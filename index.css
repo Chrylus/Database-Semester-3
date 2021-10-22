@@ -17539,9 +17539,7 @@ https://bootsnipp.com/snippets/featured/bootstrap-line-tabs-by-keenthemes
   width: 100%;
 }
 .page-home #complaint-box {
-  background: -webkit-linear-gradient(#ffffff, #f7f8f9);
-  background: -o-linear-gradient(#ffffff, #f7f8f9);
-  background: linear-gradient(#ffffff, #f7f8f9);
+  background-color: #FEF5ED;
 }
 .page-home #trending {
   overflow: hidden;
