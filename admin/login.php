@@ -64,12 +64,12 @@
                                     <form class="user" method="POST" action="../controller.php?aksi=login">
                                         <div class="form-group">
                                             <input type="username" class="form-control form-control-user"
-                                                id="exampleInputEmail" aria-describedby="emailHelp"
+                                                id="username" name="username" aria-describedby="emailHelp"
                                                 placeholder="Enter Username...">
                                         </div>
                                         <div class="form-group">
                                             <input type="password" class="form-control form-control-user"
-                                                id="exampleInputPassword" placeholder="Password">
+                                                id="password" name="password" placeholder="Password">
                                         </div>
                                         <div class="form-group">
                                             <div class="custom-control custom-checkbox small">
