@@ -144,7 +144,7 @@
             
             else
             {
-            header("location:login.php?pesan=gagal");
+            header("location:admin/login.php?pesan=gagal");
             //  alert("Gagal simpan Data");
             }
             break;
