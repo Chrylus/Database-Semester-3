@@ -1,7 +1,6 @@
 <!DOCTYPE html>
-<html>
+<html lang = "en">
 <head>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-35959721-1"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -15,31 +14,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
     <!-- Place this data between the <head> tags of your website -->
-    <title>WADUL - Wadah Aspirasi Desa Unit Layanan</title>
+    <title>Laporan Pengaduan Masalah BINUS@Malang</title>
 
-    <!-- Open Graph data -->
-    <meta property="og:title" content="LAPOR! - Layanan Aspirasi dan Pengaduan Online Rakyat">
-    <meta property="og:url" content="https://www.lapor.go.id">
-    <meta property="og:image" content="https://storage.lapor.go.id/app/media/meta-image.png">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-    <meta property="og:description" content="Layanan Aspirasi dan Pengaduan Online Rakyat (LAPOR!) adalah sarana interaktif masyarakat dan pemerintah berbasis media sosial pertama untuk pengawasan dan pengendalian pembangunan.">
-    <meta property="og:site_name" content="LAPOR!">
-
-    <!-- Facebook Data -->
-    <meta property="fb:app_id" content="">
-    <meta property="fb:page_id" content="">
-
-    <link rel="canonical" href="https://www.lapor.go.id">
-
-    <!-- Favicons
+    <!-- Favicons -->
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
     <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
     <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#d7381b">
     <meta name="apple-mobile-web-app-title" content="LAPOR!">
     <meta name="application-name" content="LAPOR!">
-    <meta name="theme-color" content="#ffffff"> -->
+    <meta name="theme-color" content="#ffffff">
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
@@ -50,30 +34,33 @@
     <script src="https://www.lapor.go.id/themes/lapor/assets/sweetalert2/sweetalert2.min.js"></script>
     <link rel="stylesheet" href="https://www.lapor.go.id/plugins/responsiv/uploader/assets/css/uploader.css">
     <link rel="stylesheet" href="https://www.lapor.go.id/combine/66cb3800f16b20b046b93a4571b46c42-1617850351">
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://www.lapor.go.id/combine/15d6ac0173665e1a9057c30ca8e08f8f-1617850351"></script>
     <script src="https://www.lapor.go.id/themes/lapor/assets/js/zingchart.min.js"></script>
+    <link rel="icon" href="../Part-Time-Binus/user/images/Binus Logo.png">
+    <link rel ="stylesheet" href = "//cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+    <script src="//cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+
+    <nav id="leftMenu" class="navmenu navmenu-default navmenu-inverse navmenu-fixed-left offcanvas" role="navigation">
+        <ul class="nav navmenu-nav">
+            <li role="presentation" class="  active">
+                <a href="#" >
+                    Layanan Pengaduan
+                </a>
+            </li>
+            <li role="presentation" class="  ">
+                <a href="admin/login.php" >
+                    Admin
+                </a>
+            </li>
+        </ul>
+    </nav>
 </head>
 
 <body class="page-home pd-t-0 ">
     <div class="loader-custom hidden"></div>
-
-    <nav id="leftMenu" class="navmenu navmenu-default navmenu-inverse navmenu-fixed-left offcanvas" role="navigation">
-	    <ul class="nav navmenu-nav active">
-		    <li role="presentation" class="  ">
-                <a href="#" >
-                   Tentang Wadul
-                </a>
-            </li>
-            <li role="presentation" class="  ">
-                <a href="#" >
-                    Statistik
-                </a>
-            </li>
-	    </ul>
-    </nav>
-
+    <div id="search-bar"> </div>
+    
     <header class="navbar-fixed-top navbar-inverse ">
         <div class="container">
             <div class="navbar-header">
@@ -83,92 +70,78 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-
-                <a class="navbar-brand" href="https://www.lapor.go.id">
+                <a class="navbar-brand" href="#">
                     <img src="images/logo-wadul.png" alt="" class="img-responsive hidden-navbar-inverse">
                     <img src="images/logo-wadul.png" alt="" class="img-responsive hidden-navbar-default">
                 </a>
+            </div>
 
-				<a href="#" class="btn btn-outline-white btn-sm navbar-btn navbar-btn-mobile pull-right visible-xs" data-toggle="modal" data-target="#modalLogin" style="margin-right: 15px"><i class="fa fa-user"></i></a>
-			</div>
-
-		    <div class="collapse navbar-collapse">
-			    <ul class="nav navbar-nav navbar-left navbar-primary">
-				    <li role="presentation" class="  ">
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav navbar-left navbar-primary">
+                    <li role="presentation" class="  ">
                         <a href="#" >
-                            Tentang Wadul
+                            Layanan Pengaduan
                         </a>
                     </li>
                     <li role="presentation" class="  ">
-                        <a href="#" >
-                            Statistik
+                        <a href="admin/login.php" >
+                            Admin
                         </a>
                     </li>
-                </ul>
-				<div class="nav navbar-nav navbar-right mg-l-10  hidden-sm">
-                </div>
-			</div>
-	    </div>
-    </header>        
+            </div>
+        </div>
+    </header>
 
     <section id="hero">
         <div class="container">
             <div class="block block-aspiration">
-                <div class="h2">Wadah Aspirasi Desa Unit Layanan</div>
-                    <p>Sampaikan aspirasi Anda langsung kepada unit kerja yang berwenang</p>
-                    <hr>
-                </div>
+                <div class="h2">Wadah Aspirasi Daerah Unit Layanan</div>
+                <p>Sampaikan aspirasi Anda langsung kepada unit kerja yang berwenang</p>
+                <hr>
             </div>
-            <svg width="100%" height="160px" viewBox="0 0 1300 160" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                <g>
-                    <path d="M1300,160 L-5.68434189e-14,160 L-5.68434189e-14,119 C423.103102,41.8480501 1096.33049,180.773108 1300,98 L1300,160 Z" fill="#FEF5ED" fill-rule="nonzero"></path>
-                    <path d="M129.77395,40.2373685 C292.925845,31.2149964 314.345174,146.772453 615.144273,151.135393 C915.94337,155.498333 1017.27057,40.8373289 1240.93447,40.8373289 C1262.89392,40.8373289 1282.20864,41.9705564 1299.18628,44.0144896 L1300,160 L-1.0658141e-14,160 L-1.0658141e-14,105 C31.4276111,70.4780448 73.5616946,43.3459311 129.77395,40.2373685 Z" fill="#FEF5ED" fill-rule="nonzero" opacity="0.3"></path>
-                    <path d="M69.77395,60.2373685 C232.925845,51.2149964 314.345174,146.772453 615.144273,151.135393 C915.94337,155.498333 1017.27057,0.837328936 1240.93447,0.837328936 C1263.91283,0.837328936 1283.59768,0.606916225 1300,1 L1300,160 L-1.70530257e-13,160 L-9.9475983e-14,74 C-9.9475983e-14,74 36.9912359,62.0502671 69.77395,60.2373685 Z" fill="#FEF5ED" fill-rule="nonzero" opacity="0.3"></path>
-                    <path d="M2.27373675e-13,68 C23.2194389,95.7701288 69.7555676,123.009338 207,125 C507.7991,129.36294 698.336099,22 922,22 C1047.38026,22 1198.02057,63.2171658 1300,101 L1300,160 L0,160 L2.27373675e-13,68 Z" fill="#FEF5ED" fill-rule="nonzero" opacity="0.3" transform="translate(650, 91) scale(-1, 1) translate(-650, -91) "></path>
-                </g>
-            </svg>
+        </div>
+        <svg width="100%" height="160px" viewBox="0 0 1300 160" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <g>
+                <path d="M1300,160 L-5.68434189e-14,160 L-5.68434189e-14,119 C423.103102,41.8480501 1096.33049,180.773108 1300,98 L1300,160 Z" fill="#FEF5ED" fill-rule="nonzero"></path>
+                <path d="M129.77395,40.2373685 C292.925845,31.2149964 314.345174,146.772453 615.144273,151.135393 C915.94337,155.498333 1017.27057,40.8373289 1240.93447,40.8373289 C1262.89392,40.8373289 1282.20864,41.9705564 1299.18628,44.0144896 L1300,160 L-1.0658141e-14,160 L-1.0658141e-14,105 C31.4276111,70.4780448 73.5616946,43.3459311 129.77395,40.2373685 Z" fill="#FEF5ED" fill-rule="nonzero" opacity="0.3"></path>
+                <path d="M69.77395,60.2373685 C232.925845,51.2149964 314.345174,146.772453 615.144273,151.135393 C915.94337,155.498333 1017.27057,0.837328936 1240.93447,0.837328936 C1263.91283,0.837328936 1283.59768,0.606916225 1300,1 L1300,160 L-1.70530257e-13,160 L-9.9475983e-14,74 C-9.9475983e-14,74 36.9912359,62.0502671 69.77395,60.2373685 Z" fill="#FEF5ED" fill-rule="nonzero" opacity="0.3"></path>
+                <path d="M2.27373675e-13,68 C23.2194389,95.7701288 69.7555676,123.009338 207,125 C507.7991,129.36294 698.336099,22 922,22 C1047.38026,22 1198.02057,63.2171658 1300,101 L1300,160 L0,160 L2.27373675e-13,68 Z" fill="#FEF5ED" fill-rule="nonzero" opacity="0.3" transform="translate(650, 91) scale(-1, 1) translate(-650, -91) "></path>
+            </g>
+        </svg>
     </section>
 
     <section id="complaint-box">
         <div class="container">
             <div class="row">
                 <div class="col-md-8 col-md-offset-2 mg-b-40">
-                    <form method="POST" action="https://www.lapor.go.id" accept-charset="UTF-8" data-request="complaint::onCreate" class="complaint-form" data-request-flash=""><input name="_session_key" type="hidden" value="H0jzdJd1I0aAdLo6yGIAoXiVQbWLCd9LtHLCP50V"><input name="_token" type="hidden" value="OZPVvzymSbDonv62HUjG7WfRuRGreTmfzpAXIb0A">
-
+                    <form action="user/connect_user.php" method="POST" class="complaint-form" enctype="multipart/form-data">
                         <div class="complaint-form-box">
+                            <br>
                             <div class="select-complaint">Sampaikan Laporan Anda</div>
-                            <label for="classification_complaint" class="choose-classification">
-                                Pilih Klasifikasi Laporan
-                            </label>
-                            <div class="btn-group btn-complaint-type" id="classification_complaint" data-toggle="buttons">
-                                <label class="btn btn-default">
-                                    <input type="radio" name="classification_id" value="1" class="sr-only" required />
-                                        <span>PENGADUAN</span>
-                                </label>
-                                <label class="btn btn-default">
-                                    <input type="radio" name="classification_id" value="3" class="sr-only" required />          
-                                        <span>ASPIRASI</span>
-                                </label>
-                                <label class="btn btn-default">
-                                    <input type="radio" name="classification_id" value="2" class="sr-only" required  />
-                                        <span>PERMINTAAN INFORMASI</span>
-                                </label>
+                            <!-- <center><p><b>Pilih Klasifikasi Permintaan Anda</b></p></center> -->
+                            <center>
+                                <a href="#" class="button1 active">Pengaduan</a>
+                                <a href="#" class="button1">Aspirasi</a>
+                            </center>
+                            <div class="complaint-help">
+                                Perhatikan Cara Menyampaikan 
+                                <span id="classfication_name">
+                                    Pengaduan
+                                </span> Yang Baik dan Benar 
+                                <a href="#modalPengaduan" data-toggle="modal" class="modalTrigger" id="modalToggler" data-modal-name="modalPengaduan" data-target="#bannerformmodal">
+                                    <img alt="info-complaint" class="info-complaint" src="https://www.lapor.go.id/themes/lapor/assets/images/info.svg" >
+                                </a>
                             </div>
                         </div>
-                        <div class="complaint-help">
-                            Perhatikan Cara Menyampaikan 
-                            <span id="classfication_name">
-                                Pengaduan
-                            </span> Yang Baik dan Benar 
-                            <a href="#modalPengaduan" data-toggle="modal" class="modalTrigger" id="modalToggler" data-modal-name="modalPengaduan" data-target="#bannerformmodal">
-                                <img alt="info-complaint" class="info-complaint" src="https://www.lapor.go.id/themes/lapor/assets/images/info.svg" >
-                            </a>
+                        
+                        <div class="complaint-form-category">
+                            <input type="text" name="nama" class="form-control" placeholder="NIK *" required></textarea>
                         </div>
                         <div class="complaint-form-category">
-                            <input type="text" name="title" class="form-control" placeholder="Ketik Judul Laporan Anda *" required></textarea>
+                            <input type="text" name="email" class="form-control" placeholder="Tujuan *" required></textarea>
                         </div>
                         <div class="complaint-form-category">
-                            <textarea name="content" id="" rows="6" class="form-control textarea-flex autosize" placeholder="Ketik Isi Laporan Anda *" required></textarea>
+                            <input type="text" name="no_Telepon" class="form-control" placeholder="Keperluan *" required></textarea>
                         </div>
                         <div class="complaint-form-box p-5px" id="date_incident">
                             <div class="form-group">
@@ -181,81 +154,16 @@
                             </div>
                         </div>
                         <div class="complaint-form-category">
-                            <select class="form-control" name="location_id" id="location_id" placeholder="Ketik Lokasi Kejadian *" data-request-search="complaint::onSearchLocation" required>
-                            </select>
+                            <textarea name="problem" id="" rows="6" class="form-control textarea-flex autosize" placeholder="Keterangan *" required></textarea>
                         </div>
+                        <label for="classification_complaint" class="choose-classification">Lampiran Masalah</label>
                         <div class="complaint-form-category">
-                            <select class="form-control" name="suggestion_institution_id" id="select_institution_id" placeholder="Ketik Instansi Tujuan" data-request-search="complaint::onSearchInstitution">
-                            </select>
-                        </div>
-
-                        <div class="complaint-form-attachments">
-                
-                            <div
-                                class="responsiv-uploader-fileupload style-file-multi is-multi "
-                                data-control="fileupload"
-                                data-template="#uploaderTemplatefileUploader"
-                                data-unique-id="fileUploader"
-                                data-file-types=".jpg,.jpeg,.bmp,.png,.webp,.gif,.svg,.js,.map,.ico,.css,.less,.scss,.ics,.odt,.doc,.docx,.ppt,.pptx,.pdf,.swf,.txt,.xml,.ods,.xls,.xlsx,.eot,.woff,.woff2,.ttf,.flv,.wmv,.mp3,.ogg,.wav,.avi,.mov,.mp4,.mpeg,.webm,.mkv,.rar,.xml,.zip">
-
-                                <!-- Field placeholder -->
-                                <input type="hidden" name="_uploader[attachments]" value="" />
-
-                                <!-- Upload Button -->
-                                <button type="button" class="ui button btn btn-default oc-icon-upload upload-button">
-                                    Upload Lampiran (max 2MB)
-                                </button>
-
-                                <!-- Existing files -->
-                                <div class="upload-files-container">
-                                </div>
-                            </div>
-
-                            <!-- Template for new files -->
-                            <script type="text/template" id="uploaderTemplatefileUploader">
-                                <div class="upload-object dz-preview dz-file-preview">
-                                    <div class="icon-container">
-                                        <img data-dz-thumbnail src="https://www.lapor.go.id/plugins/responsiv/uploader/assets/images/upload.png" />
-                                    </div>
-                                    <div class="info">
-                                        <h4 class="filename">
-                                            <span data-dz-name></span>
-                                        </h4>
-                                        <p class="size" data-dz-size></p>
-                                        <p class="error"><span data-dz-errormessage></span></p>
-                                    </div>
-                                    <div class="meta">
-                                        <a
-                                            href="javascript:;"
-                                            class="upload-remove-button"
-                                            data-request="fileUploader::onRemoveAttachment"
-                                            data-request-confirm="Are you sure?"
-                                            >&times;</a>
-                                        <div class="progress-bar"><span class="upload-progress" data-dz-uploadprogress></span></div>
-                                    </div>
-                                </div>
-                            </script>
+                            <input type="file" name="lampiran" class="form-control" accept="image/*" required></textarea>
                         </div>
 
                         <div class="complaint-form-footer">
                             <div class="row-flex flex-align-between">
-                                <div class="footer-left">
-                                    <a href="#" data-toggle="slidetoggle" data-target=".complaint-form-attachments">
-                                        <label class="label label-primary">0</label>
-                                        <i class="fa fa-fw fa-paperclip"></i> <span class="label-attachment"  data-toggle="tooltip" data-placement="top" data-title="Upload lampiran pendukung laporan Anda">Upload Lampiran</span>
-                                    </a>
-                                </div>
-
-                                <div class="footer-right text-right">
-                                <!-- HELP Button -->
-                                    <input type="hidden" name="latitude" data-toggle="currentLatitude">
-                                    <input type="hidden" name="longitude" data-toggle="currentLongitude">
-                                    <input type="hidden" name="origin_latitude">
-                                    <input type="hidden" name="origin_longitude">
-                                    <a class="btn btn-primary" id="submit-complaint" data-attach-loading>
-                                        LAPOR!
-                                    </a>           
-                                </div>
+                                <input class="btn btn-primary" id="submit-complaint" type="submit" value="CREATE TICKET" name="submit" data-target="#data_submit">
                             </div>
                         </div>
                     </form>
@@ -298,108 +206,7 @@
                 <script src="https://www.lapor.go.id/themes/lapor/assets/select2/js/select2.min.js"></script>
                 <script src="https://www.lapor.go.id/themes/lapor/assets/select2/js/select2totree.js"></script>
                 <link rel="stylesheet" type="text/css" href="https://www.lapor.go.id/themes/lapor/assets/select2/css/select2.min.css">
-                <link rel="stylesheet" type="text/css" href="https://www.lapor.go.id/themes/lapor/assets/select2/css/select2totree.css">
-
-                <script>
-                    function GetURLParameter(sParam)
-                    {
-                        var sPageURL = window.location.search.substring(1);
-                        var sURLVariables = sPageURL.split('&');
-                        for (var i = 0; i < sURLVariables.length; i++)
-                        {
-                            var sParameterName = sURLVariables[i].split('=');
-                            if (sParameterName[0] == sParam)
-                            {
-                                return decodeURIComponent(sParameterName[1]);
-                            }
-                        }
-                    }
-                    $(document).ready(function() {
-                        getCat = GetURLParameter('category');
-                        $( ".complaint-form #submit-complaint" ).click(function() {
-                            button_submit = $(this);
-                            button_submit.addClass('oc-loading');
-                            $('#select_categories').attr('disabled', false);
-                            if( 
-                                $('.complaint-form [name=classification_id]:checked').val() &&
-                                $('.complaint-form [name=title]').val() &&
-                                $('.complaint-form [name=content]').val() &&
-                                $('.complaint-form [name=location_id]').val()
-                            ){
-                                $.ajax({
-                                    url : 'https://www.lapor.go.id/api/v3/complaints/check_similarity',
-                                    method : 'POST',
-                                    data : { 
-                                        content: $('.complaint-form [name=content]').val(),
-                                        user_id: '',
-                                    },
-                                    success:function(result){
-                                        if(result.status_code==1){
-                                            html_text = '';
-                                            html_text += 'Anda tidak perlu membuat laporan baru dan bisa melanjutkan proses aduan<br><br>' +
-                                                    '<div class="content-data"><b>ID Laporan</b>: #'+ result.data.id +' <br><b>Judul Laporan</b>: '+ result.data.title +' <br>' +
-                                                    '<b>Status</b>: '+ result.data.status_name;
-                                            if(result.data.status_description){
-                                                html_text += '<br><b>Deskripsi</b>: '+ result.data.status_description;
-                                            }
-                                            if(result.data.pending_status){
-                                                html_text += '<br><b>Alasan</b>: '+ result.data.pending_status +'<br>';
-                                            }
-                                            html_text += '</div>';
-                                            Swal.fire({
-                                                title: '<strong>Laporan Serupa Milik Anda Sudah Ada</strong>',
-                                                imageUrl: 'https://www.lapor.go.id/themes/lapor/assets/images/complaint-exist.png',
-                                                html: html_text,
-                                                showCloseButton: true,
-                                                showCancelButton: true,
-                                                focusConfirm: false,
-                                                showClass: {
-                                                    popup: 'complaint-already-exist'
-                                                },
-                                                confirmButtonText:
-                                                    'Lanjutkan Laporan',
-                                                confirmButtonAriaLabel: 'Lanjutkan Laporan',
-                                                cancelButtonText:
-                                                    'Batalkan',
-                                                cancelButtonAriaLabel: 'Batalkan',
-                                                reverseButtons: true
-                                            }).then((button) => {
-                                                if (button.isConfirmed) {
-                                                    window.location = 'https://www.lapor.go.id/'+result.data.id;
-                                                }
-                                            });
-                                            button_submit.removeClass('oc-loading');
-                                        } else {
-                                            $(".complaint-form").submit();
-                                            button_submit.removeClass('oc-loading');
-                                        }
-                                        if(getCat){
-                                            $('#select_categories').attr('disabled', 'disabled');
-                                        }
-                                    },
-                                    error: function (error) {
-                                    }
-                                });
-                            } else {
-                                $(".complaint-form").submit();
-                                button_submit.removeClass('oc-loading');
-                            }
-                        });
-                        $("#select_categories").select2ToTree({
-                            treeData: {dataArr: mydata},
-                            allowClear: true,
-                            placeholder: "Pilih Kategori Laporan Anda",
-                            positionDropdown: true,
-                            autoClose: false,
-                        });
-                        $('#select_categories').val('').change();
-                        if(getCat){
-                            $('#select_categories').val(getCat);
-                            $('#select_categories').trigger('change');
-                            $('#select_categories').attr('disabled', 'disabled');
-                        }
-                    });
-                </script>                
+                <link rel="stylesheet" type="text/css" href="https://www.lapor.go.id/themes/lapor/assets/select2/css/select2totree.css">  
             </div>
             <div class="col-sm-12">
                 <div class="text-center text-muted h3 mg-0 mg-b-30">PROSES LAPORAN</div>
@@ -467,124 +274,79 @@
             </div>
         </div>
     </section>
-    <section class="block block-counter" id="hero" style="color:white; padding: 40px 0 40px;">
-        <div class="container">
-            <div class="text-center text-muted h3 mg-0 mg-b-30" style="color: white">JUMLAH LAPORAN SEKARANG</div>
+        <section class="block block-counter" id="hero" style="color:white; padding: 40px 0 40px;">
+            <div class="container">
+                <div class="text-center text-muted h3 mg-0 mg-b-30" style="color: white">JUMLAH LAPORAN SEKARANG</div>
 
-            <div class="row-flex flex-tablet text-center">
-                <div class="post post-counter" style="margin-left: auto;margin-right: auto;">
-                    <div class="counter-count"> 
-                        <span class="numscroller" data-min='0' data-max='69420' data-delay='2' data-increment='1000'></span></div>
+                <div class="row-flex flex-tablet text-center">
+                    <div class="post post-counter" style="margin-left: auto;margin-right: auto;">
+                        <div class="counter-count"> 
+                            <span class="numscroller" data-min='0' data-max='69420' data-delay='2' data-increment='1000'></span></div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
-    <div class="clearfix"></div>
+        </section>
+        <div class="clearfix"></div>
 
-    <footer>
-            <div class="post-footer">
-                <div class="footer-copyright">
-                    Database-Semester 3
+        <footer>
+                <div class="post-footer">
+                    <div class="footer-copyright">
+                        Database-Semester 3
+                    </div>
                 </div>
             </div>
-        </div>
-    </footer>
+        </footer>
 
-        
-    <form method="POST" action="https://www.lapor.go.id" accept-charset="UTF-8" data-request="laporAuth::onSignin" data-request-update="&#039;captcha-login&#039;: &#039;#google-captcha&#039;"><input name="_session_key" type="hidden" value="H0jzdJd1I0aAdLo6yGIAoXiVQbWLCd9LtHLCP50V"><input name="_token" type="hidden" value="OZPVvzymSbDonv62HUjG7WfRuRGreTmfzpAXIb0A">
-        <div class="modal fade" id="modalLogin">
-            <div class="modal-dialog modal-md">
-                <div class="modal-content">
-                    <div class="modal-body">
-                        <div class="row">
+        <form method="POST" action="https://www.lapor.go.id" accept-charset="UTF-8" data-request="laporAuth::onSignin" data-request-update="&#039;captcha-login&#039;: &#039;#google-captcha&#039;"><input name="_session_key" type="hidden" value="H0jzdJd1I0aAdLo6yGIAoXiVQbWLCd9LtHLCP50V"><input name="_token" type="hidden" value="OZPVvzymSbDonv62HUjG7WfRuRGreTmfzpAXIb0A">
+            <div class="modal fade" id="modalLogin">
+                <div class="modal-dialog modal-md">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <div class="row">
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </form>
+        </form>
 
-    <div class="modal fade" id="modalMap">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title text-center">Pilih Lokasi</h4>
-            </div>
-            <div class="modal-body pd-0">
-                <input type="hidden" data-toggle="locationMarkerLatitude">
-                <input type="hidden" data-toggle="locationMarkerLongitude">
-                <div class="location-marker"><img src="https://www.lapor.go.id/themes/lapor/assets/images/complaint-marker.png" alt="" height="70"></div>
-
-                <div class="location-name bg-warning pd-10 text-ellipsis">
-                    <span data-toggle="locationName">Geser map untuk mendapatkan lokasi yang anda inginkan</span>
+        <div class="modal fade" id="modalMap">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title text-center">Pilih Lokasi</h4>
                 </div>
-                <div id="mapLocation"><center class="pd-10">Silahkan aktifkan fitur pelacakan lokasi Anda pada browser</center></div>
-            </div>
-            <div class="modal-footer">
-                <div class="text-center">
-                    <button class="btn btn-default" data-dismiss="modal">Tutup</button>
-                    <button class="btn btn-danger" data-dismiss="modal" data-toggle="removeLocation">Hapus Lokasi</button>
-                    <button class="btn btn-info" data-dismiss="modal">Pilih Lokasi</button>
+                <div class="modal-body pd-0">
+                    <input type="hidden" data-toggle="locationMarkerLatitude">
+                    <input type="hidden" data-toggle="locationMarkerLongitude">
+                    <div class="location-marker"><img src="https://www.lapor.go.id/themes/lapor/assets/images/complaint-marker.png" alt="" height="70"></div>
+
+                    <div class="location-name bg-warning pd-10 text-ellipsis">
+                        <span data-toggle="locationName">Geser map untuk mendapatkan lokasi yang anda inginkan</span>
+                    </div>
+                    <div id="mapLocation"><center class="pd-10">Silahkan aktifkan fitur pelacakan lokasi Anda pada browser</center></div>
+                </div>
+                <div class="modal-footer">
+                    <div class="text-center">
+                        <button class="btn btn-default" data-dismiss="modal">Tutup</button>
+                        <button class="btn btn-danger" data-dismiss="modal" data-toggle="removeLocation">Hapus Lokasi</button>
+                        <button class="btn btn-info" data-dismiss="modal">Pilih Lokasi</button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
 
-        <div class="loadedcontentmodal"></div>
+    <div class="loadedcontentmodal"></div>
 
-        <script src="https://www.lapor.go.id/combine/412ecc180b60d48eb196db8827c68391-1634533910"></script>
+    <script src="https://www.lapor.go.id/combine/412ecc180b60d48eb196db8827c68391-1634533910"></script>
+    <script src="https://www.lapor.go.id/plugins/responsiv/uploader/assets/vendor/dropzone/dropzone.js"></script>
+    <script src="https://www.lapor.go.id/plugins/responsiv/uploader/assets/js/uploader.js"></script>
+    <script src="https://www.lapor.go.id/combine/e0149bf6f4f799c71effe2f3272859ac-1617850352"></script>
+    <script src="https://www.lapor.go.id/combine/6853ff71a407ef7906205e10eefc483e-1617850351"></script>
 
-        <script src="https://www.lapor.go.id/plugins/responsiv/uploader/assets/vendor/dropzone/dropzone.js"></script>
-<script src="https://www.lapor.go.id/plugins/responsiv/uploader/assets/js/uploader.js"></script>
-<script src="https://www.lapor.go.id/combine/e0149bf6f4f799c71effe2f3272859ac-1617850352"></script>
-<script src="https://www.lapor.go.id/combine/6853ff71a407ef7906205e10eefc483e-1617850351"></script>
-
-<script>
-
-
-var swiper = new Swiper('.swiper-primary', {
-    initialSlide: 1,
-    pagination: '.swiper-pagination',
-    centeredSlides: true,
-    slidesPerView: 'auto',
-    scrollbarHide: true,
-    loop: true,
-    autoplay: 4000,
-    spaceBetween: 80,
-    paginationClickable: true,
-    breakpoints: {
-        768: {
-            slidesPerView: 1,
-            spaceBetween: 0,
-        }
-    }
-});
-
-var swiper = new Swiper('.swiper-social-feed', {
-    initialSlide: 4,
-    slidesPerView: 'auto',
-    scrollbarHide: true,
-    loop: true,
-    autoplay: 4000,
-    spaceBetween: 20,
-    direction: 'vertical',
-});
-
-</script>
-
-<script src="https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyBLHjAqc9z24spcOJmit4weWYBe32eLBho&libraries=places, geometry&region=ID"></script>
-<script src="https://cdn.klokantech.com/maptilerlayer/v1/index.js"></script>
-        <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-    ga('create', 'UA-134274968-1', 'auto');
-    ga('set', 'forceSSL', true);        ga('send', 'pageview');
-</script>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyBLHjAqc9z24spcOJmit4weWYBe32eLBho&libraries=places, geometry&region=ID"></script>
 
     <script src="https://www.lapor.go.id/themes/lapor/assets/dashboard/leaflet/leaflet.js"></script>
     <script src="https://www.lapor.go.id/themes/lapor/assets/dashboard/leaflet/leaflet-providers-master leaflet-providers.js"></script>
