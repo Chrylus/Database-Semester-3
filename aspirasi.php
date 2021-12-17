@@ -49,7 +49,7 @@
                 </a>
             </li>
             <li role="presentation" class="  ">
-                <a href="admin/index.html" >
+                <a href="admin/index.php" >
                     Admin
                 </a>
             </li>
@@ -84,7 +84,7 @@
                         </a>
                     </li>
                     <li role="presentation" class="  ">
-                        <a href="admin/index.html" >
+                        <a href="admin/index.php" >
                             Admin
                         </a>
                     </li>
