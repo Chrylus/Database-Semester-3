@@ -41,7 +41,7 @@
                         $ext = strtolower(pathinfo($_FILES["files"]["name"][$key], PATHINFO_EXTENSION));
                         if(in_array( $ext, array('jpg', 'jpeg', 'png', 'gif', 'bmp'))) {
                             $new_filename = uniqid() .  '_' . $nik . '.' . $ext;
-                            move_uploaded_file($file_tmp,'admin/berkas/'.$new_filename);
+                            move_uploaded_file($file_tmp,'admin/pengaduan/berkas/'.$new_filename);
                         }
                     }
                 }
@@ -65,14 +65,57 @@
             break;
         case 'tambah_aspirasi':
             if(isset($data['submit'])){
-                // Ambil input dari depan
-                $nama = $data['Nama'];
-                // Escape 
-                $esc_name = mysqli_real_escape_string($koneksi, $nama);
                 // Default
                 $unik = uniqid('ASPIRASI');
-                // Eksekusi 
-                
+                // Ambil input dari depan
+                $nik = $data['NIK'];
+                $esc_nik = mysqli_real_escape_string($koneksi, $nik);
+                $tujuan = $data['Tujuan'];
+                $esc_tujuan = mysqli_real_escape_string($koneksi, $tujuan);
+                $keperluan = $data['Keperluan'];
+                $esc_keperluan = mysqli_real_escape_string($koneksi, $keperluan);
+                $keterangan = $data['Keterangan'];
+                $esc_keterangan = mysqli_real_escape_string($koneksi, $keterangan);
+                // Ambil input dari depan
+                $nama = $data['Nama'];
+                $esc_name = mysqli_real_escape_string($koneksi, $nama);
+                $no_telepon = $data['No_telepon'];
+                $esc_no_telepon = mysqli_real_escape_string($koneksi, $no_telepon);
+                $email = $data['Email'];
+                $esc_email = mysqli_real_escape_string($koneksi, $email);
+                // Default
+                $pending = 'Pending';
+                // File upload
+                if(isset($_FILES["files"]) && !empty($_FILES["files"]["name"])){
+                    foreach($_FILES['files']['tmp_name'] as $key => $tmp_name ){
+                        $file_name = $key.$_FILES['files']['name'][$key];
+                        $file_size =$_FILES['files']['size'][$key];
+                        $file_tmp =$_FILES['files']['tmp_name'][$key];
+                        $file_type=$_FILES['files']['type'][$key];
+                        $original_filename = $_FILES['files']['name'][$key];
+                        $ext = strtolower(pathinfo($_FILES["files"]["name"][$key], PATHINFO_EXTENSION));
+                        if(in_array( $ext, array('jpg', 'jpeg', 'png', 'gif', 'bmp'))) {
+                            $new_filename = uniqid() .  '_' . $nik . '.' . $ext;
+                            move_uploaded_file($file_tmp,'admin/pengaduan/berkas/'.$new_filename);
+                        }
+                    }
+                }
+                // Eksekusi
+                $query1 = "INSERT INTO pelaporan(
+                    ID_Pelaporan, NIK, Tujuan, Keperluan, Keterangan, Status)
+                    VALUES ('$unik', '$esc_nik', '$esc_tujuan', '$esc_keperluan', '$esc_keterangan', '$pending')";
+                $exec1 = mysqli_query($koneksi, $query1);
+                $query2 = "INSERT INTO penduduk(
+                    Nama, NIK, No_telepon, Email)
+                    VALUES ('$esc_name', '$esc_nik', '$esc_no_telepon', '$esc_email')";
+                $exec2 = mysqli_query($koneksi, $query2);
+                $query3 = "INSERT INTO lampiran(ID_Pelaporan, lampiran) VALUES ('$unik', '$new_filename')";
+                $exec3 = mysqli_query($koneksi, $query3);
+                if($exec1 || $exec2 || $exec3){
+                    header("location: index.php?pesan=Sukses");
+                }else{
+                    header("location: index.php?pesan=Gagal");
+                }
             }
             break;
         case 'login':   
