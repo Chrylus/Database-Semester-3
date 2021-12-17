@@ -161,7 +161,7 @@
                         </div>
                         <label for="classification_complaint" class="choose-classification">Lampiran Masalah</label>
                         <div class="complaint-form-category">
-                            <input type="file" name="lampiran" class="form-control" accept="image"></textarea>
+                            <input type="file" name="files" id="files" class="form-control" accept="image"></textarea>
                         </div>
 
                         <div class="complaint-form-footer">
