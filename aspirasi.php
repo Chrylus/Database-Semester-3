@@ -126,14 +126,14 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-8 col-md-offset-2 mg-b-40">
-                    <form action="controller.php?aksi=tambah_pengaduan" method="POST" class="complaint-form" enctype="multipart/form-data">
+                    <form action="controller.php?aksi=tambah_aspirasi" method="POST" class="complaint-form" enctype="multipart/form-data">
                         <div class="complaint-form-box">
                             <br>
                             <div class="select-complaint">Sampaikan Laporan Anda</div>
                             <!-- <center><p><b>Pilih Klasifikasi Permintaan Anda</b></p></center> -->
                             <center>
-                                <a href="#" class="button1 active">Pengaduan</a>
-                                <a href="aspirasi.php" class="button1">Aspirasi</a>
+                                <a href="Index.php" class="button1">Pengaduan</a>
+                                <a href="#" class="button1 active">Aspirasi</a>
                             </center>
                             <div class="complaint-help">
                                 Perhatikan Cara Menyampaikan 
@@ -163,10 +163,6 @@
                         </div>
                         <div class="complaint-form-category">
                             <input type="text" name="Keperluan" class="form-control" placeholder="Keperluan *" required></textarea>
-                        </div>
-                        <label for="classification_complaint" class="choose-classification">Tanggal Kejadian</label>
-                        <div class="complaint-form-category">
-                            <input type="date" name="TanggalKejadian" class="form-control" placeholder="Tanggal Kejadian *" required></textarea>
                         </div>
                         <div class="complaint-form-category">
                             <textarea name="Keterangan" id="" rows="6" class="form-control textarea-flex autosize" placeholder="Keterangan *" required></textarea>

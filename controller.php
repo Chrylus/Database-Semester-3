@@ -112,9 +112,9 @@
                 $query3 = "INSERT INTO lampiran(ID_Pelaporan, lampiran) VALUES ('$unik', '$new_filename')";
                 $exec3 = mysqli_query($koneksi, $query3);
                 if($exec1 || $exec2 || $exec3){
-                    header("location: index.php?pesan=Sukses");
+                    header("location: aspirasi.php?pesan=Sukses");
                 }else{
-                    header("location: index.php?pesan=Gagal");
+                    header("location: aspirasi.php?pesan=Gagal");
                 }
             }
             break;
