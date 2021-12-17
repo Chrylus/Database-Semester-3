@@ -114,7 +114,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-8 col-md-offset-2 mg-b-40">
-                    <form action="user/connect_user.php" method="POST" class="complaint-form" enctype="multipart/form-data">
+                    <form action="controller.php?aksi=tambah_pengaduan" method="POST" class="complaint-form" enctype="multipart/form-data">
                         <div class="complaint-form-box">
                             <br>
                             <div class="select-complaint">Sampaikan Laporan Anda</div>
@@ -152,22 +152,16 @@
                         <div class="complaint-form-category">
                             <input type="text" name="Keperluan" class="form-control" placeholder="Keperluan *" required></textarea>
                         </div>
-                        <div class="complaint-form-box p-5px" id="date_incident">
-                            <div class="form-group">
-                                <div class='input-group date'>
-                                    <input type='text' id="date_of_incident" name="TanggalKejadian" required class="form-control input-doi" placeholder="Pilih Tanggal Kejadian *" autocomplete="off">
-                                    <span class="input-group-addon">
-                                        <span class="fa fa-calendar"></span>
-                                    </span>
-                                </div>
-                            </div>
+                        <label for="classification_complaint" class="choose-classification">Tanggal Kejadian</label>
+                        <div class="complaint-form-category">
+                            <input type="date" name="TanggalKejadian" class="form-control" placeholder="Tanggal Kejadian *" required></textarea>
                         </div>
                         <div class="complaint-form-category">
                             <textarea name="Keterangan" id="" rows="6" class="form-control textarea-flex autosize" placeholder="Keterangan *" required></textarea>
                         </div>
                         <label for="classification_complaint" class="choose-classification">Lampiran Masalah</label>
                         <div class="complaint-form-category">
-                            <input type="file" name="lampiran" class="form-control" accept="image/*" required></textarea>
+                            <input type="file" name="lampiran" class="form-control" accept="image"></textarea>
                         </div>
 
                         <div class="complaint-form-footer">
