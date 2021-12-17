@@ -1,3 +1,7 @@
+
+<?php 
+  session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -39,13 +43,29 @@
                             <div class="col-lg-6">
                                 <div class="p-5">
                                     <div class="text-center">
+                                    <?php 
+        if(isset($_GET['pesan']))
+            {
+            if($_GET['pesan'] == "gagal")
+            {
+                echo "<div class='alert alert-danger'>Gagal Login karena Username atau Password Salah</div>";
+            }
+            else if($_GET['pesan'] == "logout")
+            {
+                echo "<div class='alert alert-success'>Anda Berhasil Logout dari Sistem</div>";
+            }else if($_GET['pesan'] == "belum_login")
+            {
+                echo "<div class='alert alert-warning'>Anda Belum Melakukan Login ke dalam Sistem</div>";
+            }
+        }
+        ?>
                                         <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
                                     </div>
-                                    <form class="user">
+                                    <form class="user" method="POST" action="../controller.php?aksi=login">
                                         <div class="form-group">
-                                            <input type="email" class="form-control form-control-user"
+                                            <input type="username" class="form-control form-control-user"
                                                 id="exampleInputEmail" aria-describedby="emailHelp"
-                                                placeholder="Enter Email Address...">
+                                                placeholder="Enter Username...">
                                         </div>
                                         <div class="form-group">
                                             <input type="password" class="form-control form-control-user"
@@ -58,24 +78,11 @@
                                                     Me</label>
                                             </div>
                                         </div>
-                                        <a href="index.html" class="btn btn-primary btn-user btn-block">
+                                        <button  class="btn btn-primary btn-user btn-block">
                                             Login
-                                        </a>
+                                        </button>
                                         <hr>
-                                        <a href="index.html" class="btn btn-google btn-user btn-block">
-                                            <i class="fab fa-google fa-fw"></i> Login with Google
-                                        </a>
-                                        <a href="index.html" class="btn btn-facebook btn-user btn-block">
-                                            <i class="fab fa-facebook-f fa-fw"></i> Login with Facebook
-                                        </a>
-                                    </form>
-                                    <hr>
-                                    <div class="text-center">
-                                        <a class="small" href="forgot-password.html">Forgot Password?</a>
-                                    </div>
-                                    <div class="text-center">
-                                        <a class="small" href="register.html">Create an Account!</a>
-                                    </div>
+                                       
                                 </div>
                             </div>
                         </div>
