@@ -172,7 +172,7 @@
 
                         <div class="complaint-form-footer">
                             <div class="row-flex flex-align-between">
-                                <input class="btn btn-primary" id="submit-complaint" type="submit" value="CREATE TICKET" name="submit" data-target="#data_submit">
+                                <input class="btn btn-primary" id="submit-complaint" type="submit" value="submit" name="submit" data-target="#data_submit">
                             </div>
                         </div>
                     </form>
