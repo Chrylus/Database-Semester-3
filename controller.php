@@ -112,9 +112,9 @@
                 $query3 = "INSERT INTO lampiran(ID_Pelaporan, lampiran) VALUES ('$unik', '$new_filename')";
                 $exec3 = mysqli_query($koneksi, $query3);
                 if($exec1 || $exec2 || $exec3){
-                    header("location: aspirasi.php?pesan=Sukses");
+                    header("location: index.php?pesan=Sukses");
                 }else{
-                    header("location: aspirasi.php?pesan=Gagal");
+                    header("location: index.php?pesan=Gagal");
                 }
             }
             break;
@@ -135,7 +135,7 @@
                 //  $_SESSION['nama'] = $row->nama;
                 $_SESSION['status'] = "login";
                 $_SESSION['id']= $row['id'];
-                header("location:admin/index.html"); //berpindah ke halaman beranda
+                header("location:admin/index.php"); //berpindah ke halaman beranda
             }
             
             else
@@ -149,7 +149,7 @@
             session_unset();
             session_destroy();
             // $_SESSION['status'] = "berhasil logout";
-            header("location:login.php");
+            header("location:admin/login.php");
             break;
         default:
         echo 'Error';
