@@ -136,6 +136,7 @@
             if($cek_login > 0){ //jika data yang ditemukan lebih dari 0
                 $row = mysqli_fetch_assoc($data);
                 $_SESSION['username'] = $row['username'];
+                $_SESSION['nama'] = $row['name'];
                 //  $_SESSION['nama'] = $row->nama;
                 $_SESSION['status'] = "login";
                 $_SESSION['id']= $row['id'];

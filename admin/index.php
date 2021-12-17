@@ -43,7 +43,7 @@
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+                <div class="sidebar-brand-text mx-3">WADUL</div>
             </a>
 
             <!-- Divider -->
@@ -289,7 +289,7 @@
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small"> <?php 
                         if (isset($_SESSION["id"])) 
                         {              
-                            echo($_SESSION['username']);
+                            echo($_SESSION['nama']);
                         }
                     ?> </span>
                                 <img class="img-profile rounded-circle"

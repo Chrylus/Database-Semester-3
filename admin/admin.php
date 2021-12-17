@@ -38,7 +38,7 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <ul class="navbar-nav  sidebar sidebar-dark accordion" id="accordionSidebar" style="background-color:#0090D1">
+        <ul class="navbar-nav  sidebar sidebar-dark accordion" id="accordionSidebar" style="background-color:#4e73df">
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.php">
@@ -48,9 +48,7 @@
                 
                 <div class="sidebar-brand-text mx-3">
                     <?php 
-                        if (isset($_SESSION["id"])) {              
-                            echo($_SESSION['username']);
-                        }
+                        echo 'WADUL';
 
                         //Pengujian Apakah data absensi
                         if(isset($_GET['hal']))
@@ -143,8 +141,8 @@
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
-            <li class="nav-item">
-                <a class="nav-link" href="index.php">
+            <li class="nav-item active">
+                <a class="nav-link" href="index.html">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
@@ -152,61 +150,35 @@
             <!-- Divider -->
             <hr class="sidebar-divider">
 
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Interface
+            </div>
+            <li class="nav-item">
+                <a class="nav-link" href="charts.html">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Admin</span></a>
+            </li> 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                     aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>Ticket</span>
+                    <i class="fas fa-fw fa-file"></i>
+                    <span>Lihat Laporan</span>
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Ticket:</h6>
-                        <a class="collapse-item" href="tables.php">All</a>
-                        <a class="collapse-item" href="tables_open.php">Open</a>
-                        <a class="collapse-item" href="tables_close.php">Close</a>
-                        <a class="collapse-item" href="tables_on_progress.php">On Progress</a>
-                        <a class="collapse-item" href="tables_overdue.php">Overdue</a>
+                        <h6 class="collapse-header">Laporan:</h6>
+                        <a class="collapse-item" href="buttons.html">Pengaduan</a>
+                        <a class="collapse-item" href="cards.html">Aspirasi</a>
                     </div>
                 </div>
             </li>
 
-            <!-- Nav Item - Utilities Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="charts.html">
                     <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Artikel</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="tables_event.php">
-                    <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Event</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="tables_peminjaman.php">
-                    <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Peminjaman</span></a>
-            </li>
-
-            <div class="sidebar-heading">
-                Administrator
-            </div>
-
-            <li class="nav-item active">
-                <a class="nav-link" href="admin.php">
-                    <i class="fas fa-fw fa-chart-area"></i>
-                    <span>PIC</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="reminder.php">
-                    <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Reminder</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="report.php">
-                    <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Report</span>
-                </a>
+                    <span>Status Laporan</span></a>
             </li>
             
             <!-- Divider -->
@@ -247,7 +219,7 @@
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">
                                     <?php 
                                     if (isset($_SESSION["id"])) {              
-                                        echo($_SESSION['username']);
+                                        echo($_SESSION['nama']);
                                     }
                                     ?>
                                 </span>
@@ -335,9 +307,6 @@
                                                 <td>
                                                     <a href="admin.php?hal=edit&id=<?=$data['id']?>" class="btn btn-warning"> Edit </a>
                                                     <a href="admin.php?hal=hapus&id=<?=$data['id']?>" class="btn btn-danger"> Hapus </a>
-                                                </td>
-                                                <td>
-                                                    
                                                 </td>
                                             </tr>
                                             <?php endwhile; //penutup perulangan while ?>           
