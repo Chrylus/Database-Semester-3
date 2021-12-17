@@ -1,8 +1,9 @@
 <?php 
+    session_start();
     include 'koneksi.php';
 
     $data = $_REQUEST;
-
+ 
     switch($data['aksi']){
         case 'tambah_pengaduan':
             if(isset($data['submit'])){
@@ -51,8 +52,41 @@
                 // Eksekusi 
                 
             }
-            break;    
+            break;
+        case 'login':   
+            $username = $_POST['username']; //menampung data yang dikirim dari input username
+            $password = $_POST['password']; //menampung data yang dikirim dari input password
+            //  $passwordmd5=md5($password);
+            // $data = mysqli_query($koneksi,"SELECT * from customer WHERE email='$email' and password='$password'");
+            //untuk mencari data yang sesuai di database yang sesuai dengan inputan
+            $data=$koneksi->query("SELECT * from msadmin WHERE username='$username' and password='$password'");
+            
+            $row=mysqli_fetch_object($data);
+            //untuk menjadikan data yang didapat menjadi objek
+            
+            $cek_login = mysqli_num_rows($data);
+            //menghitung jumlah data yang didapat
+            
+
+            if($cek_login > 0) //jika data yang ditemukan lebih dari 0
+            {
+            $_SESSION['username'] = $username;
+            //  $_SESSION['nama'] = $row->nama;
+            $_SESSION['status'] = "login";
+            $_SESSION['id']= $row->id;
+            header("location:admin/index.html"); //berpindah ke halaman beranda
+            }
+            
+            else
+            {
+            header("location:login.php?pesan=gagal");
+            //  alert("Gagal simpan Data");
+            }
+            
+
         default:
         echo 'Error';
+        
+
     }
 ?>
