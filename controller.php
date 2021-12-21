@@ -45,15 +45,15 @@
                         }
                     }
                 }
+                $query2 = "INSERT INTO penduduk(
+                    Nama, NIK, No_telepon, Email)
+                    VALUES ('$esc_name', '$esc_nik', '$esc_no_telepon', '$esc_email')";
+                $exec2 = mysqli_query($koneksi, $query2);
                 // Eksekusi
                 $query1 = "INSERT INTO pelaporan(
                     ID_Pelaporan, NIK, Tujuan, Keperluan, Keterangan, TanggalKejadian, Status)
                     VALUES ('$unik', '$esc_nik', '$esc_tujuan', '$esc_keperluan', '$esc_keterangan', '$esc_tanggal_kejadian', '$pending')";
                 $exec1 = mysqli_query($koneksi, $query1);
-                $query2 = "INSERT INTO penduduk(
-                    Nama, NIK, No_telepon, Email)
-                    VALUES ('$esc_name', '$esc_nik', '$esc_no_telepon', '$esc_email')";
-                $exec2 = mysqli_query($koneksi, $query2);
                 if ($new_filename != NULL){
                     $query3 = "INSERT INTO lampiran(ID_Pelaporan, lampiran) VALUES ('$unik', '$new_filename')";
                     $exec3 = mysqli_query($koneksi, $query3);
@@ -123,8 +123,8 @@
             }
             break;
         case 'login':   
-            $username = $_POST['username']; //menampung data yang dikirim dari input username
-            $password = $_POST['password']; //menampung data yang dikirim dari input password
+            $username = $data['username']; //menampung data yang dikirim dari input username
+            $password = $data['password']; //menampung data yang dikirim dari input password
             //  $passwordmd5=md5($password);
             // $data = mysqli_query($koneksi,"SELECT * from customer WHERE email='$email' and password='$password'");
             //untuk mencari data yang sesuai di database yang sesuai dengan inputan
@@ -138,7 +138,7 @@
                 $_SESSION['username'] = $row['username'];
                 $_SESSION['nama'] = $row['name'];
                 //  $_SESSION['nama'] = $row->nama;
-                $_SESSION['status'] = "login";
+                $_SESSION['status'] = "login_admin";
                 $_SESSION['id']= $row['id'];
                 header("location:admin/index.php"); //berpindah ke halaman beranda
             }
@@ -149,6 +149,35 @@
             //  alert("Gagal simpan Data");
             }
             break;
+            case 'login_masyarakat':
+                if(isset($data['submit'])){
+                    $email = $data['email']; //menampung data yang dikirim dari input username
+                    $nik = $data['nik']; //menampung data yang dikirim dari input password
+                    //  $passwordmd5=md5($password);
+                    // $data = mysqli_query($koneksi,"SELECT * from customer WHERE email='$email' and password='$password'");
+                    //untuk mencari data yang sesuai di database yang sesuai dengan inputan
+                    $data=$koneksi->query("SELECT * FROM penduduk WHERE Email='$email' and NIK='$nik'");
+                    
+                    $cek_login = mysqli_num_rows($data);
+                    //menghitung jumlah data yang didapat
+                    
+                    if($cek_login > 0){ //jika data yang ditemukan lebih dari 0
+                        $row = mysqli_fetch_assoc($data);
+                        $_SESSION['nama'] = $row['Nama'];
+                        $_SESSION['nik'] = $row['NIK'];
+                        $_SESSION['telepon'] = $row['No_telepon'];
+                        $_SESSION['email'] = $row['Email'];
+                        $_SESSION['status'] = "login";
+                        header("location:index.php?=sukses"); //berpindah ke halaman beranda
+                    }
+                    
+                    else
+                    {
+                    header("location:index.php?pesan=gagal");
+                    //  alert("Gagal simpan Data");
+                    }
+                }   
+                break;
         case 'logout':
             unset($_SESSION['status']);
             session_unset();

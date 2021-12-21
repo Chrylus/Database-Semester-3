@@ -1,3 +1,9 @@
+<?php
+include 'koneksi.php';
+session_start();
+session_regenerate_id(true);
+?>
+
 <!DOCTYPE html>
 <html lang = "en">
 <head>
@@ -126,62 +132,101 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-8 col-md-offset-2 mg-b-40">
-                    <form action="controller.php?aksi=tambah_pengaduan" method="POST" class="complaint-form" enctype="multipart/form-data">
-                        <div class="complaint-form-box">
-                            <br>
-                            <div class="select-complaint">Sampaikan Laporan Anda</div>
-                            <!-- <center><p><b>Pilih Klasifikasi Permintaan Anda</b></p></center> -->
-                            <center>
-                                <a href="#" class="button1 active">Pengaduan</a>
-                                <a href="aspirasi.php" class="button1">Aspirasi</a>
-                            </center>
-                            <div class="complaint-help">
-                                Perhatikan Cara Menyampaikan 
-                                <span id="classfication_name">
-                                    Pengaduan
-                                </span> Yang Baik dan Benar 
-                                <a href="#modalPengaduan" data-toggle="modal" class="modalTrigger" id="modalToggler" data-modal-name="modalPengaduan" data-target="#bannerformmodal">
-                                    <img alt="info-complaint" class="info-complaint" src="https://www.lapor.go.id/themes/lapor/assets/images/info.svg" >
-                                </a>
+                    <?php if(!isset($_SESSION['nik'])){?>
+                        <form action="controller.php?aksi=login_masyarakat" method="POST" class="complaint-form" enctype="multipart/form-data">
+                            <div class="complaint-form-box">
+                                <br>
+                                <div class="select-complaint">Sampaikan Laporan Anda</div>
+                                <!-- <center><p><b>Pilih Klasifikasi Permintaan Anda</b></p></center> -->
+                                <center>
+                                    <a href="#" class="button1 active">Login</a>
+                                    <a href="aspirasi.php" class="button1">Daftar</a>
+                                </center>
+                                <div class="complaint-help">
+                                    Silahkan login terlebih dahulu 
+                                    <span id="classfication_name">
+                                        atau registrasi
+                                    </span> bila Anda belum memiliki akun 
+                                    
+                                </div>
                             </div>
-                        </div>
-                        
-                        <div class="complaint-form-category">
-                            <input type="text" name="Nama" class="form-control" placeholder="Nama *" required></textarea>
-                        </div>
-                        <div class="complaint-form-category">
-                            <input type="text" name="NIK" class="form-control" placeholder="NIK *" required></textarea>
-                        </div>
-                        <div class="complaint-form-category">
-                            <input type="text" name="No_telepon" class="form-control" placeholder="No Telepon *" required></textarea>
-                        </div>
-                        <div class="complaint-form-category">
-                            <input type="email" name="Email" class="form-control" placeholder="Email *" required></textarea>
-                        </div>
-                        <div class="complaint-form-category">
-                            <input type="text" name="Tujuan" class="form-control" placeholder="Tujuan *" required></textarea>
-                        </div>
-                        <div class="complaint-form-category">
-                            <input type="text" name="Keperluan" class="form-control" placeholder="Keperluan *" required></textarea>
-                        </div>
-                        <label for="classification_complaint" class="choose-classification">Tanggal Kejadian</label>
-                        <div class="complaint-form-category">
-                            <input type="date" name="TanggalKejadian" class="form-control" placeholder="Tanggal Kejadian *" required></textarea>
-                        </div>
-                        <div class="complaint-form-category">
-                            <textarea name="Keterangan" id="" rows="6" class="form-control textarea-flex autosize" placeholder="Keterangan *" required></textarea>
-                        </div>
-                        <label for="classification_complaint" class="choose-classification">Lampiran Masalah</label>
-                        <div class="complaint-form-category">
-                            <input type="file" name="files[]" id="files[]" class="form-control" accept="image"></textarea>
-                        </div>
+                            
+                            <div class="complaint-form-category">
+                                <input type="email" name="email" class="form-control" placeholder="Email *" required></textarea>
+                            </div>
+                            <div class="complaint-form-category">
+                                <input type="text" name="nik" class="form-control" placeholder="NIK *" required></textarea>
+                            </div>
 
-                        <div class="complaint-form-footer">
-                            <div class="row-flex flex-align-between">
-                                <input class="btn btn-primary" id="submit-complaint" type="submit" value="submit" name="submit" data-target="#data_submit">
+                            <div class="complaint-form-footer">
+                                <div class="row-flex flex-align-between">
+                                    <input class="btn btn-primary" id="submit-complaint" type="submit" value="submit" name="submit" data-target="#data_submit">
+                                </div>
                             </div>
-                        </div>
-                    </form>
+                        </form>
+                    <?php } else if(isset($_SESSION['nik'])) {?>
+                        <form action="controller.php?aksi=tambah_pengaduan" method="POST" class="complaint-form" enctype="multipart/form-data">
+                            <div class="complaint-form-box">
+                                <br>
+                                <div class="select-complaint">Sampaikan Laporan Anda</div>
+                                <!-- <center><p><b>Pilih Klasifikasi Permintaan Anda</b></p></center> -->
+                                <center>
+                                    <a href="#" class="button1 active">Pengaduan</a>
+                                    <a href="aspirasi.php" class="button1">Aspirasi</a>
+                                </center>
+                                <div class="complaint-help">
+                                    Perhatikan Cara Menyampaikan 
+                                    <span id="classfication_name">
+                                        Pengaduan
+                                    </span> Yang Baik dan Benar 
+                                    <a href="#modalPengaduan" data-toggle="modal" class="modalTrigger" id="modalToggler" data-modal-name="modalPengaduan" data-target="#bannerformmodal">
+                                        <img alt="info-complaint" class="info-complaint" src="https://www.lapor.go.id/themes/lapor/assets/images/info.svg" >
+                                    </a>
+                                </div>
+                            </div>
+                            
+                            <div class="complaint-form-category">
+                                <input type="text" name="Nama" class="form-control" value="<?php echo $_SESSION['nama']; ?>" placeholder="Nama *" readonly></textarea>
+                            </div>
+                            <div class="complaint-form-category">
+                                <input type="text" name="NIK" class="form-control" value="<?php echo $_SESSION['nik']; ?>" placeholder="NIK *" readonly></textarea>
+                            </div>
+                            <div class="complaint-form-category">
+                                <input type="text" name="No_telepon" class="form-control" value="<?php echo $_SESSION['telepon']; ?>" placeholder="No Telepon *" readonly></textarea>
+                            </div>
+                            <div class="complaint-form-category">
+                                <input type="email" name="Email" class="form-control" value="<?php echo $_SESSION['email']; ?>" placeholder="Email *" readonly></textarea>
+                            </div>
+                            <div class="complaint-form-category">
+                                <select id="select_categories" class="select-tree-view" placeholder="Pilih Kategori Laporan Anda" name="category_id">
+                                    <option>Unit Layanan *</option>
+                                </select>
+                            </div>
+                            <div class="complaint-form-category">
+                                <select id="select_categories" class="select-tree-view" placeholder="Pilih Kategori Laporan Anda" name="category_id">
+                                    <option>Keperluan *</option>
+                                </select>
+                            </div>
+                            <label for="classification_complaint" class="choose-classification">Tanggal Kejadian</label>
+                            <div class="complaint-form-category">
+                                <input type="date" name="TanggalKejadian" class="form-control" placeholder="Tanggal Kejadian *" required></textarea>
+                            </div>
+                            <div class="complaint-form-category">
+                                <textarea name="Keterangan" id="" rows="6" class="form-control textarea-flex autosize" placeholder="Keterangan *" required></textarea>
+                            </div>
+                            <label for="classification_complaint" class="choose-classification">Lampiran Masalah</label>
+                            <div class="complaint-form-category">
+                                <input type="file" name="files[]" id="files[]" class="form-control" accept="image"></textarea>
+                            </div>
+
+                            <div class="complaint-form-footer">
+                                <div class="row-flex flex-align-between">
+                                    <input class="btn btn-primary" id="submit-complaint" type="submit" value="submit" name="submit" data-target="#data_submit">
+                                </div>
+                            </div>
+                        </form>
+                    <?php } ?>
+                    
                     <div class="modal fade how-to" id="modalPengaduan" tabindex="-1" role="dialog" aria-labelledby="modalPengaduan" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
