@@ -107,12 +107,12 @@ session_regenerate_id(true);
                 <div class="nav navbar-nav navbar-right mg-l-10">
                     <?php
                         if(isset($_SESSION["nik"])){
-                            echo' <a href="controller.php?aksi=logout_user" class="btn navbar-btn pull-right btn-outline-white">
-                                Logout
-                            </a>';
-                        }
+                            echo    '<a href="controller.php?aksi=logout_user" class="btn navbar-btn pull-right btn-outline-white">
+                                        Logout
+                                    </a>';
+                            }
                     ?>
-                </div>    
+                </div> 
             </div>
         </div>
     </header>
@@ -137,16 +137,17 @@ session_regenerate_id(true);
 
     <?php
         if(isset($_GET['Ticket'])){
-            $Pesan=$_GET['Ticket'];
-            echo    "<script type = 'text/javascript'>
-                        Swal.fire(
-                            'Mohon Catat Nomor Tiket Anda',
-                            '$Pesan',
-                            'success'
-                        ).then(function() {
-                            window.location.href = 'index.php';
-                        })
-                    </script>";
+        $Pesan=$_GET['Ticket'];
+
+        echo    "<script type = 'text/javascript'>
+                    Swal.fire(
+                        'Status Ticket Anda Adalah',
+                        '<b>$Pesan</b>',
+                        'success'
+                    ).then(function() {
+                        window.location.href = 'Check_Ticket.php';
+                    })
+                </script>";
         }
     ?>
 
@@ -154,112 +155,37 @@ session_regenerate_id(true);
         <div class="container">
             <div class="row">
                 <div class="col-md-8 col-md-offset-2 mg-b-40">
-                    <?php if(!isset($_SESSION['nik'])){?>
-                        <form action="controller.php?aksi=login_masyarakat" method="POST" class="complaint-form" enctype="multipart/form-data">
-                            <div class="complaint-form-box">
-                                <br>
-                                <div class="select-complaint">Sampaikan Laporan Anda</div>
-                                <!-- <center><p><b>Pilih Klasifikasi Permintaan Anda</b></p></center> -->
-                                <center>
-                                    <a href="#" class="button1 active">Login</a>
-                                    <a href="daftar.php" class="button1">Daftar</a>
-                                </center>
-                                <div class="complaint-help">
-                                    Silahkan login terlebih dahulu 
-                                    <span id="classfication_name">
-                                        atau registrasi
-                                    </span> bila Anda belum memiliki akun 
-                                    
-                                </div>
+                    <form action="controller.php?aksi=cek_tiket" method="POST" class="complaint-form" enctype="multipart/form-data">
+                        <div class="complaint-form-box">
+                            <br>
+                            <div class="select-complaint">Sampaikan Laporan Anda</div>
+                            <!-- <center><p><b>Pilih Klasifikasi Permintaan Anda</b></p></center> -->
+                            <center>
+                                <a href="index.php" class="button1">Pengaduan</a>
+                                <a href="aspirasi.php" class="button1">Aspirasi</a>
+                                <a href="#" class="button1 active">Cek Tiket</a>
+                            </center>
+                            <div class="complaint-help">
+                                Perhatikan Cara Menyampaikan 
+                                <span id="classfication_name">
+                                    Pengaduan
+                                </span> Yang Baik dan Benar 
+                                <a href="#modalPengaduan" data-toggle="modal" class="modalTrigger" id="modalToggler" data-modal-name="modalPengaduan" data-target="#bannerformmodal">
+                                    <img alt="info-complaint" class="info-complaint" src="https://www.lapor.go.id/themes/lapor/assets/images/info.svg" >
+                                </a>
                             </div>
-                            
-                            <div class="complaint-form-category">
-                                <input type="email" name="email" class="form-control" placeholder="Email *" required></textarea>
-                            </div>
-                            <div class="complaint-form-category">
-                                <input type="password" name="password" class="form-control" placeholder="Password *" required></textarea>
-                            </div>
+                        </div>
+                        
+                        <div class="complaint-form-category">
+                            <input type="text" name="query" class="form-control" required/> <br>     
+                        </div>
 
-                            <div class="complaint-form-footer">
-                                <div class="row-flex flex-align-between">
-                                    <input class="btn btn-primary" id="submit-complaint" type="submit" value="submit" name="submit" data-target="#data_submit">
-                                </div>
+                        <div class="complaint-form-footer">
+                            <div class="row-flex flex-align-between">
+                                <input class="btn btn-primary" id="submit-complaint" type="submit" value="Search" name="submit" data-target="#data_submit">
                             </div>
-                        </form>
-                    <?php } else if(isset($_SESSION['nik'])) {?>
-                        <form action="controller.php?aksi=tambah_pengaduan" method="POST" class="complaint-form" enctype="multipart/form-data">
-                            <div class="complaint-form-box">
-                                <br>
-                                <div class="select-complaint">Sampaikan Laporan Anda</div>
-                                <!-- <center><p><b>Pilih Klasifikasi Permintaan Anda</b></p></center> -->
-                                <center>
-                                    <a href="#" class="button1 active">Pengaduan</a>
-                                    <a href="aspirasi.php" class="button1">Aspirasi</a>
-                                    <a href="Check_Ticket.php" class="button1">Cek Tiket</a>
-                                </center>
-                                <div class="complaint-help">
-                                    Perhatikan Cara Menyampaikan 
-                                    <span id="classfication_name">
-                                        Pengaduan
-                                    </span> Yang Baik dan Benar 
-                                    <a href="#modalPengaduan" data-toggle="modal" class="modalTrigger" id="modalToggler" data-modal-name="modalPengaduan" data-target="#bannerformmodal">
-                                        <img alt="info-complaint" class="info-complaint" src="https://www.lapor.go.id/themes/lapor/assets/images/info.svg" >
-                                    </a>
-                                </div>
-                            </div>
-                            
-                            <div class="complaint-form-category">
-                                <input type="text" name="Nama" class="form-control" value="<?php echo $_SESSION['nama']; ?>" placeholder="Nama *" readonly></textarea>
-                            </div>
-                            <div class="complaint-form-category">
-                                <input type="text" name="NIK" class="form-control" value="<?php echo $_SESSION['nik']; ?>" placeholder="NIK *" readonly></textarea>
-                            </div>
-                            <div class="complaint-form-category">
-                                <input type="text" name="No_telepon" class="form-control" value="<?php echo $_SESSION['telepon']; ?>" placeholder="No Telepon *" readonly></textarea>
-                            </div>
-                            <div class="complaint-form-category">
-                                <input type="email" name="Email" class="form-control" value="<?php echo $_SESSION['email']; ?>" placeholder="Email *" readonly></textarea>
-                            </div>
-                            <div class="complaint-form-category">
-                                <select name="unit" id="unit" class="select-tree-view" placeholder="Pilih Kategori Laporan Anda" name="category_id" onchange="getId(this.value);">
-                                    <option>Unit Layanan *</option>
-                                    <?php
-                                        $query = "SELECT * FROM unit_layanan";
-                                        $results=mysqli_query($koneksi, $query);
-                                        //loop
-                                        foreach ($results as $unit){
-                                    ?>
-                                    <option value="<?php echo $unit["id"];?>"><?php echo $unit["nama_unit"];?></option>
-                                    <?php
-                                        }
-                                    ?>
-                                </select>
-                            </div>
-                            <div class="complaint-form-category">
-                                <select name="keperluan" id="keperluan" class="select-tree-view" placeholder="Pilih Kategori Laporan Anda" name="category_id">
-                                    <option>Keperluan *</option>
-                                </select>
-                            </div>
-                            <label for="classification_complaint" class="choose-classification">Tanggal Kejadian</label>
-                            <div class="complaint-form-category">
-                                <input type="date" name="TanggalKejadian" id="TanggalKejadian" class="form-control" placeholder="Tanggal Kejadian *" required></textarea>
-                            </div>
-                            <div class="complaint-form-category">
-                                <textarea name="Keterangan" id="" rows="6" class="form-control textarea-flex autosize" placeholder="Keterangan *" required></textarea>
-                            </div>
-                            <label for="classification_complaint" class="choose-classification">Lampiran Masalah</label>
-                            <div class="complaint-form-category">
-                                <input type="file" name="files[]" id="files[]" class="form-control" accept="image"></textarea>
-                            </div>
-
-                            <div class="complaint-form-footer">
-                                <div class="row-flex flex-align-between">
-                                    <input class="btn btn-primary" id="submit-complaint" type="submit" value="submit" name="submit" data-target="#data_submit">
-                                </div>
-                            </div>
-                        </form>
-                    <?php } ?>
-                    
+                        </div>
+                    </form>
                     <div class="modal fade how-to" id="modalPengaduan" tabindex="-1" role="dialog" aria-labelledby="modalPengaduan" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
@@ -448,18 +374,5 @@ session_regenerate_id(true);
     <script src="https://www.lapor.go.id/themes/lapor/assets/dashboard/leaflet/leaflet.js"></script>
     <script src="https://www.lapor.go.id/themes/lapor/assets/dashboard/leaflet/leaflet-providers-master leaflet-providers.js"></script>
     <script src="https://www.lapor.go.id/themes/lapor/assets/dashboard/leaflet/leaflet.ajax.min.js"></script>
-    <script>
-        function getId(val){
-            //We create ajax function
-            $.ajax({
-                type: "POST",
-                url: "getdata.php",
-                data: "id="+val,
-                success: function(data){
-                    $("#keperluan").html(data);
-                }
-            });
-        }
-    </script>
 </body>
 </html>

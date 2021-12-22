@@ -1,7 +1,5 @@
 <?php
 include 'koneksi.php';
-session_start();
-session_regenerate_id(true);
 ?>
 
 <!DOCTYPE html>
@@ -59,15 +57,6 @@ session_regenerate_id(true);
                     Admin
                 </a>
             </li>
-            <li role="presentation" class="  ">
-                <?php
-                if(isset($_SESSION["nik"])){
-                    echo'<a href="controller.php?aksi=logout_user">
-                        Logout
-                    </a>';
-                }
-                ?>
-            </li>
         </ul>
     </nav>
 </head>
@@ -104,15 +93,6 @@ session_regenerate_id(true);
                         </a>
                     </li>
                 </ul>
-                <div class="nav navbar-nav navbar-right mg-l-10">
-                    <?php
-                        if(isset($_SESSION["nik"])){
-                            echo' <a href="controller.php?aksi=logout_user" class="btn navbar-btn pull-right btn-outline-white">
-                                Logout
-                            </a>';
-                        }
-                    ?>
-                </div>    
             </div>
         </div>
     </header>
@@ -135,49 +115,56 @@ session_regenerate_id(true);
         </svg>
     </section>
 
-    <?php
-        if(isset($_GET['Ticket'])){
-            $Pesan=$_GET['Ticket'];
-            echo    "<script type = 'text/javascript'>
-                        Swal.fire(
-                            'Mohon Catat Nomor Tiket Anda',
-                            '$Pesan',
-                            'success'
-                        ).then(function() {
-                            window.location.href = 'index.php';
-                        })
-                    </script>";
-        }
+    <?php if(isset($_GET['peringatan'])){
+        echo    "<script type = 'text/javascript'>
+                Swal.fire(
+                    'Registrasi Sukses',
+                    'Silahkan Login Untuk Mengajukan Pengaduan',
+                    'success'
+                ).then(function() {
+                    window.location.href = 'index.php';
+                })
+                </script>";
+    }
     ?>
+    
 
     <section id="complaint-box">
         <div class="container">
             <div class="row">
                 <div class="col-md-8 col-md-offset-2 mg-b-40">
                     <?php if(!isset($_SESSION['nik'])){?>
-                        <form action="controller.php?aksi=login_masyarakat" method="POST" class="complaint-form" enctype="multipart/form-data">
+                        <form action="controller.php?aksi=daftar_masyarakat" method="POST" class="complaint-form" enctype="multipart/form-data">
                             <div class="complaint-form-box">
                                 <br>
                                 <div class="select-complaint">Sampaikan Laporan Anda</div>
                                 <!-- <center><p><b>Pilih Klasifikasi Permintaan Anda</b></p></center> -->
                                 <center>
-                                    <a href="#" class="button1 active">Login</a>
-                                    <a href="daftar.php" class="button1">Daftar</a>
+                                    <a href="Index.php" class="button1 ">Login</a>
+                                    <a href="#" class="button1 active">Daftar</a>
                                 </center>
                                 <div class="complaint-help">
-                                    Silahkan login terlebih dahulu 
+                                   Registrasi Akun Anda
                                     <span id="classfication_name">
-                                        atau registrasi
-                                    </span> bila Anda belum memiliki akun 
+                                      
+                                    </span> 
                                     
                                 </div>
                             </div>
-                            
                             <div class="complaint-form-category">
-                                <input type="email" name="email" class="form-control" placeholder="Email *" required></textarea>
+                                <input type="nama" name="Nama" class="form-control" placeholder="Nama *" required></textarea>
                             </div>
                             <div class="complaint-form-category">
-                                <input type="password" name="password" class="form-control" placeholder="Password *" required></textarea>
+                            <input type="text" name="NIK" class="form-control" placeholder="NIK *" required></textarea>
+                        </div>
+                        <div class="complaint-form-category">
+                            <input type="text" name="No_telepon" class="form-control" placeholder="No Telepon *" required></textarea>
+                        </div>
+                            <div class="complaint-form-category">
+                                <input type="email" name="Email" class="form-control" placeholder="Email *" required></textarea>
+                            </div>
+                            <div class="complaint-form-category">
+                                <input type="password" name="Password" class="form-control" placeholder="Password *" required></textarea>
                             </div>
 
                             <div class="complaint-form-footer">
@@ -195,7 +182,6 @@ session_regenerate_id(true);
                                 <center>
                                     <a href="#" class="button1 active">Pengaduan</a>
                                     <a href="aspirasi.php" class="button1">Aspirasi</a>
-                                    <a href="Check_Ticket.php" class="button1">Cek Tiket</a>
                                 </center>
                                 <div class="complaint-help">
                                     Perhatikan Cara Menyampaikan 
@@ -221,28 +207,18 @@ session_regenerate_id(true);
                                 <input type="email" name="Email" class="form-control" value="<?php echo $_SESSION['email']; ?>" placeholder="Email *" readonly></textarea>
                             </div>
                             <div class="complaint-form-category">
-                                <select name="unit" id="unit" class="select-tree-view" placeholder="Pilih Kategori Laporan Anda" name="category_id" onchange="getId(this.value);">
+                                <select id="select_categories" class="select-tree-view" placeholder="Pilih Kategori Laporan Anda" name="category_id">
                                     <option>Unit Layanan *</option>
-                                    <?php
-                                        $query = "SELECT * FROM unit_layanan";
-                                        $results=mysqli_query($koneksi, $query);
-                                        //loop
-                                        foreach ($results as $unit){
-                                    ?>
-                                    <option value="<?php echo $unit["id"];?>"><?php echo $unit["nama_unit"];?></option>
-                                    <?php
-                                        }
-                                    ?>
                                 </select>
                             </div>
                             <div class="complaint-form-category">
-                                <select name="keperluan" id="keperluan" class="select-tree-view" placeholder="Pilih Kategori Laporan Anda" name="category_id">
+                                <select id="select_categories" class="select-tree-view" placeholder="Pilih Kategori Laporan Anda" name="category_id">
                                     <option>Keperluan *</option>
                                 </select>
                             </div>
                             <label for="classification_complaint" class="choose-classification">Tanggal Kejadian</label>
                             <div class="complaint-form-category">
-                                <input type="date" name="TanggalKejadian" id="TanggalKejadian" class="form-control" placeholder="Tanggal Kejadian *" required></textarea>
+                                <input type="date" name="TanggalKejadian" class="form-control" placeholder="Tanggal Kejadian *" required></textarea>
                             </div>
                             <div class="complaint-form-category">
                                 <textarea name="Keterangan" id="" rows="6" class="form-control textarea-flex autosize" placeholder="Keterangan *" required></textarea>
@@ -448,18 +424,5 @@ session_regenerate_id(true);
     <script src="https://www.lapor.go.id/themes/lapor/assets/dashboard/leaflet/leaflet.js"></script>
     <script src="https://www.lapor.go.id/themes/lapor/assets/dashboard/leaflet/leaflet-providers-master leaflet-providers.js"></script>
     <script src="https://www.lapor.go.id/themes/lapor/assets/dashboard/leaflet/leaflet.ajax.min.js"></script>
-    <script>
-        function getId(val){
-            //We create ajax function
-            $.ajax({
-                type: "POST",
-                url: "getdata.php",
-                data: "id="+val,
-                success: function(data){
-                    $("#keperluan").html(data);
-                }
-            });
-        }
-    </script>
 </body>
 </html>

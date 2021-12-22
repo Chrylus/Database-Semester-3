@@ -5,7 +5,7 @@
         header("location:login.php");
     }
 
-    include '../koneksi.php';
+    include '../../koneksi.php';
 ?>
 
 <!DOCTYPE html>
@@ -21,11 +21,11 @@
     <title>PIC</title>
 
     <!-- Custom fonts for this template-->
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="../css/sb-admin-2.min.css" rel="stylesheet">
     <link rel="icon" href="../user/images/Binus Logo.png">
     <!-- Table sort -->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
@@ -38,111 +38,22 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <ul class="navbar-nav  sidebar sidebar-dark accordion" id="accordionSidebar" style="background-color:#4e73df">
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.php">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
-                
-                <div class="sidebar-brand-text mx-3">
-                    <?php 
-                        echo 'WADUL';
-
-                        //Pengujian Apakah data absensi
-                        if(isset($_GET['hal']))
-                        {
-                            if($_GET['hal'] == "edit")
-                            {
-                                //Tampilkan Data yang akan diedit
-                                $tampil = mysqli_query($koneksi, "SELECT * FROM msadmin WHERE id = '$_GET[id]' ");
-                                $data = mysqli_fetch_array($tampil);
-                                if($data)
-                                {
-                                    //Jika data ditemukan, maka data ditampung ke dalam variabel
-                                    $txtName = $data['name'];
-                                    $txtUsername = $data['username'];
-                                    $txtPassword = $data['password'];
-                                }
-                            }
-                            else if ($_GET['hal'] == "hapus")
-                            {
-                                //Persiapan hapus data
-                                $hapus = mysqli_query($koneksi, "DELETE FROM msadmin WHERE id = '$_GET[id]' ");
-                                if($hapus){
-                                    echo "<script>
-                                            alert('Hapus Data Sukses!!');
-                                            document.location='admin.php';
-                                        </script>";
-                                }
-                            }
-                        }
-
-                        if(isset($_POST['bsimpan']))
-                        {
-                            //Pengujian Apakah data akan diedit atau disimpan baru
-                            if($_GET['hal'] == "edit")
-                            {
-                                //Data akan di edit
-                                $password=$_POST['password'];
-                                $edit = mysqli_query($koneksi, "UPDATE msadmin set
-                                                                    name = '$_POST[name]',
-                                                                    username = '$_POST[username]',
-                                                                    password = '$password'
-                                                                WHERE id = '$_GET[id]'
-                                                            ");
-                                if($edit) //jika edit sukses
-                                {
-                                    echo "<script>
-                                            alert('Edit data Sukses!');
-                                            document.location='admin.php';
-                                        </script>";
-                                }
-                                else
-                                {
-                                    echo "<script>
-                                            alert('Edit data GAGAL!!');
-                                            document.location='admin.php';
-                                        </script>";
-                                }
-                            }
-                            else
-                            {
-                                //Data akan disimpan Baru
-                                $password=$_POST['password'];
-                                $simpan = mysqli_query($koneksi, "INSERT INTO msadmin (name, username, password)
-                                                            VALUES ('$_POST[name]',
-                                                                    '$_POST[username]', 
-                                                                    '$password'
-                                                                    )
-                                                            ");
-                                if($simpan) //jika simpan sukses
-                                {
-                                    echo "<script>
-                                            alert('Simpan data Sukses!');
-                                            document.location='admin.php';
-                                        </script>";
-                                }
-                                else
-                                {
-                                    echo "<script>
-                                            alert('Simpan data GAGAL!!');
-                                            document.location='admin.php';
-                                        </script>";
-                                }
-                            }
-                        }
-                    ?>                                
-                </div>
+                <div class="sidebar-brand-text mx-3">WADUL</div>
             </a>
-            
+
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
-                <a class="nav-link" href="index.html">
+            <li class="nav-item">
+                <a class="nav-link" href="../index.php">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
@@ -154,8 +65,8 @@
             <div class="sidebar-heading">
                 Interface
             </div>
-            <li class="nav-item">
-                <a class="nav-link" href="charts.html">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">
                     <i class="fas fa-fw fa-cog"></i>
                     <span>Admin</span></a>
             </li> 
@@ -169,8 +80,8 @@
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Laporan:</h6>
-                        <a class="collapse-item" href="buttons.html">Pengaduan</a>
-                        <a class="collapse-item" href="cards.html">Aspirasi</a>
+                        <a class="collapse-item" href="../pengaduan/index.php">Pengaduan</a>
+                        <a class="collapse-item" href="../aspirasi/index.php">Aspirasi</a>
                     </div>
                 </div>
             </li>
@@ -180,9 +91,10 @@
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span>Status Laporan</span></a>
             </li>
-            
-            <!-- Divider -->
-            <hr class="sidebar-divider">
+
+           
+            <!-- Nav Item - Utilities Collapse Menu -->
+           
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
@@ -191,6 +103,10 @@
             <div class="text-center d-none d-md-inline">
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
             </div>
+
+            <!-- Sidebar Message -->
+            
+
         </ul>
         <!-- End of Sidebar -->
 
@@ -223,7 +139,7 @@
                                     }
                                     ?>
                                 </span>
-                                <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
+                                <img class="img-profile rounded-circle" src="../img/undraw_profile.svg">
                             </a>
                             
                             <!-- Dropdown - User Information -->
@@ -250,19 +166,41 @@
                         <h1 class="h3 mb-0 text-gray-800">Data Administrator</h1>
                     </div>
                     <div class="card-body">
-                    <form method="post" action="">
+                    <?php if(isset($_GET['hal']) == "edit"){?>
+                        <?php 
+                            $id = $_GET['id'];
+                            $query = "SELECT * FROM msadmin WHERE id = '$_GET[id]'";
+                            $exec = mysqli_query($koneksi, $query);
+                            $fetch = mysqli_fetch_array($exec);    
+                        ?>
+                        <form method="post" action="../../controller.php?aksi=edit_admin&id=<?=$fetch['id']?>">
                         <div class="complaint-form-category">
-                            <input type="text" name="name" class="form-control" placeholder="Nama *" value="<?=@$txtName?>" required></textarea>
+                            <input type="text" name="name" class="form-control" placeholder="Nama *" value="<?=$fetch['name']?>" required></textarea>
                         </div>
                         <div class="complaint-form-category">
-                            <input type="text" name="username" class="form-control" placeholder="Username *" value="<?=@$txtUsername?>" required></textarea>
+                            <input type="text" name="username" class="form-control" placeholder="Username *" value="<?=$fetch['username']?>" required></textarea>
                         </div>
                         <div class="complaint-form-category">
-                            <input type="password" name="password" class="form-control" placeholder="Password   *" value="<?=@$txtPassword?>" required></textarea>
+                            <input type="password" name="password" class="form-control" placeholder="Password   *" required></textarea>
                         </div>
                         <br>
-                        <button type="submit" class="btn btn-success" name="bsimpan">Simpan</button>
+                        <button type="submit" class="btn btn-success">Simpan</button>
                     </form>
+                    <?php } else if(isset($_GET['hal']) != "edit"){?>
+                        <form method="post" action="../../controller.php?aksi=tambah_admin">
+                        <div class="complaint-form-category">
+                            <input type="text" name="name" class="form-control" placeholder="Nama *" required></textarea>
+                        </div>
+                        <div class="complaint-form-category">
+                            <input type="text" name="username" class="form-control" placeholder="Username *" required></textarea>
+                        </div>
+                        <div class="complaint-form-category">
+                            <input type="password" name="password" class="form-control" placeholder="Password   *" required></textarea>
+                        </div>
+                        <br>
+                        <button type="submit" class="btn btn-success">Simpan</button>
+                    </form>
+                    <?php } ?>
                     <br><br>
                     
                     <!-- Content Row -->
@@ -306,7 +244,7 @@
                                                 <td><?=$data['username']?></td>
                                                 <td>
                                                     <a href="admin.php?hal=edit&id=<?=$data['id']?>" class="btn btn-warning"> Edit </a>
-                                                    <a href="admin.php?hal=hapus&id=<?=$data['id']?>" class="btn btn-danger"> Hapus </a>
+                                                    <a href="../../controller.php?aksi=hapus_admin&id=<?=$data['id']?>" class="btn btn-danger"> Hapus </a>
                                                 </td>
                                             </tr>
                                             <?php endwhile; //penutup perulangan while ?>           
@@ -362,28 +300,28 @@
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="logout.php">Logout</a>
+                    <a class="btn btn-primary" href="../../controller.php?aksi=logout">Logout</a>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../vendor/jquery/jquery.min.js"></script>
+    <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="../vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin-2.min.js"></script>
+    <script src="../js/sb-admin-2.min.js"></script>
 
     <!-- Page level plugins -->
-    <script src="vendor/chart.js/Chart.min.js"></script>
+    <script src="../vendor/chart.js/Chart.min.js"></script>
 
     <!-- Page level custom scripts -->
-    <script src="js/demo/chart-area-demo.js"></script>
-    <script src="js/demo/chart-pie-demo.js"></script>
+    <script src="../js/demo/chart-area-demo.js"></script>
+    <script src="../js/demo/chart-pie-demo.js"></script>
 
 </body>
 

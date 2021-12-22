@@ -98,4 +98,53 @@ function register(){
     }
 }
 
+function logout() {
+    $logout = $_POST['logout'];
+    if($logout == "logout"){
+        session_unset();
+        session_destroy();
+        $response = array(
+            'status' => 'success'
+        );
+        header('Content-Type: application/json');
+        echo json_encode($response);
+    }
+}
+
+function tambah_pengaduan(){
+    global $koneksi;
+    // Default
+    $unik = uniqid('PENGADUAN');
+    // Ambil input dari depan
+    $nik = $_POST['NIK'];
+    $esc_nik = mysqli_real_escape_string($koneksi, $nik);
+    $tujuan = $_POST['Tujuan'];
+    $esc_tujuan = mysqli_real_escape_string($koneksi, $tujuan);
+    $keperluan = $_POST['Keperluan'];
+    $esc_keperluan = mysqli_real_escape_string($koneksi, $keperluan);
+    $keterangan = $_POST['Keterangan'];
+    $esc_keterangan = mysqli_real_escape_string($koneksi, $keterangan);
+    $tanggal_kejadian = $_POST['TanggalKejadian'];
+    $esc_tanggal_kejadian = mysqli_real_escape_string($koneksi, $tanggal_kejadian);
+    // Default
+    $pending = 'Pending';
+    $tanggal = date("Y-m-d");
+    // Eksekusi
+    $query1 = "INSERT INTO `pelaporan` (`ID_Pelaporan`, `NIK`, `Tujuan`, `Keperluan`, `Keterangan`, `TanggalLaporan`, `TanggalKejadian`, `Status`) VALUES ('$unik', '$esc_nik', '$esc_tujuan', '$esc_keperluan', '$esc_keterangan', '$tanggal', '$esc_tanggal_kejadian', '$pending')";
+    $exec1 = mysqli_query($koneksi, $query1);
+    
+    if($exec1){
+        $response = array(
+            'status' => 'success'
+        );
+        
+    }else{
+        $response = array(
+            'status' => 'gagal'
+        );
+    }
+    header('Content-Type: application/json');
+    echo json_encode($response);
+}
+
 ?>

@@ -1,3 +1,9 @@
+<?php
+include 'koneksi.php';
+session_start();
+session_regenerate_id(true);
+?>
+
 <!DOCTYPE html>
 <html lang = "en">
 <head>
@@ -53,6 +59,15 @@
                     Admin
                 </a>
             </li>
+            <li role="presentation" class="  ">
+                <?php
+                if(isset($_SESSION["nik"])){
+                    echo'<a href="controller.php?aksi=logout_user">
+                        Logout
+                    </a>';
+                }
+                ?>
+            </li>
         </ul>
     </nav>
 </head>
@@ -88,6 +103,16 @@
                             Admin
                         </a>
                     </li>
+                </ul>
+                <div class="nav navbar-nav navbar-right mg-l-10">
+                    <?php
+                        if(isset($_SESSION["nik"])){
+                            echo    '<a href="controller.php?aksi=logout_user" class="btn navbar-btn pull-right btn-outline-white">
+                                        Logout
+                                    </a>';
+                            }
+                    ?>
+                </div> 
             </div>
         </div>
     </header>
@@ -111,13 +136,16 @@
     </section>
 
     <?php
-        if(isset($_GET['pesan'])){
+        if(isset($_GET['Ticket'])){
+            $Pesan=$_GET['Ticket'];
             echo    "<script type = 'text/javascript'>
                         Swal.fire(
-                            'Sukses',
-                            'Laporan Berhasil Dikirim',
+                            'Mohon Catat Nomor Tiket Anda',
+                            '$Pesan',
                             'success'
-                        )
+                        ).then(function() {
+                            window.location.href = 'aspirasi.php';
+                        })
                     </script>";
         }
     ?>
@@ -132,8 +160,9 @@
                             <div class="select-complaint">Sampaikan Laporan Anda</div>
                             <!-- <center><p><b>Pilih Klasifikasi Permintaan Anda</b></p></center> -->
                             <center>
-                                <a href="Index.php" class="button1">Pengaduan</a>
+                                <a href="index.php" class="button1">Pengaduan</a>
                                 <a href="#" class="button1 active">Aspirasi</a>
+                                <a href="Check_Ticket.php" class="button1">Cek Tiket</a>
                             </center>
                             <div class="complaint-help">
                                 Perhatikan Cara Menyampaikan 
@@ -147,22 +176,36 @@
                         </div>
                         
                         <div class="complaint-form-category">
-                            <input type="text" name="Nama" class="form-control" placeholder="Nama *" required></textarea>
+                            <input type="text" name="Nama" class="form-control" value="<?php echo $_SESSION['nama']; ?>" placeholder="Nama *" readonly></textarea>
                         </div>
                         <div class="complaint-form-category">
-                            <input type="text" name="NIK" class="form-control" placeholder="NIK *" required></textarea>
+                            <input type="text" name="NIK" class="form-control" value="<?php echo $_SESSION['nik']; ?>" placeholder="NIK *" readonly></textarea>
                         </div>
                         <div class="complaint-form-category">
-                            <input type="text" name="No_telepon" class="form-control" placeholder="No Telepon *" required></textarea>
+                            <input type="text" name="No_telepon" class="form-control" value="<?php echo $_SESSION['telepon']; ?>" placeholder="No Telepon *" readonly></textarea>
                         </div>
                         <div class="complaint-form-category">
-                            <input type="email" name="Email" class="form-control" placeholder="Email *" required></textarea>
+                            <input type="email" name="Email" class="form-control" value="<?php echo $_SESSION['email']; ?>" placeholder="Email *" readonly></textarea>
                         </div>
                         <div class="complaint-form-category">
-                            <input type="text" name="Tujuan" class="form-control" placeholder="Tujuan *" required></textarea>
+                            <select name="unit" id="unit" class="select-tree-view" placeholder="Pilih Kategori Laporan Anda" name="category_id" onchange="getId(this.value);">
+                                <option>Unit Layanan *</option>
+                                <?php
+                                    $query = "SELECT * FROM unit_layanan";
+                                    $results=mysqli_query($koneksi, $query);
+                                    //loop
+                                    foreach ($results as $unit){
+                                ?>
+                                <option value="<?php echo $unit["id"];?>"><?php echo $unit["nama_unit"];?></option>
+                                <?php
+                                    }
+                                ?>
+                            </select>
                         </div>
                         <div class="complaint-form-category">
-                            <input type="text" name="Keperluan" class="form-control" placeholder="Keperluan *" required></textarea>
+                            <select name="keperluan" id="keperluan" class="select-tree-view" placeholder="Pilih Kategori Laporan Anda" name="category_id">
+                                <option>Keperluan *</option>
+                            </select>
                         </div>
                         <div class="complaint-form-category">
                             <textarea name="Keterangan" id="" rows="6" class="form-control textarea-flex autosize" placeholder="Keterangan *" required></textarea>
@@ -287,12 +330,16 @@
     </section>
         <section class="block block-counter" id="hero" style="color:white; padding: 40px 0 40px;">
             <div class="container">
-                <div class="text-center text-muted h3 mg-0 mg-b-30" style="color: white">JUMLAH LAPORAN SEKARANG</div>
-
+                <div class="text-center text-muted h3 mg-0 mg-b-30" style="color: white">JUMLAH LAPORAN DAN ASPIRASI SEKARANG</div>
+                <?php 
+                    $query = "SELECT COUNT(ID_Pelaporan) AS JumlahLaporan FROM pelaporan;";
+                    $exec = mysqli_query($koneksi, $query);
+                    $fetch_q = mysqli_fetch_array($exec);
+                ?>
                 <div class="row-flex flex-tablet text-center">
                     <div class="post post-counter" style="margin-left: auto;margin-right: auto;">
                         <div class="counter-count"> 
-                            <span class="numscroller" data-min='0' data-max='69420' data-delay='2' data-increment='1000'></span></div>
+                            <span class="numscroller" data-min='0' data-max=<?= $fetch_q['JumlahLaporan'] ?> data-delay='2' data-increment='1000'></span></div>
                     </div>
                 </div>
             </div>
@@ -362,5 +409,20 @@
     <script src="https://www.lapor.go.id/themes/lapor/assets/dashboard/leaflet/leaflet.js"></script>
     <script src="https://www.lapor.go.id/themes/lapor/assets/dashboard/leaflet/leaflet-providers-master leaflet-providers.js"></script>
     <script src="https://www.lapor.go.id/themes/lapor/assets/dashboard/leaflet/leaflet.ajax.min.js"></script>
+
+    <script>
+        function getId(val){
+            //We create ajax function
+            $.ajax({
+                type: "POST",
+                url: "getdata.php",
+                data: "id="+val,
+                success: function(data){
+                    $("#keperluan").html(data);
+                }
+            });
+        }
+    </script>
+
 </body>
 </html>
