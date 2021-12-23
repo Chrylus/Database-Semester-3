@@ -10,6 +10,7 @@
             if(isset($data['submit'])){
                 // Default
                 $unik = uniqid('PGD');
+                
                 // Ambil input dari depan
                 $nik = $data['NIK'];
                 $esc_nik = mysqli_real_escape_string($koneksi, $nik);
@@ -21,14 +22,6 @@
                 $esc_keterangan = mysqli_real_escape_string($koneksi, $keterangan);
                 $tanggal_kejadian = $data['TanggalKejadian'];
                 $esc_tanggal_kejadian = mysqli_real_escape_string($koneksi, $tanggal_kejadian);
-                // Komparasi
-                $keperluan_tbl = "SELECT * FROM keperluan";
-                $exec_kep = mysqli_query($koneksi, $keperluan_tbl);
-                $fetch_kep = mysqli_fetch_array($exec_kep);
-                $cek_kep = $fetch_kep ['keperluan'];
-                if($keperluan = $cek_kep){
-                    $topik_id = $fetch_kep['topik_id'];
-                }
                 // File upload
                 if(isset($_FILES["files"]) && !empty($_FILES["files"]["name"])){
                     foreach($_FILES['files']['tmp_name'] as $key => $tmp_name ){
@@ -46,7 +39,7 @@
                 }
                 // Eksekusi
                 $query1 = "INSERT INTO pelaporan (ID_Pelaporan, NIK, Tujuan, Keperluan, Keterangan, TanggalKejadian)
-                    VALUES ('$unik', '$esc_nik', '$esc_tujuan', '$topik_id', '$esc_keterangan', '$esc_tanggal_kejadian')";
+                    VALUES ('$unik', '$esc_nik', '$esc_tujuan', '$keperluan', '$esc_keterangan', '$esc_tanggal_kejadian')";
                 $exec1 = mysqli_query($koneksi, $query1);
                 $ticket = mysqli_query($koneksi, "SELECT Ticket FROM pelaporan ORDER BY ID DESC LIMIT 1");
                 $result = mysqli_fetch_array($ticket);

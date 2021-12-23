@@ -7,7 +7,7 @@
 
         foreach ($results as $keperluan) {
 ?>
-            <option value="<?php echo $keperluan["keperluan"];?>"><?php echo $keperluan["keperluan"];?></option>       
+            <option value="<?php echo $keperluan["topik_id"];?>"><?php echo $keperluan["keperluan"];?></option>       
 <?php
         }
     }

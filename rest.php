@@ -147,4 +147,60 @@ function tambah_pengaduan(){
     echo json_encode($response);
 }
 
+function lihat_keperluan(){
+    global $koneksi;
+    $query = "SELECT * FROM unit_layanan WHERE id = '$_GET[id]'";
+    $exec1 = mysqli_query($koneksi, $query);
+    while($fetch = mysqli_fetch_array($exec1)){
+        $response = array(
+            'nama_unit' => $fetch['nama_unit']
+        );
+        header('Content-Type: application/json');
+        echo json_encode($response);
+    }
+}
+
+function cek_tiket(){
+
+    global $koneksi;
+    // Search
+    $query = $_POST['query']; 
+    // gets value sent over search form
+    $min_length = 3;
+    // you can set minimum length of the query if you want
+    if(strlen($query) >= $min_length){ // if query length is more or equal minimum length then
+        $query = htmlspecialchars($query); 
+        // changes characters used in html to their equivalents, for example: < to >
+        
+        $query = mysqli_real_escape_string($koneksi, $query);
+        // makes sure nobody uses SQL injection
+        
+        $raw_results = mysqli_query($koneksi, "SELECT * FROM pelaporan
+            WHERE (`Ticket` LIKE '%".$query."%') OR (`Ticket` LIKE '%".$query."%')");
+            
+        if(mysqli_num_rows($raw_results) > 0){ // if one or more rows are returned do following
+            while($results = mysqli_fetch_array($raw_results)){
+            // $results = mysql_fetch_array($raw_results) puts data from database into array, while it's valid it does the loop
+                $response = array(
+                    'status' => $results['Status']
+                );
+                header('Content-Type: application/json');
+                echo json_encode($response);
+            }
+        }
+        else{ // if there is no matching rows do following
+            $response = array(
+                'status' => 'gagal'
+            );
+            header('Content-Type: application/json');
+            echo json_encode($response);
+        }
+    }else{ // if query length is less than minimum
+        $response = array(
+            'status' => 'panjang minimum tidak terpenuhi'
+        );
+        header('Content-Type: application/json');
+        echo json_encode($response);
+    }
+} 
 ?>
