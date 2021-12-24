@@ -39,6 +39,10 @@
     $sql7    = "select count(id_keldesa) as Total_KelDesa from keldesa";
     $result7 = mysqli_query($koneksi, $sql7);
     $data7   = mysqli_fetch_assoc($result7);
+
+    $sql8    = "select count(id) as Total_Admin from msadmin";
+    $result8 = mysqli_query($koneksi, $sql8);
+    $data8   = mysqli_fetch_assoc($result8);
     //End of Tampilan Tiket di Dashboard Atas
 ?>
 
@@ -364,7 +368,7 @@
 
                         <!-- Ticket Pelaporan Pending -->
                         <div class="col-xl-3 col-md-6 mb-4">
-                            <a href = "#">
+                            <a href = "aspirasi/index.php">
                                 <div class="card border-left-primary shadow h-100 py-2">
                                     <div class="card-body">
                                         <div class="row no-gutters align-items-center">
@@ -383,7 +387,7 @@
 
                         <!-- Ticket Aspirasi Pending -->
                         <div class="col-xl-3 col-md-6 mb-4">
-                            <a href = "tables_on_progress.php">
+                            <a href = "pengaduan/index.php">
                                 <div class="card border-left-success shadow h-100 py-2">
                                     <div class="card-body">
                                         <div class="row no-gutters align-items-center">
@@ -402,7 +406,7 @@
 
                         <!-- Total Ticket -->
                         <div class="col-xl-3 col-md-6 mb-4">
-                            <a href = "tables_close.php">
+                            <a href = "#">
                                 <div class="card border-left-info shadow h-100 py-2">
                                     <div class="card-body">
                                         <div class="row no-gutters align-items-center">
@@ -424,7 +428,7 @@
                         </div>
 
                         <div class="col-xl-3 col-md-6 mb-4">
-                            <a href = "tables.php">
+                            <a href = "#">
                                 <div class="card border-left-warning shadow h-100 py-2">
                                     <div class="card-body">
                                         <div class="row no-gutters align-items-center">
@@ -442,7 +446,7 @@
                         </div>
 
                         <div class="col-xl-3 col-md-6 mb-4">
-                            <a href = "tables.php">
+                            <a href = "#">
                                 <div class="card border-left-danger shadow h-100 py-2">
                                     <div class="card-body">
                                         <div class="row no-gutters align-items-center">
@@ -460,7 +464,7 @@
                         </div>
 
                         <div class="col-xl-3 col-md-6 mb-4">
-                            <a href = "tables.php">
+                            <a href = "#">
                                 <div class="card border-left-secondary shadow h-100 py-2">
                                     <div class="card-body">
                                         <div class="row no-gutters align-items-center">
@@ -478,7 +482,7 @@
                         </div>
 
                         <div class="col-xl-3 col-md-6 mb-4">
-                            <a href = "tables.php">
+                            <a href = "#">
                                 <div class="card border-left-dark shadow h-100 py-2">
                                     <div class="card-body">
                                         <div class="row no-gutters align-items-center">
@@ -488,6 +492,24 @@
                                             </div>
                                             <div class="col-auto">
                                                 <i class="fas fa-building fa-2x text-gray-300"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <a href = "#">
+                                <div class="card border-left-dark shadow h-100 py-2">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="text-xs font-weight-bold text-warning text-uppercase mb-1"> Total Admin </div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $data8['Total_Admin'];?></div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class="fas fa-male fa-2x text-gray-300"></i>
                                             </div>
                                         </div>
                                     </div>
