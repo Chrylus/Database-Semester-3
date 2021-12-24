@@ -807,8 +807,8 @@
                                                 hoverBorderColor:'#000'
                                             }],
                                             labels: [
-                                                'Request',
-                                                'Layanan'
+                                                'Pengaduan',
+                                                'Aspirasi'
                                             ]
                                         };
                                         
