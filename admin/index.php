@@ -19,6 +19,7 @@
     // AND MONTH (TanggalLaporan) = MONTH (CURDATE()) AND YEAR (TanggalLaporan) = YEAR (CURDATE()) 
     $result2 = mysqli_query($koneksi, $sql2);
     $data2   = mysqli_fetch_assoc($result2);
+    
 
     $sql3    = "select count(ID_Pelaporan) as Total_Ticket from pelaporan";
     $result3 = mysqli_query($koneksi, $sql3);
@@ -44,6 +45,106 @@
     $result8 = mysqli_query($koneksi, $sql8);
     $data8   = mysqli_fetch_assoc($result8);
     //End of Tampilan Tiket di Dashboard Atas
+
+    //buat chart titik untuk aspirasi pending
+    $sql9    = "select count(Status) as Pending_Aspirasi from pelaporan WHERE (Status = 'Pending') AND (ID_Pelaporan LIKE '%ASP%') AND MONTH (TanggalLaporan) = 1 AND YEAR (TanggalLaporan) = YEAR (CURDATE())";
+    $result9 = mysqli_query($koneksi, $sql9);
+    $data9   = mysqli_fetch_assoc($result9);
+
+    $sql10    = "select count(Status) as Pending_Aspirasi from pelaporan WHERE (Status = 'Pending') AND (ID_Pelaporan LIKE '%ASP%') AND MONTH (TanggalLaporan) = 2 AND YEAR (TanggalLaporan) = YEAR (CURDATE())";
+    $result10 = mysqli_query($koneksi, $sql10);
+    $data10   = mysqli_fetch_assoc($result10);
+
+    $sql11    = "select count(Status) as Pending_Aspirasi from pelaporan WHERE (Status = 'Pending') AND (ID_Pelaporan LIKE '%ASP%') AND MONTH (TanggalLaporan) = 3 AND YEAR (TanggalLaporan) = YEAR (CURDATE())";
+    $result11 = mysqli_query($koneksi, $sql11);
+    $data11   = mysqli_fetch_assoc($result11);
+
+    $sql12    = "select count(Status) as Pending_Aspirasi from pelaporan WHERE (Status = 'Pending') AND (ID_Pelaporan LIKE '%ASP%') AND MONTH (TanggalLaporan) = 4 AND YEAR (TanggalLaporan) = YEAR (CURDATE())";
+    $result12 = mysqli_query($koneksi, $sql12);
+    $data12   = mysqli_fetch_assoc($result12);
+
+    $sql13    = "select count(Status) as Pending_Aspirasi from pelaporan WHERE (Status = 'Pending') AND (ID_Pelaporan LIKE '%ASP%') AND MONTH (TanggalLaporan) = 5 AND YEAR (TanggalLaporan) = YEAR (CURDATE())";
+    $result13 = mysqli_query($koneksi, $sql13);
+    $data13   = mysqli_fetch_assoc($result13);
+
+    $sql14    = "select count(Status) as Pending_Aspirasi from pelaporan WHERE (Status = 'Pending') AND (ID_Pelaporan LIKE '%ASP%') AND MONTH (TanggalLaporan) = 6 AND YEAR (TanggalLaporan) = YEAR (CURDATE())";
+    $result14 = mysqli_query($koneksi, $sql14);
+    $data14   = mysqli_fetch_assoc($result14);
+
+    $sql15    = "select count(Status) as Pending_Aspirasi from pelaporan WHERE (Status = 'Pending') AND (ID_Pelaporan LIKE '%ASP%') AND MONTH (TanggalLaporan) = 7 AND YEAR (TanggalLaporan) = YEAR (CURDATE())";
+    $result15 = mysqli_query($koneksi, $sql15);
+    $data15   = mysqli_fetch_assoc($result15);
+
+    $sql16    = "select count(Status) as Pending_Aspirasi from pelaporan WHERE (Status = 'Pending') AND (ID_Pelaporan LIKE '%ASP%') AND MONTH (TanggalLaporan) = 8 AND YEAR (TanggalLaporan) = YEAR (CURDATE())";
+    $result16 = mysqli_query($koneksi, $sql16);
+    $data16   = mysqli_fetch_assoc($result16);
+
+    $sql17    = "select count(Status) as Pending_Aspirasi from pelaporan WHERE (Status = 'Pending') AND (ID_Pelaporan LIKE '%ASP%') AND MONTH (TanggalLaporan) = 9 AND YEAR (TanggalLaporan) = YEAR (CURDATE())";
+    $result17 = mysqli_query($koneksi, $sql17);
+    $data17   = mysqli_fetch_assoc($result17);
+
+    $sql18    = "select count(Status) as Pending_Aspirasi from pelaporan WHERE (Status = 'Pending') AND (ID_Pelaporan LIKE '%ASP%') AND MONTH (TanggalLaporan) = 10 AND YEAR (TanggalLaporan) = YEAR (CURDATE())";
+    $result18 = mysqli_query($koneksi, $sql18);
+    $data18   = mysqli_fetch_assoc($result18);
+
+    $sql19    = "select count(Status) as Pending_Aspirasi from pelaporan WHERE (Status = 'Pending') AND (ID_Pelaporan LIKE '%ASP%') AND MONTH (TanggalLaporan) = 11 AND YEAR (TanggalLaporan) = YEAR (CURDATE())";
+    $result19 = mysqli_query($koneksi, $sql19);
+    $data19   = mysqli_fetch_assoc($result19);
+
+    $sql20    = "select count(Status) as Pending_Aspirasi from pelaporan WHERE (Status = 'Pending') AND (ID_Pelaporan LIKE '%ASP%') AND MONTH (TanggalLaporan) = 12 AND YEAR (TanggalLaporan) = YEAR (CURDATE())";
+    $result20 = mysqli_query($koneksi, $sql20);
+    $data20   = mysqli_fetch_assoc($result20);
+    //buat chart titik untuk Pengaduan pending
+
+    $sql21    = "select count(Status) as Pending_Pengaduan from pelaporan WHERE (Status = 'Pending') AND (ID_Pelaporan LIKE '%PGD%') AND MONTH (TanggalLaporan) = 1 AND YEAR (TanggalLaporan) = YEAR (CURDATE())";
+    $result21 = mysqli_query($koneksi, $sql21);
+    $data21   = mysqli_fetch_assoc($result21);
+
+    $sql22    = "select count(Status) as Pending_Pengaduan from pelaporan WHERE (Status = 'Pending') AND (ID_Pelaporan LIKE '%PGD%') AND MONTH (TanggalLaporan) = 2 AND YEAR (TanggalLaporan) = YEAR (CURDATE())";
+    $result22 = mysqli_query($koneksi, $sql22);
+    $data22   = mysqli_fetch_assoc($result22);
+
+    $sql23    = "select count(Status) as Pending_Pengaduan from pelaporan WHERE (Status = 'Pending') AND (ID_Pelaporan LIKE '%PGD%') AND MONTH (TanggalLaporan) = 3 AND YEAR (TanggalLaporan) = YEAR (CURDATE())";
+    $result23 = mysqli_query($koneksi, $sql23);
+    $data23   = mysqli_fetch_assoc($result23);
+
+    $sql24    = "select count(Status) as Pending_Pengaduan from pelaporan WHERE (Status = 'Pending') AND (ID_Pelaporan LIKE '%PGD%') AND MONTH (TanggalLaporan) = 4 AND YEAR (TanggalLaporan) = YEAR (CURDATE())";
+    $result24 = mysqli_query($koneksi, $sql24);
+    $data24   = mysqli_fetch_assoc($result24);
+
+    $sql25    = "select count(Status) as Pending_Pengaduan from pelaporan WHERE (Status = 'Pending') AND (ID_Pelaporan LIKE '%ASP%') AND MONTH (TanggalLaporan) = 5 AND YEAR (TanggalLaporan) = YEAR (CURDATE())";
+    $result25 = mysqli_query($koneksi, $sql25);
+    $data25   = mysqli_fetch_assoc($result25);
+
+    $sql26    = "select count(Status) as Pending_Pengaduan from pelaporan WHERE (Status = 'Pending') AND (ID_Pelaporan LIKE '%PGD%') AND MONTH (TanggalLaporan) = 6 AND YEAR (TanggalLaporan) = YEAR (CURDATE())";
+    $result26 = mysqli_query($koneksi, $sql26);
+    $data26   = mysqli_fetch_assoc($result26);
+
+    $sql27    = "select count(Status) as Pending_Pengaduan from pelaporan WHERE (Status = 'Pending') AND (ID_Pelaporan LIKE '%PGD%') AND MONTH (TanggalLaporan) = 7 AND YEAR (TanggalLaporan) = YEAR (CURDATE())";
+    $result27 = mysqli_query($koneksi, $sql27);
+    $data27   = mysqli_fetch_assoc($result27);
+
+    $sql28    = "select count(Status) as Pending_Pengaduan from pelaporan WHERE (Status = 'Pending') AND (ID_Pelaporan LIKE '%PGD%') AND MONTH (TanggalLaporan) = 8 AND YEAR (TanggalLaporan) = YEAR (CURDATE())";
+    $result28 = mysqli_query($koneksi, $sql28);
+    $data28   = mysqli_fetch_assoc($result28);
+
+    $sql29    = "select count(Status) as Pending_Pengaduan from pelaporan WHERE (Status = 'Pending') AND (ID_Pelaporan LIKE '%PGD%') AND MONTH (TanggalLaporan) = 9 AND YEAR (TanggalLaporan) = YEAR (CURDATE())";
+    $result29 = mysqli_query($koneksi, $sql29);
+    $data29   = mysqli_fetch_assoc($result29);
+
+    $sql30    = "select count(Status) as Pending_Pengaduan from pelaporan WHERE (Status = 'Pending') AND (ID_Pelaporan LIKE '%PGD%') AND MONTH (TanggalLaporan) = 10 AND YEAR (TanggalLaporan) = YEAR (CURDATE())";
+    $result30 = mysqli_query($koneksi, $sql30);
+    $data30   = mysqli_fetch_assoc($result30);
+
+    $sql31    = "select count(Status) as Pending_Pengaduan from pelaporan WHERE (Status = 'Pending') AND (ID_Pelaporan LIKE '%PGD%') AND MONTH (TanggalLaporan) = 11 AND YEAR (TanggalLaporan) = YEAR (CURDATE())";
+    $result31 = mysqli_query($koneksi, $sql31);
+    $data31   = mysqli_fetch_assoc($result31);
+
+    $sql32    = "select count(Status) as Pending_Pengaduan from pelaporan WHERE (Status = 'Pending') AND (ID_Pelaporan LIKE '%PGD%') AND MONTH (TanggalLaporan) = 12 AND YEAR (TanggalLaporan) = YEAR (CURDATE())";
+    $result32 = mysqli_query($koneksi, $sql32);
+    $data32   = mysqli_fetch_assoc($result32);
+
+
 ?>
 
 <!DOCTYPE html>
@@ -67,6 +168,8 @@
 
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script> 
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.js"></script> 
 
 </head>
 
@@ -547,7 +650,7 @@
                                 <!-- Card Body -->
                                 <div class="card-body">
                                     <div class="chart-area">
-                                        <canvas id="myAreaChart"></canvas>
+                                        <canvas id="layanan"></canvas>
                                     </div>
                                 </div>
                             </div>
@@ -595,7 +698,147 @@
                             </div>
                         </div>
                     </div>
+                    <!-- function for chart -->
+                    <script>
+                         $(function () {/*from   w ww .  ja va2 s  . c o  m*/
 
+                            var ctx = document.getElementById("layanan").getContext('2d');
+                            Chart.defaults.global.defaultFontFamily = 'Lato';
+                            Chart.defaults.global.defaultFontSize = 12;
+                            Chart.defaults.global.defaultFontColor = '#777';
+
+                                        var datafirst = {
+                                            label: "Aspirasi",
+                                            data: [<?php echo $data9['Pending_Aspirasi'];?>,
+                                                    <?php echo $data10['Pending_Aspirasi'];?>,
+                                                    <?php echo $data11['Pending_Aspirasi'];?>,
+                                                    <?php echo $data12['Pending_Aspirasi'];?>,
+                                                    <?php echo $data13['Pending_Aspirasi'];?>,
+                                                    <?php echo $data14['Pending_Aspirasi'];?>,
+                                                    <?php echo $data15['Pending_Aspirasi'];?>,
+                                                    <?php echo $data16['Pending_Aspirasi'];?>,
+                                                    <?php echo $data17['Pending_Aspirasi'];?>,
+                                                    <?php echo $data18['Pending_Aspirasi'];?>,
+                                                    <?php echo $data19['Pending_Aspirasi'];?>,
+                                                    <?php echo $data20['Pending_Aspirasi'];?>,
+                                                ],
+                                            backgroundColor: 'rgba(255, 99, 132, 0.6)'
+                                        };
+                                        var datasecond = {
+                                            label: "Pengaduan",
+                                            data: [<?php echo $data21['Pending_Pengaduan'];?>,
+                                                    <?php echo $data22['Pending_Pengaduan'];?>,
+                                                    <?php echo $data23['Pending_Pengaduan'];?>,
+                                                    <?php echo $data24['Pending_Pengaduan'];?>,
+                                                    <?php echo $data25['Pending_Pengaduan'];?>,
+                                                    <?php echo $data26['Pending_Pengaduan'];?>,
+                                                    <?php echo $data27['Pending_Pengaduan'];?>,
+                                                    <?php echo $data28['Pending_Pengaduan'];?>,
+                                                    <?php echo $data29['Pending_Pengaduan'];?>,
+                                                    <?php echo $data30['Pending_Pengaduan'];?>,
+                                                    <?php echo $data31['Pending_Pengaduan'];?>,
+                                                    <?php echo $data32['Pending_Pengaduan'];?>,
+                                                ],
+                                            backgroundColor: 'rgba(54, 162, 235, 0.6)'
+                                        };
+                                        
+                                        var data = {      
+                                            labels: [
+                                                'Januari',
+                                                'Februari',
+                                                'Maret',
+                                                'April',
+                                                'Mei',
+                                                'Juni',
+                                                'Juli',
+                                                'Agustus',
+                                                'September',
+                                                'Oktober',
+                                                'November',
+                                                'Desember'
+                                            ],
+                                            datasets: [datafirst, datasecond]
+                                        };
+                                        var myDoughnutChart = new Chart(ctx, {
+                                            type: 'line',
+                                            data: data,
+                                            options:{
+                                                legend:{
+                                                    display:true,
+                                                    position:'right',
+                                                    labels:{
+                                                        fontColor:'#000'
+                                                    }
+                                                },
+                                                layout:{
+                                                    padding:{
+                                                        left:0,
+                                                        right:0,
+                                                        bottom:80,
+                                                        top:0
+                                                    }
+                                                },
+                                                tooltips:{
+                                                    enabled:true
+                                                }
+                                            }
+                                            });
+                                        });
+                                        var ctx = document.getElementById("layanan").getContext('2d');
+                                            Chart.defaults.global.defaultFontFamily = 'Lato';
+                                            Chart.defaults.global.defaultFontSize = 12;
+                                            Chart.defaults.global.defaultFontColor = '#777';
+
+                                        var datafirst = {
+                                            label: "Total Telat",
+                                            data: [<?php echo $data6['overdue'];?>,
+                                                    <?php echo $data7['overdue'];?>,
+                                                    <?php echo $data8['overdue'];?>,
+                                                    <?php echo $data9['overdue'];?>,
+                                                    <?php echo $data10['overdue'];?>,
+                                                    <?php echo $data11['overdue'];?>,
+                                                    <?php echo $data12['overdue'];?>,
+                                                    <?php echo $data13['overdue'];?>,
+                                                    <?php echo $data14['overdue'];?>,
+                                                    <?php echo $data15['overdue'];?>,
+                                                    <?php echo $data16['overdue'];?>,
+                                                    <?php echo $data17['overdue'];?>,
+                                                ],
+                                            backgroundColor: 'rgba(255, 99, 132, 0.6)'
+                                        };
+                                        var data = {      
+                                            labels: [
+                                                'Januari',
+                                                'Februari',
+                                                'Maret',
+                                            ],
+                                    datasets: [datafirst]
+                                        };
+                                        var myDoughnutChart = new Chart(ctx, {
+                                            type: 'line',
+                                            data: data,
+                                            options:{
+                                                legend:{
+                                                    display:true,
+                                                    position:'right',
+                                                    labels:{
+                                                        fontColor:'#000'
+                                                    }
+                                                },
+                                                layout:{
+                                                    padding:{
+                                                        left:0,
+                                                        right:0,
+                                                        bottom:80,
+                                                        top:0
+                                                    }
+                                                },
+                                                tooltips:{
+                                                    enabled:true
+                                                }
+                                            }
+                                            });
+                                    </script> 
                     <!-- Content Row -->
                     <div class="row">
 
@@ -640,7 +883,7 @@
                                     </div>
                                 </div>
                             </div>
-
+                
                             <!-- Color System -->
                             <div class="row">
                                 <div class="col-lg-6 mb-4">
@@ -808,7 +1051,7 @@
 
     <!-- Page level plugins -->
     <script src="vendor/chart.js/Chart.min.js"></script>
-
+ <script src="vendor/chart.js/Chart.min.js"></script>
     <!-- Page level custom scripts -->
     <script src="js/demo/chart-area-demo.js"></script>
     <script src="js/demo/chart-pie-demo.js"></script>
