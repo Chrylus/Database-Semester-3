@@ -192,13 +192,35 @@ include '../../koneksi.php';
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Laporan Aspirasi</h1>
-                    <br>
-                    <!-- DataTales Example -->
-                    <div class="card shadow mb-4">
-                        <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Laporan Aspirasi</h6>
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">Laporan Aspirasi</h1>
+                    </div>
+                    <div class="card-body">
+                    <?php if(isset($_GET['hal']) == "edit"){?>
+                        <?php 
+                            $ID = $_GET['ID'];
+                            $query = "SELECT * FROM pelaporan WHERE ID = '$_GET[ID]'";
+                            $exec = mysqli_query($koneksi, $query);
+                            $fetch = mysqli_fetch_array($exec);    
+                        ?>
+                        <form method="post" action="../../controller.php?aksi=edit_aspirasi&ID=<?=$fetch['ID']?>">
+                        <div class="complaint-form-category">
+                            <input type="text" name="Status" class="form-control" placeholder="Status *" value="<?=$fetch['Status']?>" required></textarea>
                         </div>
+                        <br>
+                        <button type="submit" class="btn btn-success">Simpan</button>
+                    </form>
+                    <?php } else if(isset($_GET['hal']) != "edit"){?>
+                        <form method="post" action="../../controller.php?aksi=edit_aspirasi">
+                        <div class="complaint-form-category">
+                            <input type="text" name="Status" class="form-control" placeholder="Status *" required></textarea>
+                        </div>
+                        <br>
+                        <button type="submit" class="btn btn-success">Simpan</button>
+                    </form>
+                    <?php } ?>
+                    <br><br>
+                        
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -214,6 +236,7 @@ include '../../koneksi.php';
                                             <th>Tanggal_Kejadian</th>
                                             <th>Status</th>
                                             <th>Ticket</th>
+                                            <th>Command</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
@@ -228,11 +251,13 @@ include '../../koneksi.php';
                                             <th>Tanggal_Kejadian</th>
                                             <th>Status</th>
                                             <th>Ticket</th>
+                                            <th>Command</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
                                     <?php
-                                        $tampil = "SELECT 
+                                        $tampil = "SELECT
+                                        pelaporan.ID AS 'ID',
 										pelaporan.ID_Pelaporan AS 'ID_Pelaporan', 
                                         pelaporan.NIK AS 'NIK',
                                         unit_layanan.nama_unit AS 'nama_unit', 
@@ -261,6 +286,9 @@ include '../../koneksi.php';
                                                     <td><?=$fetch_t['TanggalKejadian']?></td>
                                                     <td><?=$fetch_t['Status']?></td>
                                                     <td><?=$fetch_t['Ticket']?></td>
+                                                    <td>
+                                                    <a href="index.php?hal=edit&ID=<?=$fetch_t['ID']?>" class="btn btn-warning"> Edit </a>
+                                                    </td>
                                                 </tr>
                                             <?php endwhile; ?>   
                                     </tbody>

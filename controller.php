@@ -290,6 +290,34 @@
                 header("location: admin/super/admin.php?alert=gagal");
             }
             break;
+        case 'edit_aspirasi':
+                $Status = $_POST['Status'];
+                // Escape
+
+                //$query = "UPDATE msadmin SET (name, username, password) VALUES ('$esc_nama', '$esc_username', '$hash_pw') WHERE id = '$_GET[id]'";
+                $query = "UPDATE pelaporan SET Status = '$Status' WHERE ID = '$_GET[ID]'";
+    
+                $exec = mysqli_query($koneksi, $query);
+                if($exec){
+                    header("location: admin/aspirasi/index.php?alert=sukses");
+                }else{
+                    header("location: admin/aspirasi/index.php?alert=gagal");
+                }
+                break;
+        case 'edit_pengaduan':
+                    $Status = $_POST['Status'];
+                    // Escape
+    
+                    //$query = "UPDATE msadmin SET (name, username, password) VALUES ('$esc_nama', '$esc_username', '$hash_pw') WHERE id = '$_GET[id]'";
+                    $query = "UPDATE pelaporan SET Status = '$Status' WHERE ID = '$_GET[ID]'";
+        
+                    $exec = mysqli_query($koneksi, $query);
+                    if($exec){
+                        header("location: admin/aspirasi/index.php?alert=sukses");
+                    }else{
+                        header("location: admin/aspirasi/index.php?alert=gagal");
+                    }
+                    break;
         default:
         echo 'Error';
     }
