@@ -144,7 +144,14 @@
     $result32 = mysqli_query($koneksi, $sql32);
     $data32   = mysqli_fetch_assoc($result32);
 
-
+     //buat tabel chart pie
+     $sql33    = "select count(Status) as Pending_Pelaporan from pelaporan WHERE (Status = 'Pending') AND (ID_Pelaporan LIKE '%PGD%') AND YEAR (TanggalLaporan) = YEAR (CURDATE())";
+     $result33 = mysqli_query($koneksi, $sql33);
+     $data33   = mysqli_fetch_assoc($result33);
+ 
+     $sql34    = "select count(Status) as Pending_Aspirasi from pelaporan WHERE (Status = 'Pending') AND (ID_Pelaporan LIKE '%ASP%') AND YEAR (TanggalLaporan) = YEAR (CURDATE())";
+     $result34 = mysqli_query($koneksi, $sql34);
+     $data34   = mysqli_fetch_assoc($result34);
 ?>
 
 <!DOCTYPE html>
@@ -631,8 +638,8 @@
                                 <!-- Card Header - Dropdown -->
                                 <div
                                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">Earnings Overview</h6>
-                                    <div class="dropdown no-arrow">
+                                    <h6 class="m-0 font-weight-bold text-primary">Pending Tiket</h6>
+                                    <!-- <div class="dropdown no-arrow">
                                         <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
                                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
@@ -645,7 +652,7 @@
                                             <div class="dropdown-divider"></div>
                                             <a class="dropdown-item" href="#">Something else here</a>
                                         </div>
-                                    </div>
+                                    </div> -->
                                 </div>
                                 <!-- Card Body -->
                                 <div class="card-body">
@@ -662,8 +669,8 @@
                                 <!-- Card Header - Dropdown -->
                                 <div
                                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">Revenue Sources</h6>
-                                    <div class="dropdown no-arrow">
+                                    <h6 class="m-0 font-weight-bold text-primary">Total Tiket</h6>
+                                    <!-- <div class="dropdown no-arrow">
                                         <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
                                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
@@ -676,14 +683,14 @@
                                             <div class="dropdown-divider"></div>
                                             <a class="dropdown-item" href="#">Something else here</a>
                                         </div>
-                                    </div>
+                                    </div> -->
                                 </div>
                                 <!-- Card Body -->
                                 <div class="card-body">
-                                    <div class="chart-pie pt-4 pb-2">
-                                        <canvas id="myPieChart"></canvas>
+                                    <div class="chart pt-2 pb-1">
+                                        <canvas id="jenis_tiket"></canvas>
                                     </div>
-                                    <div class="mt-4 text-center small">
+                                    <!-- <div class="mt-4 text-center small">
                                         <span class="mr-2">
                                             <i class="fas fa-circle text-primary"></i> Direct
                                         </span>
@@ -693,14 +700,14 @@
                                         <span class="mr-2">
                                             <i class="fas fa-circle text-info"></i> Referral
                                         </span>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                         </div>
                     </div>
                     <!-- function for chart -->
                     <script>
-                         $(function () {/*from   w ww .  ja va2 s  . c o  m*/
+                         $(function () {
 
                             var ctx = document.getElementById("layanan").getContext('2d');
                             Chart.defaults.global.defaultFontFamily = 'Lato';
@@ -783,40 +790,31 @@
                                                 }
                                             }
                                             });
-                                        });
-                                        var ctx = document.getElementById("layanan").getContext('2d');
-                                            Chart.defaults.global.defaultFontFamily = 'Lato';
-                                            Chart.defaults.global.defaultFontSize = 12;
-                                            Chart.defaults.global.defaultFontColor = '#777';
-
-                                        var datafirst = {
-                                            label: "Total Telat",
-                                            data: [<?php echo $data6['overdue'];?>,
-                                                    <?php echo $data7['overdue'];?>,
-                                                    <?php echo $data8['overdue'];?>,
-                                                    <?php echo $data9['overdue'];?>,
-                                                    <?php echo $data10['overdue'];?>,
-                                                    <?php echo $data11['overdue'];?>,
-                                                    <?php echo $data12['overdue'];?>,
-                                                    <?php echo $data13['overdue'];?>,
-                                                    <?php echo $data14['overdue'];?>,
-                                                    <?php echo $data15['overdue'];?>,
-                                                    <?php echo $data16['overdue'];?>,
-                                                    <?php echo $data17['overdue'];?>,
+                                        var ctx2 = document.getElementById("jenis_tiket").getContext('2d');
+                                         Chart.defaults.global.defaultFontFamily = 'Lato';
+                                         Chart.defaults.global.defaultFontSize = 12;
+                                        Chart.defaults.global.defaultFontColor = '#777';
+                                        var data2 = {
+                                            datasets: [{
+                                                data: [<?php echo $data33['Pending_Pelaporan'];?> , <?php echo $data34['Pending_Aspirasi'];?>],
+                                                backgroundColor: [
+                                                    'rgba(54, 162, 235, 0.6)',
+                                                    'rgba(255, 99, 132, 0.6)',
                                                 ],
-                                            backgroundColor: 'rgba(255, 99, 132, 0.6)'
-                                        };
-                                        var data = {      
+                                                borderWidth:1,
+                                                borderColor:'#777',
+                                                hoverBorderWidth:3,
+                                                hoverBorderColor:'#000'
+                                            }],
                                             labels: [
-                                                'Januari',
-                                                'Februari',
-                                                'Maret',
-                                            ],
-                                    datasets: [datafirst]
+                                                'Request',
+                                                'Layanan'
+                                            ]
                                         };
-                                        var myDoughnutChart = new Chart(ctx, {
-                                            type: 'line',
-                                            data: data,
+                                        
+                                        var myDoughnutChart2 = new Chart(ctx2, {
+                                            type: 'pie',
+                                            data: data2,
                                             options:{
                                                 legend:{
                                                     display:true,
@@ -829,7 +827,7 @@
                                                     padding:{
                                                         left:0,
                                                         right:0,
-                                                        bottom:80,
+                                                        bottom:0,
                                                         top:0
                                                     }
                                                 },
@@ -838,6 +836,11 @@
                                                 }
                                             }
                                             });
+                                        });
+                                       
+       
+
+                                           
                                     </script> 
                     <!-- Content Row -->
                     <div class="row">
