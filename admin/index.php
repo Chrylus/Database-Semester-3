@@ -7,6 +7,7 @@
 
     include ("../koneksi.php");
 
+    //Tampilan Tiket di Dashboard Atas
     $sql1    = "select count(Status) as Pending_Pelaporan from pelaporan WHERE (Status = 'Pending') AND (ID_Pelaporan LIKE '%PGD%')";
     // Kalau mau kasih syarat bulan dan tahun sama
     // AND MONTH (TanggalLaporan) = MONTH (CURDATE()) AND YEAR (TanggalLaporan) = YEAR (CURDATE())
@@ -26,6 +27,19 @@
     $sql4    = "select count(NIK) as Total_Penduduk from penduduk";
     $result4 = mysqli_query($koneksi, $sql4);
     $data4   = mysqli_fetch_assoc($result4);
+
+    $sql5    = "select count(id_kabkota) as Total_KabKota from kabkota";
+    $result5 = mysqli_query($koneksi, $sql5);
+    $data5   = mysqli_fetch_assoc($result5);
+
+    $sql6    = "select count(id_kecamatan) as Total_Kecamatan from kecamatan";
+    $result6 = mysqli_query($koneksi, $sql6);
+    $data6   = mysqli_fetch_assoc($result6);
+
+    $sql7    = "select count(id_keldesa) as Total_KelDesa from keldesa";
+    $result7 = mysqli_query($koneksi, $sql7);
+    $data7   = mysqli_fetch_assoc($result7);
+    //End of Tampilan Tiket di Dashboard Atas
 ?>
 
 <!DOCTYPE html>
@@ -420,6 +434,60 @@
                                             </div>
                                             <div class="col-auto">
                                                 <i class="fas fa-male fa-2x text-gray-300"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <a href = "tables.php">
+                                <div class="card border-left-danger shadow h-100 py-2">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="text-xs font-weight-bold text-warning text-uppercase mb-1"> Total Kabupaten dan Kota </div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $data5['Total_KabKota'];?></div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class="fas fa-building fa-2x text-gray-300"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <a href = "tables.php">
+                                <div class="card border-left-secondary shadow h-100 py-2">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="text-xs font-weight-bold text-warning text-uppercase mb-1"> Total Kecamatan </div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $data6['Total_Kecamatan'];?></div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class="fas fa-building fa-2x text-gray-300"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <a href = "tables.php">
+                                <div class="card border-left-dark shadow h-100 py-2">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="text-xs font-weight-bold text-warning text-uppercase mb-1"> Total Kelurahan dan Desa </div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $data7['Total_KelDesa'];?></div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class="fas fa-building fa-2x text-gray-300"></i>
                                             </div>
                                         </div>
                                     </div>
