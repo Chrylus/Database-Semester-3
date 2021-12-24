@@ -22,6 +22,10 @@
     $sql3    = "select count(ID_Pelaporan) as Total_Ticket from pelaporan";
     $result3 = mysqli_query($koneksi, $sql3);
     $data3   = mysqli_fetch_assoc($result3);
+    
+    $sql4    = "select count(NIK) as Total_Penduduk from penduduk";
+    $result4 = mysqli_query($koneksi, $sql4);
+    $data4   = mysqli_fetch_assoc($result4);
 ?>
 
 <!DOCTYPE html>
@@ -395,6 +399,24 @@
                                                         <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800"><?php echo $data3['Total_Ticket'];?></div>
                                                     </div>
                                                 </div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class="fas fa-ticket-alt fa-2x text-gray-300"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <a href = "tables.php">
+                                <div class="card border-left-warning shadow h-100 py-2">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="text-xs font-weight-bold text-warning text-uppercase mb-1"> Total Pengguna </div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $data4['Total_Penduduk'];?></div>
                                             </div>
                                             <div class="col-auto">
                                                 <i class="fas fa-ticket-alt fa-2x text-gray-300"></i>
