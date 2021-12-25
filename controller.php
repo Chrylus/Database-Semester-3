@@ -243,15 +243,17 @@
             break;
         case 'tambah_admin':
             $nama = $_POST['name'];
+            $nik = $_POST['nik'];
             $username = $_POST['username'];
             $password = $_POST['password'];
             // Escape
             $esc_nama = mysqli_real_escape_string($koneksi, $nama);
+            $esc_nik = mysqli_real_escape_string($koneksi, $nik);
             $esc_username = mysqli_real_escape_string($koneksi, $username);
             $esc_password = mysqli_real_escape_string($koneksi, $password);
             // Hash PW
             $hash_pw = password_hash($esc_password, PASSWORD_DEFAULT);
-            $query = "INSERT INTO msadmin (name, username, password) VALUES ('$esc_nama', '$esc_username', '$hash_pw')";
+            $query = "INSERT INTO msadmin (name, NIK, username, password) VALUES ('$esc_nama', '$esc_nik', '$esc_username', '$hash_pw')";
             $exec = mysqli_query($koneksi, $query);
             if($exec){
                 header("location: admin/super/admin.php?alert=sukses");
@@ -261,17 +263,19 @@
             break;
         case 'edit_admin':
             $nama = $_POST['name'];
+            $nik = $_POST['nik'];
             $username = $_POST['username'];
             $password = $_POST['password'];
             // Escape
             $esc_id = mysqli_real_escape_string($koneksi, $id);
             $esc_nama = mysqli_real_escape_string($koneksi, $nama);
+            $esc_nik = mysqli_real_escape_string($koneksi, $nik);
             $esc_username = mysqli_real_escape_string($koneksi, $username);
             $esc_password = mysqli_real_escape_string($koneksi, $password);
             // Hash PW
             $hash_pw = password_hash($esc_password, PASSWORD_DEFAULT);
             //$query = "UPDATE msadmin SET (name, username, password) VALUES ('$esc_nama', '$esc_username', '$hash_pw') WHERE id = '$_GET[id]'";
-            $query = "UPDATE msadmin SET name = '$esc_nama', username = '$esc_username', password = '$hash_pw' WHERE id = '$_GET[id]'";
+            $query = "UPDATE msadmin SET name = '$esc_nama', NIK = '$esc_nik, username = '$esc_username', password = '$hash_pw' WHERE id = '$_GET[id]'";
 
             $exec = mysqli_query($koneksi, $query);
             if($exec){

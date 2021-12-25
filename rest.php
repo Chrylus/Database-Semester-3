@@ -36,29 +36,41 @@ if(!empty($_GET['function']) && function_exists($_GET['function'])){
 function login(){
     global $koneksi;
     $email = $_POST['email']; //menampung data yang dikirim dari input username
-    $nik = $_POST['nik']; //menampung data yang dikirim dari input password
+    $password = $_POST['password']; //menampung data yang dikirim dari input password
     $esc_email = mysqli_real_escape_string($koneksi, $email);
-    $esc_nik = mysqli_real_escape_string($koneksi, $nik);
-    $data=$koneksi->query("SELECT * FROM penduduk WHERE Email='$esc_email' and NIK='$esc_nik'");
+    $esc_password = mysqli_real_escape_string($koneksi, $password);
+    $data=$koneksi->query("SELECT * FROM penduduk WHERE Email='$esc_email'");
             
     $cek_login = mysqli_num_rows($data);
             
     if($cek_login > 0){ //jika data yang ditemukan lebih dari 0
         $row = mysqli_fetch_assoc($data);
-        session_start();
-        session_regenerate_id(true);
-        $_SESSION['nama'] = $row['Nama'];
-        $_SESSION['nik'] = $row['NIK'];
-        $_SESSION['telepon'] = $row['No_telepon'];
-        $_SESSION['email'] = $row['Email'];
-        $response = array(
-            'nama' => $row['Nama'],
-            'nik' => $row['NIK'],
-            'telepon' => $row['No_telepon'],
-            'email' => $row['Email']
-        );
-        header('Content-Type: application/json');
-        echo json_encode($response);
+        $password = $row['password'];
+        $verify = password_verify($esc_password, $password);
+        if($verify){
+            session_start();
+            session_regenerate_id(true);
+            $_SESSION['nama'] = $row['Nama'];
+            $_SESSION['nik'] = $row['NIK'];
+            $_SESSION['telepon'] = $row['No_telepon'];
+            $_SESSION['email'] = $row['Email'];
+            $_SESSION['status'] = "login";
+            $response = array(
+                'nama' => $row['Nama'],
+                'nik' => $row['NIK'],
+                'telepon' => $row['No_telepon'],
+                'email' => $row['Email'],
+                'status' => $_SESSION['status']
+            );
+            header('Content-Type: application/json');
+            echo json_encode($response);
+        }else{
+            $response = array(
+                'status' => 'password salah'
+            );
+            header('Content-Type: application/json');
+            echo json_encode($response);
+        }
     }else{
         $response = array(
             'status' => 'gagal'
@@ -75,14 +87,18 @@ function register(){
     $nik = $_POST['nik'];  
     $telepon = $_POST['telepon'];
     $email = $_POST['email'];
+    $password = $_POST['password'];
     // Escape
     $esc_nama = mysqli_real_escape_string($koneksi, $nama);
     $esc_nik = mysqli_real_escape_string($koneksi, $nik);
     $esc_telepon = mysqli_real_escape_string($koneksi, $telepon);
     $esc_email = mysqli_real_escape_string($koneksi, $email);
+    $esc_password = mysqli_real_escape_string($koneksi, $password);
+    // Hash
+    $hash_pw = password_hash($esc_password, PASSWORD_DEFAULT);
     // Execute
-    $data=$koneksi->query("INSERT INTO penduduk(Nama, NIK, No_telepon, Email) 
-    VALUES ('$esc_nama', '$esc_nik', '$esc_telepon', '$esc_email')");
+    $data=$koneksi->query("INSERT INTO penduduk(Nama, NIK, No_telepon, Email, password) 
+    VALUES ('$esc_nama', '$esc_nik', '$esc_telepon', '$esc_email', '$hash_pw')");
     if($data){
         $response = array(
             'status' => 'success'

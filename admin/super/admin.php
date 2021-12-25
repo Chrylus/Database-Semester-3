@@ -178,6 +178,9 @@
                             <input type="text" name="name" class="form-control" placeholder="Nama *" value="<?=$fetch['name']?>" required></textarea>
                         </div>
                         <div class="complaint-form-category">
+                            <input type="text" name="nik" class="form-control" placeholder="NIK *" value="<?=$fetch['NIK']?>" required></textarea>
+                        </div>
+                        <div class="complaint-form-category">
                             <input type="text" name="username" class="form-control" placeholder="Username *" value="<?=$fetch['username']?>" required></textarea>
                         </div>
                         <div class="complaint-form-category">
@@ -190,6 +193,9 @@
                         <form method="post" action="../../controller.php?aksi=tambah_admin">
                         <div class="complaint-form-category">
                             <input type="text" name="name" class="form-control" placeholder="Nama *" required></textarea>
+                        </div>
+                        <div class="complaint-form-category">
+                            <input type="text" name="nik" class="form-control" placeholder="NIK *" required></textarea>
                         </div>
                         <div class="complaint-form-category">
                             <input type="text" name="username" class="form-control" placeholder="Username *" required></textarea>
