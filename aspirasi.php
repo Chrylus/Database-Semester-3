@@ -188,8 +188,8 @@ session_regenerate_id(true);
                             <input type="email" name="Email" class="form-control" value="<?php echo $_SESSION['email']; ?>" placeholder="Email *" readonly></textarea>
                         </div>
                         <div class="complaint-form-category">
-                            <select name="unit" id="unit" class="select-tree-view" placeholder="Pilih Kategori Laporan Anda" name="category_id" onchange="getId(this.value);">
-                                <option>Unit Layanan *</option>
+                            <select name="unit" id="unit" class="select-tree-view" placeholder="Pilih Kategori Laporan Anda" name="category_id" onchange="getId(this.value);" required>
+                                <option value ="">Unit Layanan *</option>
                                 <?php
                                     $query = "SELECT * FROM unit_layanan";
                                     $results=mysqli_query($koneksi, $query);
@@ -207,6 +207,34 @@ session_regenerate_id(true);
                                 <option>Keperluan *</option>
                             </select>
                         </div>
+                        <!-- Kota -->
+                        <div class="complaint-form-category">
+                                <select name="kota" id="kota" class="select-tree-view" placeholder="Pilih Kabupaten / Kota" name="category_id" onchange="getId2(this.value);">
+                                    <option>Kabupaten / Kota *</option>
+                                    <?php
+                                        $query = "SELECT * FROM kabkota";
+                                        $results=mysqli_query($koneksi, $query);
+                                        //loop
+                                        foreach ($results as $unit){
+                                    ?>
+                                    <option value="<?php echo $unit["id_kabkota"];?>"><?php echo $unit["nama_kabkota"];?></option>
+                                    <?php
+                                        }
+                                    ?>
+                                </select>
+                            </div>
+                            <!-- Kecamatan -->
+                            <div class="complaint-form-category">
+                                <select name="kecamatan" id="kecamatan" class="select-tree-view" placeholder="Pilih Kecamatan" name="category_id" onchange="getId4(this.value);">
+                                    <option>Kecamatan *</option>
+                                </select>
+                            </div>
+                            <!-- Kelurahan/Desa -->
+                            <div class="complaint-form-category">
+                                <select name="keldesa" id="keldesa" class="select-tree-view" placeholder="Pilih Desa/Kelurahan" name="category_id">
+                                    <option>Kelurahan/Desa *</option>
+                                </select>
+                            </div>
                         <div class="complaint-form-category">
                             <textarea name="Keterangan" id="" rows="6" class="form-control textarea-flex autosize" placeholder="Keterangan *" required></textarea>
                         </div>
@@ -415,10 +443,38 @@ session_regenerate_id(true);
             //We create ajax function
             $.ajax({
                 type: "POST",
-                url: "getdata.php",
-                data: "id="+val,
+                url: "getdata.php?fungsi=keperluan",
+                data: "id_keperluan="+val,
                 success: function(data){
                     $("#keperluan").html(data);
+                }
+            });
+        }
+    </script>
+    <!-- Kecamatan -->
+    <script>
+        function getId2(val){
+            //We create ajax function
+            $.ajax({
+                type: "POST",
+                url: "getdata.php?fungsi=kecamatan",
+                data: "id_kota="+val,
+                success: function(data){
+                    $("#kecamatan").html(data);
+                }
+            });
+        }
+    </script>
+    <!-- Desa -->
+    <script>
+        function getId4(val){
+            //We create ajax function
+            $.ajax({
+                type: "POST",
+                url: "getdata.php?fungsi=desa",
+                data: "id_kecamatan="+val,
+                success: function(data){
+                    $("#keldesa").html(data);
                 }
             });
         }

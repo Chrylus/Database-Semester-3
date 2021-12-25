@@ -221,8 +221,8 @@ session_regenerate_id(true);
                                 <input type="email" name="Email" class="form-control" value="<?php echo $_SESSION['email']; ?>" placeholder="Email *" readonly></textarea>
                             </div>
                             <div class="complaint-form-category">
-                                <select name="unit" id="unit" class="select-tree-view" placeholder="Pilih Kategori Laporan Anda" name="category_id" onchange="getId(this.value);">
-                                    <option>Unit Layanan *</option>
+                                <select name="unit" id="unit" class="select-tree-view" placeholder="Pilih Kategori Laporan Anda" name="category_id" onchange="getId(this.value);" required>
+                                    <option value="">Unit Layanan *</option>
                                     <?php
                                         $query = "SELECT * FROM unit_layanan";
                                         $results=mysqli_query($koneksi, $query);
@@ -236,8 +236,8 @@ session_regenerate_id(true);
                                 </select>
                             </div>
                             <div class="complaint-form-category">
-                                <select name="keperluan" id="keperluan" class="select-tree-view" placeholder="Pilih Kategori Laporan Anda" name="category_id">
-                                    <option>Keperluan *</option>
+                                <select name="keperluan" id="keperluan" class="select-tree-view" placeholder="Pilih Kategori Laporan Anda" name="category_id" required>
+                                    <option value ="">Keperluan *</option>
                                 </select>
                             </div>
                             <!-- Kota -->
