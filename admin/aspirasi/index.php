@@ -269,7 +269,7 @@ include '../../koneksi.php';
                                         pelaporan.Ticket AS 'Ticket'
                                         FROM pelaporan
                                         INNER JOIN  unit_layanan ON pelaporan.Tujuan = unit_layanan.id
-                                        INNER JOIN keperluan ON pelaporan.Keperluan=keperluan.id
+                                        INNER JOIN keperluan ON pelaporan.Keperluan=keperluan.topik_id
                                         WHERE pelaporan.ID_Pelaporan LIKE 'ASP%'
                                         ORDER BY pelaporan.ID_Pelaporan DESC";
                                         $execute = mysqli_query($koneksi, $tampil); 
@@ -338,7 +338,7 @@ include '../../koneksi.php';
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
+                    <a class="btn btn-primary" href="../../controller.php?aksi=logout">Logout</a>
                 </div>
             </div>
         </div>

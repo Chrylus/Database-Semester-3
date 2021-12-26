@@ -140,7 +140,7 @@ include 'koneksi.php';
                                 <div class="select-complaint">Sampaikan Laporan Anda</div>
                                 <!-- <center><p><b>Pilih Klasifikasi Permintaan Anda</b></p></center> -->
                                 <center>
-                                    <a href="Index.php" class="button1 ">Login</a>
+                                    <a href="index.php" class="button1 ">Login</a>
                                     <a href="#" class="button1 active">Daftar</a>
                                 </center>
                                 <div class="complaint-help">

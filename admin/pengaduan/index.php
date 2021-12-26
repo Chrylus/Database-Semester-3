@@ -31,7 +31,7 @@ include '../../koneksi.php';
 
     <!-- Custom styles for this page -->
     <link href="../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 </head>
 
 <body id="page-top">
@@ -268,7 +268,7 @@ include '../../koneksi.php';
                                         pelaporan.Ticket AS 'Ticket'
                                         FROM pelaporan
                                         INNER JOIN  unit_layanan ON pelaporan.Tujuan = unit_layanan.id
-                                        INNER JOIN keperluan ON pelaporan.Keperluan=keperluan.id
+                                        INNER JOIN keperluan ON pelaporan.Keperluan=keperluan.topik_id
                                         WHERE pelaporan.ID_Pelaporan LIKE 'PGD%'
                                         ORDER BY pelaporan.ID_Pelaporan DESC";
                                         $execute = mysqli_query($koneksi, $tampil); 
@@ -276,17 +276,18 @@ include '../../koneksi.php';
                                             <?php $no = 1; while($fetch_t = mysqli_fetch_array($execute)):?>
                                                 <tr>
                                                     <td><?=$no++;?></td>
-                                                    <td><?=$fetch_t['ID_Pelaporan']?></td>
-                                                    <td><?=$fetch_t['NIK']?></td>
-                                                    <td><?=$fetch_t['nama_unit']?></td>
-                                                    <td><?=$fetch_t['Keperluan']?></td>
-                                                    <td><?=$fetch_t['Keterangan']?></td>
-                                                    <td><?=$fetch_t['TanggalLaporan']?></td>
-                                                    <td><?=$fetch_t['TanggalKejadian']?></td>
-                                                    <td><?=$fetch_t['Status']?></td>
-                                                    <td><?=$fetch_t['Ticket']?></td>
+                                                    <td><span id="ID_Pelaporan<?=$fetch_t['ID']?>"><?=$fetch_t['ID_Pelaporan']?></span></td>
+                                                    <td><span id="NIK<?=$fetch_t['ID']?>"><?=$fetch_t['NIK']?></span></td>
+                                                    <td><span id="nama_unit<?=$fetch_t['ID']?>"><?=$fetch_t['nama_unit']?></span></td>
+                                                    <td><span id="Keperluan<?=$fetch_t['ID']?>"><?=$fetch_t['Keperluan']?></span></td>
+                                                    <td><span id="Keterangan<?=$fetch_t['ID']?>"><?=$fetch_t['Keterangan']?></span></td>
+                                                    <td><span id="TanggalLaporan<?=$fetch_t['ID']?>"><?=$fetch_t['TanggalLaporan']?></span></td>
+                                                    <td><span id="TanggalKejadian<?=$fetch_t['ID']?>"><?=$fetch_t['TanggalKejadian']?></span></td>
+                                                    <td><span id="Status<?=$fetch_t['ID']?>"><?=$fetch_t['Status']?></span></td>
+                                                    <td><span id="Ticket<?=$fetch_t['ID']?>"><?=$fetch_t['Ticket']?></span></td>
                                                     <td>
                                                     <a href="index.php?hal=edit&ID=<?=$fetch_t['ID']?>" class="btn btn-warning"> Edit </a>
+                                                    <button type="button" class="btn btn-warning edit" value="<?php echo $fetch_t['ID']; ?>"><span class="glyphicon glyphicon-edit"></span>Detail</button>
                                                     </td>
                                                 </tr>
                                             <?php endwhile; ?>   
@@ -322,7 +323,29 @@ include '../../koneksi.php';
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
     </a>
-
+    <!-- Detail Modal -->
+    <div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Detail</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group input-group">
+                        <span class="input-group-addon" style="width:150px;">ID Pelaporan</span>
+                        <input type="text" style="width:350px;" class="form-control" id="m_id_pelaporan">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- Logout Modal-->
     <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
@@ -337,14 +360,24 @@ include '../../koneksi.php';
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
+                    <a class="btn btn-primary" href="../../controller.php?aksi=logout">Logout</a>
                 </div>
             </div>
         </div>
     </div>
-
+    <script>
+       $(document).ready(function(){
+        $(document).on('click', '.edit', function(){
+            var id=$(this).val();
+            var id_pelaporan=$('#ID_Pelaporan'+id).text();
+            
+            $('#detailModal').modal('show');
+            $('#m_id_pelaporan').val(id_pelaporan);
+        });
+    });
+    </script>
     <!-- Bootstrap core JavaScript-->
-    <script src="../vendor/jquery/jquery.min.js"></script>
+    
     <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
