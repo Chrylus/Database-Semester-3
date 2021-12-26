@@ -208,7 +208,7 @@ include '../../koneksi.php';
                             <input type="text" name="Status" class="form-control" placeholder="Status *" value="<?=$fetch['Status']?>" required></textarea>
                         </div>
                         <br>
-                        <button type="submit" class="btn btn-success">Simpan</button>
+                        <button type="submit" class="btn btn-primary">Simpan</button>
                     </form>
                     <?php } else if(isset($_GET['hal']) != "edit"){?>
                         <form method="post" action="../../controller.php?aksi=edit_pengaduan">
@@ -216,7 +216,7 @@ include '../../koneksi.php';
                             <input type="text" name="Status" class="form-control" placeholder="Status *" required></textarea>
                         </div>
                         <br>
-                        <button type="submit" class="btn btn-success">Simpan</button>
+                        <button type="submit" class="btn btn-primary">Simpan</button>
                     </form>
                     <?php } ?>
                     <br><br>
@@ -225,32 +225,30 @@ include '../../koneksi.php';
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 <thead>
                                         <tr>
-                                            <th>No</th>
+                                            
                                             <th>ID_Pelaporan</th>
                                             <th>NIK</th>
                                             <th>Unit_Layanan</th>
                                             <th>Keperluan</th>
-                                            <th>Keterangan</th>
                                             <th>Tanggal_Laporan</th>
-                                            <th>Tanggal_Kejadian</th>
                                             <th>Status</th>
                                             <th>Ticket</th>
-                                            <th>Command</th>
+                                            <th>Edit</th>
+                                            <th>Detail</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
-                                            <th>No</th>
+                                            
                                             <th>ID_Pelaporan</th>
                                             <th>NIK</th>
                                             <th>Unit_Layanan</th>
                                             <th>Keperluan</th>
-                                            <th>Keterangan</th>
                                             <th>Tanggal_Laporan</th>
-                                            <th>Tanggal_Kejadian</th>
                                             <th>Status</th>
                                             <th>Ticket</th>
-                                            <th>Command</th>
+                                            <th>Edit</th>
+                                            <th>Detail</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
@@ -275,19 +273,18 @@ include '../../koneksi.php';
                                     ?>
                                             <?php $no = 1; while($fetch_t = mysqli_fetch_array($execute)):?>
                                                 <tr>
-                                                    <td><?=$no++;?></td>
+                                                   
                                                     <td><span id="ID_Pelaporan<?=$fetch_t['ID']?>"><?=$fetch_t['ID_Pelaporan']?></span></td>
                                                     <td><span id="NIK<?=$fetch_t['ID']?>"><?=$fetch_t['NIK']?></span></td>
                                                     <td><span id="nama_unit<?=$fetch_t['ID']?>"><?=$fetch_t['nama_unit']?></span></td>
                                                     <td><span id="Keperluan<?=$fetch_t['ID']?>"><?=$fetch_t['Keperluan']?></span></td>
-                                                    <td><span id="Keterangan<?=$fetch_t['ID']?>"><?=$fetch_t['Keterangan']?></span></td>
                                                     <td><span id="TanggalLaporan<?=$fetch_t['ID']?>"><?=$fetch_t['TanggalLaporan']?></span></td>
-                                                    <td><span id="TanggalKejadian<?=$fetch_t['ID']?>"><?=$fetch_t['TanggalKejadian']?></span></td>
                                                     <td><span id="Status<?=$fetch_t['ID']?>"><?=$fetch_t['Status']?></span></td>
                                                     <td><span id="Ticket<?=$fetch_t['ID']?>"><?=$fetch_t['Ticket']?></span></td>
                                                     <td>
-                                                    <a href="index.php?hal=edit&ID=<?=$fetch_t['ID']?>" class="btn btn-warning"> Edit </a>
-                                                    <button type="button" class="btn btn-warning edit" value="<?php echo $fetch_t['ID']; ?>"><span class="glyphicon glyphicon-edit"></span>Detail</button>
+                                                    <a href="index.php?hal=edit&ID=<?=$fetch_t['ID']?>" class="btn btn-primary"> Edit </a></td>
+                                                    <td>
+                                                    <button type="button" class="btn btn-primary edit" value="<?php echo $fetch_t['ID']; ?>"><span class="glyphicon glyphicon-edit"></span>Detail</button>
                                                     </td>
                                                 </tr>
                                             <?php endwhile; ?>   
