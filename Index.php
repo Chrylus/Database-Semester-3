@@ -138,13 +138,20 @@ session_regenerate_id(true);
     <?php
         if(isset($_GET['Ticket'])){
             $Pesan=$_GET['Ticket'];
+                
             echo    "<script type = 'text/javascript'>
-                        Swal.fire(
-                            'Mohon Catat Nomor Tiket Anda',
-                            '$Pesan',
-                            'success'
-                        ).then(function() {
-                            window.location.href = 'index.php';
+                        Swal.fire({
+                            title: 'Mohon Catat Nomor Tiket Anda',
+                            text: '$Pesan',
+                            showCancelButton: true,
+                            confirmButtonText: 'Cetak Bukti',
+                            cancelButtonText: `Ok`,
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                            
+                            } else {
+                                window.location.href = 'index.php';
+                            }
                         })
                     </script>";
         }
