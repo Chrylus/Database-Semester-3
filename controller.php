@@ -22,6 +22,15 @@
                 $esc_keterangan = mysqli_real_escape_string($koneksi, $keterangan);
                 $tanggal_kejadian = $data['TanggalKejadian'];
                 $esc_tanggal_kejadian = mysqli_real_escape_string($koneksi, $tanggal_kejadian);
+
+                // Input daerah
+                $kota = $data['kota'];
+                $esc_kota = mysqli_real_escape_string($koneksi, $kota);
+                $kecamatan = $data['kecamatan'];
+                $esc_kecamatan = mysqli_real_escape_string($koneksi, $kecamatan);
+                $keldesa = $data['keldesa'];
+                $esc_keldesa = mysqli_real_escape_string($koneksi, $keldesa);
+
                 // File upload
                 if(isset($_FILES["files"]) && !empty($_FILES["files"]["name"])){
                     foreach($_FILES['files']['tmp_name'] as $key => $tmp_name ){
@@ -37,13 +46,22 @@
                         }
                     }
                 }
-                // Eksekusi
+
+                // Eksekusi Insert Pelaporan
                 $query1 = "INSERT INTO pelaporan (ID_Pelaporan, NIK, Tujuan, Keperluan, Keterangan, TanggalKejadian)
                     VALUES ('$unik', '$esc_nik', '$esc_tujuan', '$keperluan', '$esc_keterangan', '$esc_tanggal_kejadian')";
                 $exec1 = mysqli_query($koneksi, $query1);
+                
+                // Eksekusi Insert Daerah
+                $query4 = "INSERT INTO header_pelaporan (ID_Pelaporan, KabKota, Kecamatan, KelDesa)
+                VALUES ('$unik', '$esc_kota', '$esc_kecamatan', '$esc_keldesa')";
+                $exec4 = mysqli_query($koneksi, $query4);
+
+                // Eksekusi Ticket
                 $ticket = mysqli_query($koneksi, "SELECT Ticket FROM pelaporan ORDER BY ID DESC LIMIT 1");
                 $result = mysqli_fetch_array($ticket);
                 $x = $result ['Ticket'];
+
                 if ($new_filename != NULL){
                     $query3 = "INSERT INTO lampiran(ID_Pelaporan, lampiran) VALUES ('$unik', '$new_filename')";
                     $exec3 = mysqli_query($koneksi, $query3);
@@ -59,6 +77,7 @@
             if(isset($data['submit'])){
                 // Default
                 $unik = uniqid('ASP');
+
                 // Ambil input dari depan
                 $nik = $data['NIK'];
                 $esc_nik = mysqli_real_escape_string($koneksi, $nik);
@@ -68,6 +87,15 @@
                 $esc_keperluan = mysqli_real_escape_string($koneksi, $keperluan);
                 $keterangan = $data['Keterangan'];
                 $esc_keterangan = mysqli_real_escape_string($koneksi, $keterangan);
+
+                // Input daerah
+                $kota = $data['kota'];
+                $esc_kota = mysqli_real_escape_string($koneksi, $kota);
+                $kecamatan = $data['kecamatan'];
+                $esc_kecamatan = mysqli_real_escape_string($koneksi, $kecamatan);
+                $keldesa = $data['keldesa'];
+                $esc_keldesa = mysqli_real_escape_string($koneksi, $keldesa);
+
                 // File upload
                 if(isset($_FILES["files"]) && !empty($_FILES["files"]["name"])){
                     foreach($_FILES['files']['tmp_name'] as $key => $tmp_name ){
@@ -83,13 +111,22 @@
                         }
                     }
                 }
-                // Eksekusi
+
+                // Eksekusi Insert Aspirasi
                 $query1 = "INSERT INTO pelaporan (ID_Pelaporan, NIK, Tujuan, Keperluan, Keterangan)
                     VALUES ('$unik', '$esc_nik', '$esc_tujuan', '$esc_keperluan', '$esc_keterangan')";
                 $exec1 = mysqli_query($koneksi, $query1);
+
+                // Eksekusi Insert Daerah
+                $query4 = "INSERT INTO header_pelaporan (ID_Pelaporan, KabKota, Kecamatan, KelDesa)
+                VALUES ('$unik', '$esc_kota', '$esc_kecamatan', '$esc_keldesa')";
+                $exec4 = mysqli_query($koneksi, $query4);
+
+                // Eksekusi Ticket
                 $ticket = mysqli_query($koneksi, "SELECT Ticket FROM pelaporan ORDER BY ID DESC LIMIT 1");
                 $result = mysqli_fetch_array($ticket);
                 $x = $result ['Ticket'];
+
                 if ($new_filename != NULL){
                     $query3 = "INSERT INTO lampiran(ID_Pelaporan, lampiran) VALUES ('$unik', '$new_filename')";
                     $exec3 = mysqli_query($koneksi, $query3);
@@ -191,7 +228,7 @@
                             $_SESSION['nik'] = $row['NIK'];
                             $_SESSION['telepon'] = $row['No_telepon'];
                             $_SESSION['email'] = $row['Email'];
-                            $_SESSION['status'] = "login";
+                            $_SESSION['keadaan'] = "login";
                             header("location:index.php?=sukses");
                         }else{
                             header("location:index.php?pesan=password salah");
@@ -235,7 +272,7 @@
             header("location:admin/login.php");
             break;
         case 'logout_user':
-            unset($_SESSION['status']);
+            unset($_SESSION['keadaan']);
             session_unset();
             session_destroy();
             // $_SESSION['status'] = "berhasil logout";
