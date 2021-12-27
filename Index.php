@@ -304,7 +304,7 @@ session_regenerate_id(true);
                                     </button>
                                     <h4 class="modal-title">PANDUAN PENGISIAN PENGADUAN</h4>
                                 </div>
-                            <img src="images/Panduan.png" width="100%">
+                            <img src="images/poster.png" width="100%">
                         </div>
                     </div>
                 </div>
