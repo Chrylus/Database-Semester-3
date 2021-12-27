@@ -354,9 +354,9 @@
         
                     $exec = mysqli_query($koneksi, $query);
                     if($exec){
-                        header("location: admin/aspirasi/index.php?alert=sukses");
+                        header("location: admin/pengaduan/index.php?alert=sukses");
                     }else{
-                        header("location: admin/aspirasi/index.php?alert=gagal");
+                        header("location: admin/pengaduan/index.php?alert=gagal");
                     }
                     break;
         default:

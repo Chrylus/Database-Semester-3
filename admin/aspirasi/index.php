@@ -88,16 +88,6 @@ include '../../koneksi.php';
                 </div>
             </li>
 
-            <li class="nav-item">
-                <a class="nav-link" href="charts.html">
-                    <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Status Laporan</span></a>
-            </li>
-
-           
-            <!-- Nav Item - Utilities Collapse Menu -->
-           
-
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
 
@@ -105,9 +95,6 @@ include '../../koneksi.php';
             <div class="text-center d-none d-md-inline">
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
             </div>
-
-            <!-- Sidebar Message -->
-            
 
         </ul>
         <!-- End of Sidebar -->
