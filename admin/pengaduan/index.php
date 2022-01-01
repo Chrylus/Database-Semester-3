@@ -244,7 +244,7 @@ include '../../koneksi.php';
                                         pelaporan.ID AS 'ID',
 										pelaporan.ID_Pelaporan AS 'ID_Pelaporan', 
                                         pelaporan.NIK AS 'NIK',
-                                        unit_layanan.nama_unit AS 'nama_unit', 
+                                        unit_layanan.nama_unit AS 'Nama_unit', 
                                         keperluan.Keperluan AS 'Keperluan', 
                                         pelaporan.Keterangan AS 'Keterangan',
                                         pelaporan.TanggalLaporan AS 'TanggalLaporan',
@@ -263,12 +263,29 @@ include '../../koneksi.php';
                                                     $nik = $fetch_t['NIK']; 
                                                     $query = "SELECT Nama FROM penduduk WHERE NIK='$nik'";
                                                     $exec = mysqli_query($koneksi, $query);
-                                                    $fetch_n = mysqli_fetch_array($exec);   
+                                                    $fetch_n = mysqli_fetch_array($exec);
+                                                    
+                                                    $id = $fetch_t['ID_Pelaporan'];
+                                                    $query2 = "SELECT lampiran AS 'Lampiran' FROM lampiran WHERE ID_Pelaporan='$id'";
+                                                    $exec2 = mysqli_query($koneksi, $query2);
+                                                    $fetch_n2 = mysqli_fetch_array($exec2);
+
+                                                    $query3 = "SELECT nama_kabkota AS 'KabKota' FROM kabkota INNER JOIN header_pelaporan ON header_pelaporan.KabKota = id_kabkota WHERE ID_Pelaporan='$id'";
+                                                    $exec3 = mysqli_query($koneksi, $query3);
+                                                    $fetch_n3 = mysqli_fetch_array($exec3);
+
+                                                    $query4 = "SELECT nama_kecamatan AS 'Kecamatan' FROM kecamatan INNER JOIN header_pelaporan ON header_pelaporan.Kecamatan = id_kecamatan WHERE ID_Pelaporan='$id'";
+                                                    $exec4 = mysqli_query($koneksi, $query4);
+                                                    $fetch_n4 = mysqli_fetch_array($exec4);
+
+                                                    $query5 = "SELECT nama_keldesa AS 'KelDesa' FROM keldesa INNER JOIN header_pelaporan ON header_pelaporan.KelDesa = id_keldesa WHERE ID_Pelaporan='$id'";
+                                                    $exec5 = mysqli_query($koneksi, $query5);
+                                                    $fetch_n5 = mysqli_fetch_array($exec5);
                                                 ?>
                                                 <tr>
                                                     <td><span id="ID_Pelaporan<?=$fetch_t['ID']?>"><?=$fetch_t['ID_Pelaporan']?></span></td>
                                                     <td><span id="NIK<?=$fetch_t['ID']?>"><?=$fetch_t['NIK']?></span></td>
-                                                    <td><span id="nama_unit<?=$fetch_t['ID']?>"><?=$fetch_t['nama_unit']?></span></td>
+                                                    <td><span id="Nama_unit<?=$fetch_t['ID']?>"><?=$fetch_t['Nama_unit']?></span></td>
                                                     <td><span id="Keperluan<?=$fetch_t['ID']?>"><?=$fetch_t['Keperluan']?></span></td>
                                                     <td><span id="TanggalLaporan<?=$fetch_t['ID']?>"><?=$fetch_t['TanggalLaporan']?></span></td>
                                                     <td><span id="Status<?=$fetch_t['ID']?>"><?=$fetch_t['Status']?></span></td>
@@ -277,6 +294,12 @@ include '../../koneksi.php';
                                                     <a href="index.php?hal=edit&ID=<?=$fetch_t['ID']?>" class="btn btn-primary"> Edit </a></td>
                                                     <td>
                                                     <span hidden id="Nama<?=$fetch_t['ID']?>"><?=$fetch_n['Nama']?></span>
+                                                    <span hidden id="Keterangan<?=$fetch_t['ID']?>"><?=$fetch_t['Keterangan']?></span>
+                                                    <span hidden id="Lampiran<?=$fetch_t['ID']?>"><?=$fetch_n2['Lampiran']?></span>
+                                                    <span hidden id="TanggalKejadian<?=$fetch_t['ID']?>"><?=$fetch_t['TanggalKejadian']?></span>
+                                                    <span hidden id="KabKota<?=$fetch_t['ID']?>"><?=$fetch_n3['KabKota']?></span>
+                                                    <span hidden id="Kecamatan<?=$fetch_t['ID']?>"><?=$fetch_n4['Kecamatan']?></span>
+                                                    <span hidden id="KelDesa<?=$fetch_t['ID']?>"><?=$fetch_n5['KelDesa']?></span>
                                                     <button type="button" class="btn btn-primary edit" value="<?php echo $fetch_t['ID']; ?>"><span class="glyphicon glyphicon-edit"></span>Detail</button>
                                                     </td>
                                                 </tr>
@@ -330,8 +353,58 @@ include '../../koneksi.php';
                         <input type="text" style="width:350px;" class="form-control" id="m_id_pelaporan">
                     </div>
                     <div class="form-group input-group">
+                        <span class="input-group-addon" style="width:150px;">Ticket</span>
+                        <input type="text" style="width:350px;" class="form-control" id="m_ticket">
+                    </div>
+                    <div class="form-group input-group">
                         <span class="input-group-addon" style="width:150px;">Nama Lengkap</span>
                         <input type="text" style="width:350px;" class="form-control" id="m_nama">
+                    </div>
+                    <div class="form-group input-group">
+                        <span class="input-group-addon" style="width:150px;">NIK</span>
+                        <input type="text" style="width:350px;" class="form-control" id="m_nik">
+                    </div>
+                    <div class="form-group input-group">
+                        <span class="input-group-addon" style="width:150px;">Unit Layanan</span>
+                        <input type="text" style="width:350px;" class="form-control" id="m_tujuan">
+                    </div>
+                    <div class="form-group input-group">
+                        <span class="input-group-addon" style="width:150px;">Keperluan</span>
+                        <input type="text" style="width:350px;" class="form-control" id="m_keperluan">
+                    </div>
+                    <div class="form-group input-group">
+                        <span class="input-group-addon" style="width:150px;">Keterangan</span>
+                        <input type="text" style="width:350px;" class="form-control" id="m_keterangan">
+                    </div>
+                    <div class="form-group input-group">
+                        <span class="input-group-addon" style="width:150px;">Lampiran</span>
+                        <a href = "../berkas/<?=$fetch_n2['Lampiran']?>" target="_blank">
+                            <input type="text" style="width:350px;" class="form-control" id="m_lampiran" readonly>
+                        </a>
+                    </div>
+                    <div class="form-group input-group">
+                        <span class="input-group-addon" style="width:150px;">Tanggal Pelaporan</span>
+                        <input type="text" style="width:350px;" class="form-control" id="m_tanggal_pelaporan">
+                    </div>
+                    <div class="form-group input-group">
+                        <span class="input-group-addon" style="width:150px;">Tanggal Kejadian</span>
+                        <input type="text" style="width:350px;" class="form-control" id="m_tanggal_kejadian">
+                    </div>
+                    <div class="form-group input-group">
+                        <span class="input-group-addon" style="width:150px;">Kabupaten / Kota</span>
+                        <input type="text" style="width:350px;" class="form-control" id="m_kabupaten_kota">
+                    </div>
+                    <div class="form-group input-group">
+                        <span class="input-group-addon" style="width:150px;">Kecamatan</span>
+                        <input type="text" style="width:350px;" class="form-control" id="m_kecamatan">
+                    </div>
+                    <div class="form-group input-group">
+                        <span class="input-group-addon" style="width:150px;">Kelurahan / Desa</span>
+                        <input type="text" style="width:350px;" class="form-control" id="m_kelurahan_desa">
+                    </div>
+                    <div class="form-group input-group">
+                        <span class="input-group-addon" style="width:150px;">Status</span>
+                        <input type="text" style="width:350px;" class="form-control" id="m_status">
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -364,11 +437,35 @@ include '../../koneksi.php';
         $(document).on('click', '.edit', function(){
             var id=$(this).val();
             var id_pelaporan=$('#ID_Pelaporan'+id).text();
+            var ticket=$('#Ticket'+id).text();
             var nama=$('#Nama'+id).text();
+            var nik=$('#NIK'+id).text();
+            var tujuan=$('#Nama_unit'+id).text();
+            var keperluan=$('#Keperluan'+id).text();
+            var keterangan=$('#Keterangan'+id).text();
+            var lampiran=$('#Lampiran'+id).text();
+            var tanggal_pelaporan=$('#TanggalLaporan'+id).text();
+            var tanggal_kejadian=$('#TanggalKejadian'+id).text();
+            var kabupaten_kota=$('#KabKota'+id).text();
+            var kecamatan=$('#Kecamatan'+id).text();
+            var kelurahan_desa=$('#KelDesa'+id).text();
+            var status=$('#Status'+id).text();
             
             $('#detailModal').modal('show');
             $('#m_id_pelaporan').val(id_pelaporan);
+            $('#m_ticket').val(ticket);
             $('#m_nama').val(nama);
+            $('#m_nik').val(nik);
+            $('#m_tujuan').val(tujuan);
+            $('#m_keperluan').val(keperluan);
+            $('#m_keterangan').val(keterangan);
+            $('#m_lampiran').val(lampiran);
+            $('#m_tanggal_pelaporan').val(tanggal_pelaporan);
+            $('#m_tanggal_kejadian').val(tanggal_kejadian);
+            $('#m_kabupaten_kota').val(kabupaten_kota);
+            $('#m_kecamatan').val(kecamatan);
+            $('#m_kelurahan_desa').val(kelurahan_desa);
+            $('#m_status').val(status);
         });
     });
     </script>

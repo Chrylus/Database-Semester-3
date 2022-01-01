@@ -311,7 +311,7 @@
 
                         <!-- Ticket Pelaporan Pending -->
                         <div class="col-xl-3 col-md-6 mb-4">
-                            <a href = "aspirasi/index.php">
+                            <a href = "pengaduan/index.php">
                                 <div class="card border-left-primary shadow h-100 py-2">
                                     <div class="card-body">
                                         <div class="row no-gutters align-items-center">
@@ -330,7 +330,7 @@
 
                         <!-- Ticket Aspirasi Pending -->
                         <div class="col-xl-3 col-md-6 mb-4">
-                            <a href = "pengaduan/index.php">
+                            <a href = "aspirasi/index.php">
                                 <div class="card border-left-success shadow h-100 py-2">
                                     <div class="card-body">
                                         <div class="row no-gutters align-items-center">
