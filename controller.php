@@ -224,7 +224,7 @@
                         $password = $row['password'];
                         $verify = password_verify($esc_password, $password);
                         if($verify){
-                            $_SESSION['nama'] = $row['Nama'];
+                            $_SESSION['nama_masyarakat'] = $row['Nama'];
                             $_SESSION['nik'] = $row['NIK'];
                             $_SESSION['telepon'] = $row['No_telepon'];
                             $_SESSION['email'] = $row['Email'];

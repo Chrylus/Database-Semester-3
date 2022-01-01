@@ -185,12 +185,12 @@ include '../../koneksi.php';
                     <div class="card-body">
                     <?php if(isset($_GET['hal']) == "edit"){?>
                         <?php 
-                            $ID = $_GET['ID'];
-                            $query = "SELECT * FROM pelaporan WHERE ID = '$_GET[ID]'";
+                            $id = $_GET['id'];
+                            $query = "SELECT * FROM pelaporan WHERE ID = '$id'";
                             $exec = mysqli_query($koneksi, $query);
                             $fetch = mysqli_fetch_array($exec);    
                         ?>
-                        <form method="post" action="../../controller.php?aksi=edit_pengaduan&ID=<?=$fetch['ID']?>">
+                        <form method="post" action="../../controller.php?aksi=edit_pengaduan&id=<?=$fetch['ID']?>">
                         <div class="complaint-form-category">
                             <input type="text" name="Status" class="form-control" placeholder="Status *" value="<?=$fetch['Status']?>" required></textarea>
                         </div>
@@ -291,7 +291,7 @@ include '../../koneksi.php';
                                                     <td><span id="Status<?=$fetch_t['ID']?>"><?=$fetch_t['Status']?></span></td>
                                                     <td><span id="Ticket<?=$fetch_t['ID']?>"><?=$fetch_t['Ticket']?></span></td>
                                                     <td>
-                                                    <a href="index.php?hal=edit&ID=<?=$fetch_t['ID']?>" class="btn btn-primary"> Edit </a></td>
+                                                    <a href="index.php?hal=edit&id=<?=$fetch_t['ID']?>" class="btn btn-primary"> Edit </a></td>
                                                     <td>
                                                     <span hidden id="Nama<?=$fetch_t['ID']?>"><?=$fetch_n['Nama']?></span>
                                                     <span hidden id="Keterangan<?=$fetch_t['ID']?>"><?=$fetch_t['Keterangan']?></span>

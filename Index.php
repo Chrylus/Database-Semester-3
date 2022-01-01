@@ -218,7 +218,7 @@ session_regenerate_id(true);
                             </div>
                             
                             <div class="complaint-form-category">
-                                <input type="text" name="Nama" class="form-control" value="<?php echo $_SESSION['nama']; ?>" placeholder="Nama *" readonly></textarea>
+                                <input type="text" name="Nama" class="form-control" value="<?php echo $_SESSION['nama_masyarakat']; ?>" placeholder="Nama *" readonly></textarea>
                             </div>
                             <div class="complaint-form-category">
                                 <input type="text" name="NIK" class="form-control" value="<?php echo $_SESSION['nik']; ?>" placeholder="NIK *" readonly></textarea>
