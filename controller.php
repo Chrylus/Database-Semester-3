@@ -299,6 +299,7 @@
             }
             break;
         case 'edit_admin':
+            $id = $_GET['id'];
             $nama = $_POST['name'];
             $nik = $_POST['nik'];
             $username = $_POST['username'];
@@ -312,7 +313,7 @@
             // Hash PW
             $hash_pw = password_hash($esc_password, PASSWORD_DEFAULT);
             //$query = "UPDATE msadmin SET (name, username, password) VALUES ('$esc_nama', '$esc_username', '$hash_pw') WHERE id = '$_GET[id]'";
-            $query = "UPDATE msadmin SET name = '$esc_nama', NIK = '$esc_nik, username = '$esc_username', password = '$hash_pw' WHERE id = '$_GET[id]'";
+            $query = "UPDATE msadmin SET name = '$esc_nama', NIK = '$esc_nik', username = '$esc_username', password = '$hash_pw' WHERE id = '$esc_id'";
 
             $exec = mysqli_query($koneksi, $query);
             if($exec){
@@ -322,8 +323,9 @@
             }
             break;
         case 'hapus_admin':
+            $id = $_GET['id'];
             $esc_id = mysqli_real_escape_string($koneksi, $id);
-            $query = "DELETE FROM msadmin WHERE id = '$_GET[id]'";
+            $query = "DELETE FROM msadmin WHERE id = '$esc_id'";
             $exec = mysqli_query($koneksi, $query);
             if($exec){
                 header("location: admin/super/admin.php?alert=sukses");
@@ -332,11 +334,12 @@
             }
             break;
         case 'edit_aspirasi':
+                $id = $_GET['id'];
                 $Status = $_POST['Status'];
                 // Escape
-
+                $esc_id = mysqli_real_escape_string($koneksi, $id);
                 //$query = "UPDATE msadmin SET (name, username, password) VALUES ('$esc_nama', '$esc_username', '$hash_pw') WHERE id = '$_GET[id]'";
-                $query = "UPDATE pelaporan SET Status = '$Status' WHERE ID = '$_GET[ID]'";
+                $query = "UPDATE pelaporan SET Status = '$Status' WHERE ID = '$esc_id'";
     
                 $exec = mysqli_query($koneksi, $query);
                 if($exec){
@@ -346,11 +349,12 @@
                 }
                 break;
         case 'edit_pengaduan':
+                    $id = $_GET['id'];
                     $Status = $_POST['Status'];
                     // Escape
-    
+                    $esc_id = mysqli_real_escape_string($koneksi, $id);
                     //$query = "UPDATE msadmin SET (name, username, password) VALUES ('$esc_nama', '$esc_username', '$hash_pw') WHERE id = '$_GET[id]'";
-                    $query = "UPDATE pelaporan SET Status = '$Status' WHERE ID = '$_GET[ID]'";
+                    $query = "UPDATE pelaporan SET Status = '$Status' WHERE ID = '$esc_id'";
         
                     $exec = mysqli_query($koneksi, $query);
                     if($exec){

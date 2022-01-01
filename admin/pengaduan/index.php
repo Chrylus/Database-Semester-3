@@ -259,8 +259,13 @@ include '../../koneksi.php';
                                         $execute = mysqli_query($koneksi, $tampil); 
                                     ?>
                                             <?php $no = 1; while($fetch_t = mysqli_fetch_array($execute)):?>
+                                                <?php
+                                                    $nik = $fetch_t['NIK']; 
+                                                    $query = "SELECT Nama FROM penduduk WHERE NIK='$nik'";
+                                                    $exec = mysqli_query($koneksi, $query);
+                                                    $fetch_n = mysqli_fetch_array($exec);   
+                                                ?>
                                                 <tr>
-                                                   
                                                     <td><span id="ID_Pelaporan<?=$fetch_t['ID']?>"><?=$fetch_t['ID_Pelaporan']?></span></td>
                                                     <td><span id="NIK<?=$fetch_t['ID']?>"><?=$fetch_t['NIK']?></span></td>
                                                     <td><span id="nama_unit<?=$fetch_t['ID']?>"><?=$fetch_t['nama_unit']?></span></td>
@@ -271,6 +276,7 @@ include '../../koneksi.php';
                                                     <td>
                                                     <a href="index.php?hal=edit&ID=<?=$fetch_t['ID']?>" class="btn btn-primary"> Edit </a></td>
                                                     <td>
+                                                    <span hidden id="Nama<?=$fetch_t['ID']?>"><?=$fetch_n['Nama']?></span>
                                                     <button type="button" class="btn btn-primary edit" value="<?php echo $fetch_t['ID']; ?>"><span class="glyphicon glyphicon-edit"></span>Detail</button>
                                                     </td>
                                                 </tr>
@@ -323,6 +329,10 @@ include '../../koneksi.php';
                         <span class="input-group-addon" style="width:150px;">ID Pelaporan</span>
                         <input type="text" style="width:350px;" class="form-control" id="m_id_pelaporan">
                     </div>
+                    <div class="form-group input-group">
+                        <span class="input-group-addon" style="width:150px;">Nama Lengkap</span>
+                        <input type="text" style="width:350px;" class="form-control" id="m_nama">
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
@@ -354,9 +364,11 @@ include '../../koneksi.php';
         $(document).on('click', '.edit', function(){
             var id=$(this).val();
             var id_pelaporan=$('#ID_Pelaporan'+id).text();
+            var nama=$('#Nama'+id).text();
             
             $('#detailModal').modal('show');
             $('#m_id_pelaporan').val(id_pelaporan);
+            $('#m_nama').val(nama);
         });
     });
     </script>
