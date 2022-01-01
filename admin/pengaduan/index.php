@@ -300,6 +300,16 @@ include '../../koneksi.php';
                                                     <span hidden id="KabKota<?=$fetch_t['ID']?>"><?=$fetch_n3['KabKota']?></span>
                                                     <span hidden id="Kecamatan<?=$fetch_t['ID']?>"><?=$fetch_n4['Kecamatan']?></span>
                                                     <span hidden id="KelDesa<?=$fetch_t['ID']?>"><?=$fetch_n5['KelDesa']?></span>
+                                                    <?php
+                                                        $id_lampiran = $fetch_t['ID'];
+                                                        $detail = mysqli_query ($koneksi, "SELECT lampiran AS 'Lampiran' FROM lampiran INNER JOIN pelaporan ON pelaporan.ID_Pelaporan = lampiran.ID_Pelaporan WHERE ID = '$id_lampiran'");
+                                                        $data1 = mysqli_fetch_array($detail);
+                                                        $detImage = $data1['Lampiran'];
+                                                        echo $fetch_t['ID'];
+                                                        echo "<br>";
+                                                        echo $detImage;
+                                                    ?>
+                                                    <span hidden id="Lampiran2<?=$fetch_t['ID']?>"><?=$fetch_n2['Lampiran']?></span>
                                                     <button type="button" class="btn btn-primary edit" value="<?php echo $fetch_t['ID']; ?>"><span class="glyphicon glyphicon-edit"></span>Detail</button>
                                                     </td>
                                                 </tr>
@@ -378,7 +388,7 @@ include '../../koneksi.php';
                     </div>
                     <div class="form-group input-group">
                         <span class="input-group-addon" style="width:150px;">Lampiran</span>
-                        <a href = "../berkas/<?=$fetch_n2['Lampiran']?>" target="_blank">
+                        <a href = "../berkas/<?=$detImage?>" target="_blank">
                             <input type="text" style="width:350px;" class="form-control" id="m_lampiran" readonly>
                         </a>
                     </div>
