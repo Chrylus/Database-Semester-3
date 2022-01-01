@@ -295,21 +295,15 @@ include '../../koneksi.php';
                                                     <td>
                                                     <span hidden id="Nama<?=$fetch_t['ID']?>"><?=$fetch_n['Nama']?></span>
                                                     <span hidden id="Keterangan<?=$fetch_t['ID']?>"><?=$fetch_t['Keterangan']?></span>
-                                                    <span hidden id="Lampiran<?=$fetch_t['ID']?>"><?=$fetch_n2['Lampiran']?></span>
+                                                    <?php if(isset($fetch_n2['Lampiran'])){?>
+                                                        <span hidden id="Lampiran<?=$fetch_t['ID']?>"><?=$fetch_n2['Lampiran']?></span>
+                                                    <?php } else if(!isset($fetch_n2['Lampiran'])){ ?>
+                                                        <span hidden id="Lampiran<?=$fetch_t['ID']?>">0</span>
+                                                    <?php } ?>
                                                     <span hidden id="TanggalKejadian<?=$fetch_t['ID']?>"><?=$fetch_t['TanggalKejadian']?></span>
                                                     <span hidden id="KabKota<?=$fetch_t['ID']?>"><?=$fetch_n3['KabKota']?></span>
                                                     <span hidden id="Kecamatan<?=$fetch_t['ID']?>"><?=$fetch_n4['Kecamatan']?></span>
                                                     <span hidden id="KelDesa<?=$fetch_t['ID']?>"><?=$fetch_n5['KelDesa']?></span>
-                                                    <?php
-                                                        $id_lampiran = $fetch_t['ID'];
-                                                        $detail = mysqli_query ($koneksi, "SELECT lampiran AS 'Lampiran' FROM lampiran INNER JOIN pelaporan ON pelaporan.ID_Pelaporan = lampiran.ID_Pelaporan WHERE ID = '$id_lampiran'");
-                                                        $data1 = mysqli_fetch_array($detail);
-                                                        $detImage = $data1['Lampiran'];
-                                                        echo $fetch_t['ID'];
-                                                        echo "<br>";
-                                                        echo $detImage;
-                                                    ?>
-                                                    <span hidden id="Lampiran2<?=$fetch_t['ID']?>"><?=$fetch_n2['Lampiran']?></span>
                                                     <button type="button" class="btn btn-primary edit" value="<?php echo $fetch_t['ID']; ?>"><span class="glyphicon glyphicon-edit"></span>Detail</button>
                                                     </td>
                                                 </tr>
@@ -388,8 +382,7 @@ include '../../koneksi.php';
                     </div>
                     <div class="form-group input-group">
                         <span class="input-group-addon" style="width:150px;">Lampiran</span>
-                        <a href = "../berkas/<?=$detImage?>" target="_blank">
-                            <input type="text" style="width:350px;" class="form-control" id="m_lampiran" readonly>
+                            <a href = "../berkas/" target="_blank" id="m_lampiran">
                         </a>
                     </div>
                     <div class="form-group input-group">
@@ -444,7 +437,7 @@ include '../../koneksi.php';
     </div>
     <script>
        $(document).ready(function(){
-        $(document).on('click', '.edit', function(){
+        $('.edit').on('click', function(){
             var id=$(this).val();
             var id_pelaporan=$('#ID_Pelaporan'+id).text();
             var ticket=$('#Ticket'+id).text();
@@ -469,7 +462,14 @@ include '../../koneksi.php';
             $('#m_tujuan').val(tujuan);
             $('#m_keperluan').val(keperluan);
             $('#m_keterangan').val(keterangan);
-            $('#m_lampiran').val(lampiran);
+            $('#m_lampiran').html(lampiran);
+            if(lampiran === '0'){
+                console.log(lampiran)
+                $('#m_lampiran').replaceWith('<span id="m_lampiran">Tidak Ada Data</span>');
+            }else{
+                console.log(lampiran)
+                $('#m_lampiran').replaceWith(`<a href='../berkas/${lampiran}' id="m_lampiran">${lampiran}</a>`);
+            }
             $('#m_tanggal_pelaporan').val(tanggal_pelaporan);
             $('#m_tanggal_kejadian').val(tanggal_kejadian);
             $('#m_kabupaten_kota').val(kabupaten_kota);
