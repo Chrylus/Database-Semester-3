@@ -38,11 +38,10 @@ session_regenerate_id(true);
     <link href= 'index.css' rel="stylesheet">
 
     <script src="resources/sweetalert2.min.js"></script>
-    <link rel="stylesheet" href="https://www.lapor.go.id/plugins/responsiv/uploader/assets/css/uploader.css">
     <link rel="stylesheet" href="https://www.lapor.go.id/combine/66cb3800f16b20b046b93a4571b46c42-1617850351">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://www.lapor.go.id/combine/15d6ac0173665e1a9057c30ca8e08f8f-1617850351"></script>
-    <script src="https://www.lapor.go.id/themes/lapor/assets/js/zingchart.min.js"></script>
+    <script src="resources/zingchart.min.js"></script>
     <link rel="icon" href="../Part-Time-Binus/user/images/Binus Logo.png">
     <link rel ="stylesheet" href = "//cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
     <script src="//cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
@@ -213,7 +212,7 @@ session_regenerate_id(true);
                                         Pengaduan
                                     </span> Yang Baik dan Benar 
                                     <a href="#modalPengaduan" data-toggle="modal" class="modalTrigger" id="modalToggler" data-modal-name="modalPengaduan" data-target="#bannerformmodal">
-                                        <img alt="info-complaint" class="info-complaint" src="https://www.lapor.go.id/themes/lapor/assets/images/info.svg" >
+                                        <img alt="info-complaint" class="info-complaint" src="icon/info.svg" >
                                     </a>
                                 </div>
                             </div>
@@ -324,9 +323,9 @@ session_regenerate_id(true);
                 </div>
 
                 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-                <script src="https://www.lapor.go.id/themes/lapor/assets/select2/js/select2totree.js"></script>
+                <script src="resources/select2totree.css"></script>
                 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css">
-                <link rel="stylesheet" type="text/css" href="https://www.lapor.go.id/themes/lapor/assets/select2/css/select2totree.css">  
+                <link rel="stylesheet" type="text/css" href="resources/select2totree.css">  
             </div>
             <div class="col-sm-12">
                 <div class="text-center text-muted h3 mg-0 mg-b-30">PROSES LAPORAN</div>
@@ -421,60 +420,16 @@ session_regenerate_id(true);
             </div>
         </footer>
 
-        <form method="POST" action="https://www.lapor.go.id" accept-charset="UTF-8" data-request="laporAuth::onSignin" data-request-update="&#039;captcha-login&#039;: &#039;#google-captcha&#039;"><input name="_session_key" type="hidden" value="H0jzdJd1I0aAdLo6yGIAoXiVQbWLCd9LtHLCP50V"><input name="_token" type="hidden" value="OZPVvzymSbDonv62HUjG7WfRuRGreTmfzpAXIb0A">
-            <div class="modal fade" id="modalLogin">
-                <div class="modal-dialog modal-md">
-                    <div class="modal-content">
-                        <div class="modal-body">
-                            <div class="row">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </form>
-
-        <div class="modal fade" id="modalMap">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title text-center">Pilih Lokasi</h4>
-                </div>
-                <div class="modal-body pd-0">
-                    <input type="hidden" data-toggle="locationMarkerLatitude">
-                    <input type="hidden" data-toggle="locationMarkerLongitude">
-                    <div class="location-marker"><img src="https://www.lapor.go.id/themes/lapor/assets/images/complaint-marker.png" alt="" height="70"></div>
-
-                    <div class="location-name bg-warning pd-10 text-ellipsis">
-                        <span data-toggle="locationName">Geser map untuk mendapatkan lokasi yang anda inginkan</span>
-                    </div>
-                    <div id="mapLocation"><center class="pd-10">Silahkan aktifkan fitur pelacakan lokasi Anda pada browser</center></div>
-                </div>
-                <div class="modal-footer">
-                    <div class="text-center">
-                        <button class="btn btn-default" data-dismiss="modal">Tutup</button>
-                        <button class="btn btn-danger" data-dismiss="modal" data-toggle="removeLocation">Hapus Lokasi</button>
-                        <button class="btn btn-info" data-dismiss="modal">Pilih Lokasi</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
     <div class="loadedcontentmodal"></div>
 
     <script src="https://www.lapor.go.id/combine/412ecc180b60d48eb196db8827c68391-1634533910"></script>
-    <script src="https://www.lapor.go.id/plugins/responsiv/uploader/assets/vendor/dropzone/dropzone.js"></script>
-    <script src="https://www.lapor.go.id/plugins/responsiv/uploader/assets/js/uploader.js"></script>
+    <script src="resources/dropzone.js"></script>
     <script src="https://www.lapor.go.id/combine/e0149bf6f4f799c71effe2f3272859ac-1617850352"></script>
     <script src="https://www.lapor.go.id/combine/6853ff71a407ef7906205e10eefc483e-1617850351"></script>
 
-    <script src="https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyBLHjAqc9z24spcOJmit4weWYBe32eLBho&libraries=places, geometry&region=ID"></script>
-
-    <script src="https://www.lapor.go.id/themes/lapor/assets/dashboard/leaflet/leaflet.js"></script>
-    <script src="https://www.lapor.go.id/themes/lapor/assets/dashboard/leaflet/leaflet-providers-master leaflet-providers.js"></script>
-    <script src="https://www.lapor.go.id/themes/lapor/assets/dashboard/leaflet/leaflet.ajax.min.js"></script>
+    <script src="resources/leaflet.js"></script>
+    <script src="resources/leaflet-providers.js"></script>
+    <script src="resources/leaflet.ajax.min.js"></script>
     <script>
         function getId(val){
             //We create ajax function
