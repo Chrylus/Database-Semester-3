@@ -37,7 +37,7 @@ session_regenerate_id(true);
     <!-- App Styles -->
     <link href= 'index.css' rel="stylesheet">
 
-    <script src="https://www.lapor.go.id/themes/lapor/assets/sweetalert2/sweetalert2.min.js"></script>
+    <script src="resources/sweetalert2.min.js"></script>
     <link rel="stylesheet" href="https://www.lapor.go.id/plugins/responsiv/uploader/assets/css/uploader.css">
     <link rel="stylesheet" href="https://www.lapor.go.id/combine/66cb3800f16b20b046b93a4571b46c42-1617850351">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
@@ -307,7 +307,7 @@ session_regenerate_id(true);
                                     </button>
                                     <h4 class="modal-title">PANDUAN PENGISIAN PENGADUAN</h4>
                                 </div>
-                            <img src="images/poster.png" width="100%">
+                            <img src="images/posterv20.png" width="100%">
                         </div>
                     </div>
                 </div>
@@ -318,25 +318,14 @@ session_regenerate_id(true);
                                 <button type="button" class="close" style="top: 11px;" data-dismiss="modal" aria-hidden="true">×</button>
                                 <h4 class="modal-title">PANDUAN PENGISIAN ASPIRASI</h4>
                             </div>
-                            <img src="https://www.lapor.go.id/themes/lapor/assets/images/how-to-aspirasi.jpg" width="100%">
-                        </div>
-                    </div>
-                </div>
-                <div class="modal fade how-to" id="modalPermintaanInformasi" tabindex="-1" role="dialog" aria-labelledby="modalPermintaanInformasi" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content">
-                            <div class="modal-header" style="padding: 15px;">
-                                <button type="button" class="close" style="top: 11px;" data-dismiss="modal" aria-hidden="true">×</button>
-                                <h4 class="modal-title">PANDUAN PENGISIAN PERMINTAAN INFORMASI</h4>
-                            </div>
-                            <img src="https://www.lapor.go.id/themes/lapor/assets/images/how-to-permintaan-informasi.jpg" width="100%">
+                            <img src="images/posterv20.png" width="100%">
                         </div>
                     </div>
                 </div>
 
-                <script src="https://www.lapor.go.id/themes/lapor/assets/select2/js/select2.min.js"></script>
+                <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
                 <script src="https://www.lapor.go.id/themes/lapor/assets/select2/js/select2totree.js"></script>
-                <link rel="stylesheet" type="text/css" href="https://www.lapor.go.id/themes/lapor/assets/select2/css/select2.min.css">
+                <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css">
                 <link rel="stylesheet" type="text/css" href="https://www.lapor.go.id/themes/lapor/assets/select2/css/select2totree.css">  
             </div>
             <div class="col-sm-12">
