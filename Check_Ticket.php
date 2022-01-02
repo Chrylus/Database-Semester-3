@@ -20,7 +20,7 @@ session_regenerate_id(true);
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
     <!-- Place this data between the <head> tags of your website -->
-    <title>Laporan Pengaduan Masalah BINUS@Malang</title>
+    <title>Wadul - Wadah Aspirasi Daerah Unit Layanan - Cek Ticket</title>
 
     <!-- Favicons -->
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
@@ -43,7 +43,7 @@ session_regenerate_id(true);
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://www.lapor.go.id/combine/15d6ac0173665e1a9057c30ca8e08f8f-1617850351"></script>
     <script src="https://www.lapor.go.id/themes/lapor/assets/js/zingchart.min.js"></script>
-    <link rel="icon" href="../Part-Time-Binus/user/images/Binus Logo.png">
+    <link rel="icon" href="images/logo-wadul-white-ico.png">
     <link rel ="stylesheet" href = "//cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
     <script src="//cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
 

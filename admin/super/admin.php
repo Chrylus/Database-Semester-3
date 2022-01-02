@@ -19,7 +19,7 @@
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <title>Wadul Admin - Administrator</title>
-
+    <link rel="icon" href="../../images/logo-wadul-white-ico.png">
     <!-- Custom fonts for this template-->
     <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
@@ -104,7 +104,7 @@
             <div id="content">
 
                 <!-- Topbar -->
-                <nav class="navbar navbar-expand navbar-light  topbar mb-4 static-top shadow">
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
                     <!-- Sidebar Toggle (Topbar) -->
                     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
@@ -113,8 +113,10 @@
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
+                        <li class="nav-item dropdown no-arrow mx-1">
+                            <a href="../../index.php" class="nav-link" style="color: #007BFF">Ke Halaman Depan</a>
+                        </li>
                         <div class="topbar-divider d-none d-sm-block"></div>
-
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
@@ -174,7 +176,7 @@
                             <input type="password" name="password" class="form-control" placeholder="Password   *" required></textarea>
                         </div>
                         <br>
-                        <button type="submit" class="btn btn-success">Simpan</button>
+                        <button type="submit" class="btn btn-primary">Simpan</button>
                     </form>
                     <?php } else if(isset($_GET['hal']) != "edit"){?>
                         <form method="post" action="../../controller.php?aksi=tambah_admin">
@@ -191,7 +193,7 @@
                             <input type="password" name="password" class="form-control" placeholder="Password   *" required></textarea>
                         </div>
                         <br>
-                        <button type="submit" class="btn btn-success">Simpan</button>
+                        <button type="submit" class="btn btn-primary">Simpan</button>
                     </form>
                     <?php } ?>
                     <br><br>
@@ -236,7 +238,7 @@
                                                 <td><?=$data['name']?></td>
                                                 <td><?=$data['username']?></td>
                                                 <td>
-                                                    <a href="admin.php?hal=edit&id=<?=$data['id']?>" class="btn btn-warning"> Edit </a>
+                                                    <a href="admin.php?hal=edit&id=<?=$data['id']?>" class="btn btn-primary"> Edit </a>
                                                     <a href="../../controller.php?aksi=hapus_admin&id=<?=$data['id']?>" class="btn btn-danger"> Hapus </a>
                                                 </td>
                                             </tr>

@@ -10,8 +10,8 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Login</title>
-
+    <title>Wadul Admin - Login</title>
+    <link rel="icon" href="../images/logo-wadul-white-ico.png">
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
@@ -56,7 +56,7 @@
             }
         }
         ?>
-                                        <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
+                                        <h1 class="h4 text-gray-900 mb-4">Selamat Datang !</h1>
                                     </div>
                                     <form class="user" method="POST" action="../controller.php?aksi=login" enctype="multipart/form-data">
                                         <div class="form-group">
@@ -72,7 +72,12 @@
                                             Submit
                                         </button>
                                         <hr>
-                                    </form> 
+                                    </form>
+                                    <a href="../index.php">
+                                        <button class="btn btn-primary btn-user btn-block">
+                                            Kembali ke Beranda
+                                        </button>
+                                    </a> 
                                 </div>
                             </div>
                         </div>
@@ -80,9 +85,8 @@
                 </div>
 
             </div>
-
+            
         </div>
-
     </div>
 
     <!-- Bootstrap core JavaScript-->

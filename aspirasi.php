@@ -20,7 +20,7 @@ session_regenerate_id(true);
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
     <!-- Place this data between the <head> tags of your website -->
-    <title>Laporan Pengaduan Masalah BINUS@Malang</title>
+    <title>Wadul - Wadah Aspirasi Daerah Unit Layanan - Aspirasi</title>
 
     <!-- Favicons -->
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
@@ -43,7 +43,7 @@ session_regenerate_id(true);
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://www.lapor.go.id/combine/15d6ac0173665e1a9057c30ca8e08f8f-1617850351"></script>
     <script src="https://www.lapor.go.id/themes/lapor/assets/js/zingchart.min.js"></script>
-    <link rel="icon" href="../Part-Time-Binus/user/images/Binus Logo.png">
+    <link rel="icon" href="images/logo-wadul-white-ico.png">
     <link rel ="stylesheet" href = "//cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
     <script src="//cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
 
@@ -151,7 +151,7 @@ session_regenerate_id(true);
                             cancelButtonText: `Ok`,
                         }).then((result) => {
                             if (result.isConfirmed) {
-                            
+                                window.location.href = 'create_ticket.php?id=$Pesan';
                             } else {
                                 window.location.href = 'index.php';
                             }
@@ -186,7 +186,7 @@ session_regenerate_id(true);
                         </div>
                         
                         <div class="complaint-form-category">
-                            <input type="text" name="Nama" class="form-control" value="<?php echo $_SESSION['nama']; ?>" placeholder="Nama *" readonly></textarea>
+                            <input type="text" name="Nama" class="form-control" value="<?php echo $_SESSION['nama_masyarakat']; ?>" placeholder="Nama *" readonly></textarea>
                         </div>
                         <div class="complaint-form-category">
                             <input type="text" name="NIK" class="form-control" value="<?php echo $_SESSION['nik']; ?>" placeholder="NIK *" readonly></textarea>
@@ -213,7 +213,7 @@ session_regenerate_id(true);
                             </select>
                         </div>
                         <div class="complaint-form-category">
-                            <select name="keperluan" id="keperluan" class="select-tree-view" placeholder="Pilih Kategori Laporan Anda" name="category_id">
+                            <select name="keperluan" id="keperluan" class="select-tree-view" placeholder="Pilih Kategori Laporan Anda" name="category_id" required>
                                 <option>Keperluan *</option>
                             </select>
                         </div>

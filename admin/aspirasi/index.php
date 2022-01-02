@@ -19,7 +19,7 @@ include '../../koneksi.php';
     <meta name="author" content="">
 
     <title>Wadul Admin - Aspirasi</title>
-
+    <link rel="icon" href="../../images/logo-wadul-white-ico.png">
     <!-- Custom fonts for this template -->
     <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
@@ -117,7 +117,9 @@ include '../../koneksi.php';
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
-
+                        <li class="nav-item dropdown no-arrow mx-1">
+                            <a href="../../index.php" class="nav-link" style="color: #007BFF">Ke Halaman Depan</a>
+                        </li>
                         <!-- Nav Item - Search Dropdown (Visible Only XS) -->
                         <li class="nav-item dropdown no-arrow d-sm-none">
                             <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
