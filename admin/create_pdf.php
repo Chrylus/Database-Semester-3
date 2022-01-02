@@ -5,16 +5,14 @@ $pdf->AddPage();
 
 include ('../koneksi.php');
 //Tampilan Tiket di Dashboard Atas
-$sql1    = "select count(Status) as Pending_Pelaporan from pelaporan WHERE (Status = 'Pending') AND (ID_Pelaporan LIKE '%PGD%')";
-// Kalau mau kasih syarat bulan dan tahun sama
-// AND MONTH (TanggalLaporan) = MONTH (CURDATE()) AND YEAR (TanggalLaporan) = YEAR (CURDATE())
+$sql1    = "select count(Status) as Pending_Pelaporan from pelaporan WHERE (Status = 'Pending') AND (ID_Pelaporan LIKE '%PGD%') AND MONTH (TanggalLaporan) = MONTH (CURDATE()) AND YEAR (TanggalLaporan) = YEAR (CURDATE())";
+
 $result1 = mysqli_query($koneksi, $sql1);
 $data1   = mysqli_fetch_assoc($result1);
 $pending_pel = $data1['Pending_Pelaporan'];
 
-$sql2    = "select count(Status) as Pending_Aspirasi from pelaporan WHERE (Status = 'Pending') AND (ID_Pelaporan LIKE '%ASP%')";
-// Kalau mau kasih syarat bulan dan tahun sama
-// AND MONTH (TanggalLaporan) = MONTH (CURDATE()) AND YEAR (TanggalLaporan) = YEAR (CURDATE()) 
+$sql2    = "select count(Status) as Pending_Aspirasi from pelaporan WHERE (Status = 'Pending') AND (ID_Pelaporan LIKE '%ASP%') AND MONTH (TanggalLaporan) = MONTH (CURDATE()) AND YEAR (TanggalLaporan) = YEAR (CURDATE()) ";
+
 $result2 = mysqli_query($koneksi, $sql2);
 $data2   = mysqli_fetch_assoc($result2);
 $pending_asp = $data2['Pending_Aspirasi'];

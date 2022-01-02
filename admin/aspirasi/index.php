@@ -43,7 +43,7 @@ include '../../koneksi.php';
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="../index.php">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
@@ -222,6 +222,7 @@ include '../../koneksi.php';
                                             <th>Status</th>
                                             <th>Ticket</th>
                                             <th>Edit</th>
+                                            <th>Detail</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
@@ -235,6 +236,7 @@ include '../../koneksi.php';
                                             <th>Status</th>
                                             <th>Ticket</th>
                                             <th>Edit</th>
+                                            <th>Detail</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
@@ -243,7 +245,7 @@ include '../../koneksi.php';
                                         pelaporan.ID AS 'ID',
 										pelaporan.ID_Pelaporan AS 'ID_Pelaporan', 
                                         pelaporan.NIK AS 'NIK',
-                                        unit_layanan.nama_unit AS 'nama_unit', 
+                                        unit_layanan.nama_unit AS 'Nama_unit', 
                                         keperluan.Keperluan AS 'Keperluan', 
                                         pelaporan.Keterangan AS 'Keterangan',
                                         pelaporan.TanggalLaporan AS 'TanggalLaporan',
