@@ -18,7 +18,7 @@
     <meta name="author" content="">
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    <title>PIC</title>
+    <title>Wadul Admin - Administrator</title>
 
     <!-- Custom fonts for this template-->
     <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -261,8 +261,8 @@
             <!-- Footer -->
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2021</span>
+                    <div class="Hak Cipta text-center my-auto">
+                        <span>Hak Cipta &copy; Wadul 2022</span>
                     </div>
                 </div>
             </footer>

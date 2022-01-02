@@ -386,7 +386,7 @@ session_regenerate_id(true);
 
         <footer>
                 <div class="post-footer">
-                    <div class="footer-copyright">
+                    <div class="footer-Hak Cipta">
                         Database-Semester 3
                     </div>
                 </div>

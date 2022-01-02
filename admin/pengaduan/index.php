@@ -18,7 +18,7 @@ include '../../koneksi.php';
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Tables</title>
+    <title>Wadul Admin - Pengaduan</title>
 
     <!-- Custom fonts for this template -->
     <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -198,9 +198,9 @@ include '../../koneksi.php';
                         <button type="submit" class="btn btn-primary">Simpan</button>
                     </form>
                     <?php } else if(isset($_GET['hal']) != "edit"){?>
-                        <form method="post" action="../../controller.php?aksi=edit_pengaduan">
+                        <form method="post" action="#">
                         <div class="complaint-form-category">
-                            <input type="text" name="Status" class="form-control" placeholder="Status *" required></textarea>
+                            <input type="text" name="Status" class="form-control" placeholder="Klik edit pada pengaduan yang diinginkan *" readonly></textarea>
                         </div>
                         <br>
                         <button type="submit" class="btn btn-primary">Simpan</button>
@@ -213,11 +213,11 @@ include '../../koneksi.php';
                                 <thead>
                                         <tr>
                                             
-                                            <th>ID_Pelaporan</th>
+                                            <th>ID Pelaporan</th>
                                             <th>NIK</th>
-                                            <th>Unit_Layanan</th>
+                                            <th>Unit Layanan</th>
                                             <th>Keperluan</th>
-                                            <th>Tanggal_Laporan</th>
+                                            <th>Tanggal Laporan</th>
                                             <th>Status</th>
                                             <th>Ticket</th>
                                             <th>Edit</th>
@@ -323,8 +323,8 @@ include '../../koneksi.php';
             <!-- Footer -->
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2020</span>
+                    <div class="Hak Cipta text-center my-auto">
+                        <span>Hak Cipta &copy; Wadul 2022</span>
                     </div>
                 </div>
             </footer>
@@ -479,7 +479,6 @@ include '../../koneksi.php';
         });
     });
     </script>
-    <!-- Bootstrap core JavaScript-->
     
     <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
