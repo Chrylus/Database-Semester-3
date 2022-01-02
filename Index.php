@@ -150,7 +150,7 @@ session_regenerate_id(true);
                             cancelButtonText: `Ok`,
                         }).then((result) => {
                             if (result.isConfirmed) {
-                            
+                                window.location.href = 'create_ticket.php';
                             } else {
                                 window.location.href = 'index.php';
                             }
