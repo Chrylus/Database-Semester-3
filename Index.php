@@ -77,7 +77,7 @@ session_regenerate_id(true);
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.php"><img src="images/logo-wadul.png" alt=""  height="50" ></a>
+                <a class="navbar-brand" href="index.php?id=0"><img src="images/logo-wadul.png" alt=""  height="50" ></a>
             </div>
                     <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -254,7 +254,7 @@ session_regenerate_id(true);
                                     </div>		
                                 </div>
                             </div>
-                            
+                            <input type="hidden" name="NIK" id="NIK" class="form-control" value="<?php echo $_SESSION['nik']; ?>"></input>
                             <br>
                             <div class="text-center">
                                 <button class="btn btn-flatYellow" type="submit" value="submit" name ="submit" style="font-size: 17px;color: #6241b5; font-weight: 600;">SUBMIT</button>
@@ -417,7 +417,7 @@ session_regenerate_id(true);
                                     </div>		
                                 </div>
                             </div>
-                            
+                            <input type="hidden" name="NIK" id="NIK" class="form-control" value="<?php echo $_SESSION['nik']; ?>"></input>
                             <br>
                             <div class="text-center">
                                 <button class="btn btn-flatYellow" type="submit" value="submit" name = "submit" style="font-size: 17px;color: #6241b5; font-weight: 600;">SUBMIT</butt>
