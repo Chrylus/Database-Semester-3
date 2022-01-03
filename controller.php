@@ -67,7 +67,7 @@
                     $exec3 = mysqli_query($koneksi, $query3);
                 }
                 if($exec1){
-                    header("location: index.php?Ticket=$x&id=0");
+                    header("location: index.php?Ticket0=$x&id=0");
                 }else{
                     header("location: index.php?pesan=$topik_id&id=0");
                 }
@@ -132,7 +132,7 @@
                     $exec3 = mysqli_query($koneksi, $query3);
                 }
                 if($exec1){
-                    header("location: aspirasi.php?Ticket=$x&id=1");
+                    header("location: aspirasi.php?Ticket1=$x&id=1");
                 }else{
                     header("location: aspirasi.php?pesan=Gagal&id=1");
                 }

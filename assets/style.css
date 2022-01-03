@@ -8,6 +8,30 @@ body {
 	max-width: 960px;
 	
 }
+
+.swal2-styled.swal2-cancel {
+    border: 0;
+    border-radius: 0.25em;
+    background: initial;
+    background-color: #6e7881;
+    color: #fff;
+    font-size: 1.5em !important;
+}
+
+.swal2-styled.swal2-confirm {
+    border: 0;
+    border-radius: 0.25em;
+    background: initial;
+    background-color: #0090D1 !important;
+    color: #fff;
+    font-size: 1.5em !important;
+}
+
+.swal2-html-container{
+	font-size: 16px !important;
+  	font-style: bold !important;
+}
+
 #top-nav {
 	background-color: #0090D1;
 	color: #392578;

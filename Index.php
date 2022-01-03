@@ -28,8 +28,8 @@ session_regenerate_id(true);
 </head>
 <body>
     <?php
-        if(isset($_GET['Ticket'])){
-            $Pesan=$_GET['Ticket'];
+        if(isset($_GET['Ticket0'])){
+            $Pesan=$_GET['Ticket0'];
                 
             echo    "<script type = 'text/javascript'>
                         Swal.fire({
@@ -37,12 +37,30 @@ session_regenerate_id(true);
                             text: '$Pesan',
                             showCancelButton: true,
                             confirmButtonText: 'Cetak Bukti',
-                            cancelButtonText: `Ok`,
+                            cancelButtonText: `OK`,
                         }).then((result) => {
                             if (result.isConfirmed) {
                                 window.location.href = 'create_ticket.php?id=$Pesan';
                             } else {
-                                window.location.href = 'index.php';
+                                window.location.href = 'index.php?id=0';
+                            }
+                        })
+                    </script>";
+        }else if(isset($_GET['Ticket1'])){
+            $Pesan=$_GET['Ticket1'];
+                
+            echo    "<script type = 'text/javascript'>
+                        Swal.fire({
+                            title: 'Mohon Catat Nomor Tiket Anda',
+                            text: '$Pesan',
+                            showCancelButton: true,
+                            confirmButtonText: 'Cetak Bukti',
+                            cancelButtonText: `OK`,
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.href = 'create_ticket.php?id=$Pesan';
+                            } else {
+                                window.location.href = 'index.php?id=1';
                             }
                         })
                     </script>";
@@ -284,93 +302,47 @@ session_regenerate_id(true);
                                 <div class="col-sm-10 col-sm-offset-1">
                         <div class="list-saranPengaduan">
                             <h3>DAFTAR PENGADUAN</h3>
-
-                                                <div class="form-group xs-title">
-                                    <div class="title"><a href="https://pengaduan.pu.go.id/home/saran_pengaduan_show/rmxuyLXaiJNEa6eeX_UDQCAiu1ZXiBBr6sGZP2_bxEo" style="text-decoration:none;">P3TGAI</a> &nbsp;
-                                        <i class="fa fa-star fa-1x icon-grey "data-toggle="tooltip" title = Belum&nbsp;Mendapatkan&nbsp;Rating></i><i class="fa fa-star fa-1x icon-grey "data-toggle="tooltip" title = Belum&nbsp;Mendapatkan&nbsp;Rating></i><i class="fa fa-star fa-1x icon-grey "data-toggle="tooltip" title = Belum&nbsp;Mendapatkan&nbsp;Rating></i><i class="fa fa-star fa-1x icon-grey "data-toggle="tooltip" title = Belum&nbsp;Mendapatkan&nbsp;Rating></i><i class="fa fa-star fa-1x icon-grey "data-toggle="tooltip" title = Belum&nbsp;Mendapatkan&nbsp;Rating></i>	
+                                <?php 
+                                    $list_p = "SELECT * FROM pelaporan WHERE ID_Pelaporan LIKE 'PGD%' LIMIT 4";
+                                    $exec_list = mysqli_query($koneksi, $list_p);
+                                ?>
+                                <?php while ($row = mysqli_fetch_array($exec_list)){ ?>
+                                    <?php
+                                        $unit = $row['Tujuan']; 
+                                        $data_unit = "SELECT * FROM unit_layanan WHERE id = '$unit'";
+                                        $exec_unit = mysqli_query($koneksi, $data_unit);
+                                        $fetch_unit = mysqli_fetch_array($exec_unit);
                                         
-                                    </div>
-                                    <div class="desc">
-                                        Kepada yth kementrian pupr.
+                                        $nik_pnd = $row['NIK'];
+                                        $nama_pend = "SELECT Nama FROM penduduk WHERE NIK = '$nik_pnd'";
+                                        $exec_pnd = mysqli_query($koneksi, $nama_pend);
+                                        $fetch_penduduk = mysqli_fetch_array($exec_pnd);
 
-            Mohon dengan hormat untuk mendapatkan bantuan program P3TGAI di Daerah irigasi Kuton desa Bligo kecamatan Ngluwar kab Magelang Jawa tengah. Saluran saat ini masih salura							</div>
-                                    <div class="detail"> 
-                                        <span>1 Tindakan</span> | 
-                                        <span>02-Jan-2022</span> | 
-                                        <span>21:17</span> WIB | 
-                                        <span>Hartoto Toto</span>
+                                        $date = $row['TanggalLaporan'];
+                                        $month = array('Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember');
+                                        $tanggal_hari = (int)date('d', strtotime($date));
+                                        $bulan_hari = $month[((int)date('m', strtotime($date))) - 1];
+                                        $tahun_hari = (int)date('Y', strtotime($date));
+                                    ?>
+                                    <div class="form-group xs-title">
+                                    <div class="title"><a href="detail_ticket.php?id=<?=$row['ID_Pelaporan']?>&jenis=0" style="text-decoration:none;"><?=$fetch_unit['nama_unit']?> - <?=$row['Ticket']?></a> &nbsp;	
+                                        </div>
+                                        <div class="desc">
+                                        <?=$row['Keterangan']?>
+                                        </div>
+                                        <div class="detail">  
+                                            <span><?=$tanggal_hari.' '.$bulan_hari.' '.$tahun_hari?></span> |  
+                                            <span><?=$fetch_penduduk['Nama']?></span>
+                                        </div>
                                     </div>
-                                </div>
-                                                <div class="form-group xs-title">
-                                    <div class="title"><a href="https://pengaduan.pu.go.id/home/saran_pengaduan_show/uO5Ua1-P1qxOisvn2Nv6eRHkvH9NZDMAsZR9W4NBLVk" style="text-decoration:none;">Jalan rusak berlarut2 tidak ada perbaikan </a> &nbsp;
-                                        <i class="fa fa-star fa-1x icon-grey "data-toggle="tooltip" title = Belum&nbsp;Mendapatkan&nbsp;Rating></i><i class="fa fa-star fa-1x icon-grey "data-toggle="tooltip" title = Belum&nbsp;Mendapatkan&nbsp;Rating></i><i class="fa fa-star fa-1x icon-grey "data-toggle="tooltip" title = Belum&nbsp;Mendapatkan&nbsp;Rating></i><i class="fa fa-star fa-1x icon-grey "data-toggle="tooltip" title = Belum&nbsp;Mendapatkan&nbsp;Rating></i><i class="fa fa-star fa-1x icon-grey "data-toggle="tooltip" title = Belum&nbsp;Mendapatkan&nbsp;Rating></i>	
-                                        
-                                    </div>
-                                    <div class="desc">
-                                        Aslm wr wb&nbsp;
-
-            Terima kasih sudah di beri kesempatan untuk melapor jalan yg dekat rumah saya berlokasi di Citeureup jl Industri pasar Citeureup&nbsp;dan lanjut kearah kanto kepala desa tarikolot 							</div>
-                                    <div class="detail"> 
-                                        <span>1 Tindakan</span> | 
-                                        <span>02-Jan-2022</span> | 
-                                        <span>20:24</span> WIB | 
-                                        <span>Himawan  Supiharnowo</span>
-                                    </div>
-                                </div>
-                                                <div class="form-group xs-title">
-                                    <div class="title"><a href="https://pengaduan.pu.go.id/home/saran_pengaduan_show/l1jFuwzQz12ok-DfEoGdO08Xk7R9a3MPuTqh8pJgjRU" style="text-decoration:none;">Uang DP perumahan saya belom balik sepenuhnya</a> &nbsp;
-                                        <i class="fa fa-star fa-1x icon-grey "data-toggle="tooltip" title = Belum&nbsp;Mendapatkan&nbsp;Rating></i><i class="fa fa-star fa-1x icon-grey "data-toggle="tooltip" title = Belum&nbsp;Mendapatkan&nbsp;Rating></i><i class="fa fa-star fa-1x icon-grey "data-toggle="tooltip" title = Belum&nbsp;Mendapatkan&nbsp;Rating></i><i class="fa fa-star fa-1x icon-grey "data-toggle="tooltip" title = Belum&nbsp;Mendapatkan&nbsp;Rating></i><i class="fa fa-star fa-1x icon-grey "data-toggle="tooltip" title = Belum&nbsp;Mendapatkan&nbsp;Rating></i>	
-                                        
-                                    </div>
-                                    <div class="desc">
-                                        Aslm wr wb&nbsp;
-
-            Sebelumnya saya berterima kasih&nbsp;
-
-            Tolong bantuannya untuk Tim PUPR di tahun 2019 saya pengajuan rumah subsidi ke Perumahan Bumi Tajur Raya yang bertempatan di Citeureup Taju							</div>
-                                    <div class="detail"> 
-                                        <span>2 Tindakan</span> | 
-                                        <span>02-Jan-2022</span> | 
-                                        <span>20:12</span> WIB | 
-                                        <span>Himawan  Supiharnowo</span>
-                                    </div>
-                                </div>
-                                                <div class="form-group xs-title">
-                                    <div class="title"><a href="https://pengaduan.pu.go.id/home/saran_pengaduan_show/OK9fBpHBtRko5qygjFttNt9wYSZwSQBpDSrrWIXHuww" style="text-decoration:none;">MCK SUDAH TIDAK BISA DIPAKAI MINTA DI RENOVASI</a> &nbsp;
-                                        <i class="fa fa-star fa-1x icon-grey "data-toggle="tooltip" title = Belum&nbsp;Mendapatkan&nbsp;Rating></i><i class="fa fa-star fa-1x icon-grey "data-toggle="tooltip" title = Belum&nbsp;Mendapatkan&nbsp;Rating></i><i class="fa fa-star fa-1x icon-grey "data-toggle="tooltip" title = Belum&nbsp;Mendapatkan&nbsp;Rating></i><i class="fa fa-star fa-1x icon-grey "data-toggle="tooltip" title = Belum&nbsp;Mendapatkan&nbsp;Rating></i><i class="fa fa-star fa-1x icon-grey "data-toggle="tooltip" title = Belum&nbsp;Mendapatkan&nbsp;Rating></i>	
-                                        
-                                    </div>
-                                    <div class="desc">
-                                        Mohon bantuannya untuk renovasi mck yang ada di lingkungan rumah kami,sudah sangat tidak layak dipakai dan sudah sangat hancur ,sedanngkan mck yang pakai sampai 2 RT,yaitu RT.005 dan RT.006,mohon diti							</div>
-                                    <div class="detail"> 
-                                        <span>1 Tindakan</span> | 
-                                        <span>01-Jan-2022</span> | 
-                                        <span>23:20</span> WIB | 
-                                        <span>Iqbal Priyatna</span>
-                                    </div>
-                                </div>
-                                                <div class="form-group xs-title">
-                                    <div class="title"><a href="https://pengaduan.pu.go.id/home/saran_pengaduan_show/9E8z1wm4DHpRwts-1aLn_YTJhdJbTTLvUaZtMMyJSGQ" style="text-decoration:none;">jalan rusak</a> &nbsp;
-                                        <i class="fa fa-star fa-1x icon-grey "data-toggle="tooltip" title = Belum&nbsp;Mendapatkan&nbsp;Rating></i><i class="fa fa-star fa-1x icon-grey "data-toggle="tooltip" title = Belum&nbsp;Mendapatkan&nbsp;Rating></i><i class="fa fa-star fa-1x icon-grey "data-toggle="tooltip" title = Belum&nbsp;Mendapatkan&nbsp;Rating></i><i class="fa fa-star fa-1x icon-grey "data-toggle="tooltip" title = Belum&nbsp;Mendapatkan&nbsp;Rating></i><i class="fa fa-star fa-1x icon-grey "data-toggle="tooltip" title = Belum&nbsp;Mendapatkan&nbsp;Rating></i>	
-                                        
-                                    </div>
-                                    <div class="desc">
-                                        didepan rumah saya terdapat jalanan yang bolong yang harus ditambal dimana alamatnya adalah jalan menteng granit rt 005 rw 009 no 2 kelurahan pasar manggis kecamtan menteng atas jakarta selatan&nbsp;
-                                    </div>
-                                    <div class="detail"> 
-                                        <span>2 Tindakan</span> | 
-                                        <span>29-Des-2021</span> | 
-                                        <span>14:30</span> WIB | 
-                                        <span>Anonim</span>
-                                    </div>
-                                </div>
-                                                <div class="password text-center xs-title">
-                                <a href="https://pengaduan.pu.go.id//home/saran_pengaduan_all" class="btn btn-flatYellow" style="font-size: 17px;color: #6241b5; font-weight: 600;">Lihat Laporan Lain</a>
-                            </div>	
+                                <?php } ?>
+                                <div class="password text-center xs-title">
+                                    <a href="https://pengaduan.pu.go.id//home/saran_pengaduan_all" class="btn btn-flatYellow" style="font-size: 17px;color: #6241b5; font-weight: 600;">Lihat Laporan Lain</a>
+                                </div>	
+                            </div>
                         </div>
                     </div>
-                            </div>
-            </div>
+                </div>
             </section>
         <!-- Aspirasi -->
         <?php } else if($id == 1){?>
@@ -445,91 +417,46 @@ session_regenerate_id(true);
                         </form>
                     </div>
                                 <div class="col-sm-10 col-sm-offset-1">
-                        <div class="list-saranPengaduan">
+                                <div class="list-saranPengaduan">
                             <h3>DAFTAR ASPIRASI</h3>
-
-                                                <div class="form-group xs-title">
-                                    <div class="title"><a href="https://pengaduan.pu.go.id/home/saran_pengaduan_show/rmxuyLXaiJNEa6eeX_UDQCAiu1ZXiBBr6sGZP2_bxEo" style="text-decoration:none;">P3TGAI</a> &nbsp;
-                                        <i class="fa fa-star fa-1x icon-grey "data-toggle="tooltip" title = Belum&nbsp;Mendapatkan&nbsp;Rating></i><i class="fa fa-star fa-1x icon-grey "data-toggle="tooltip" title = Belum&nbsp;Mendapatkan&nbsp;Rating></i><i class="fa fa-star fa-1x icon-grey "data-toggle="tooltip" title = Belum&nbsp;Mendapatkan&nbsp;Rating></i><i class="fa fa-star fa-1x icon-grey "data-toggle="tooltip" title = Belum&nbsp;Mendapatkan&nbsp;Rating></i><i class="fa fa-star fa-1x icon-grey "data-toggle="tooltip" title = Belum&nbsp;Mendapatkan&nbsp;Rating></i>	
+                                <?php 
+                                    $list_p = "SELECT * FROM pelaporan WHERE ID_Pelaporan LIKE 'ASP%' LIMIT 4";
+                                    $exec_list = mysqli_query($koneksi, $list_p);
+                                ?>
+                                <?php while ($row = mysqli_fetch_array($exec_list)){ ?>
+                                    <?php
+                                        $unit = $row['Tujuan']; 
+                                        $data_unit = "SELECT * FROM unit_layanan WHERE id = '$unit'";
+                                        $exec_unit = mysqli_query($koneksi, $data_unit);
+                                        $fetch_unit = mysqli_fetch_array($exec_unit);
                                         
-                                    </div>
-                                    <div class="desc">
-                                        Kepada yth kementrian pupr.
+                                        $nik_pnd = $row['NIK'];
+                                        $nama_pend = "SELECT Nama FROM penduduk WHERE NIK = '$nik_pnd'";
+                                        $exec_pnd = mysqli_query($koneksi, $nama_pend);
+                                        $fetch_penduduk = mysqli_fetch_array($exec_pnd);
 
-            Mohon dengan hormat untuk mendapatkan bantuan program P3TGAI di Daerah irigasi Kuton desa Bligo kecamatan Ngluwar kab Magelang Jawa tengah. Saluran saat ini masih salura							</div>
-                                    <div class="detail"> 
-                                        <span>1 Tindakan</span> | 
-                                        <span>02-Jan-2022</span> | 
-                                        <span>21:17</span> WIB | 
-                                        <span>Hartoto Toto</span>
+                                        $date = $row['TanggalLaporan'];
+                                        $month = array('Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember');
+                                        $tanggal_hari = (int)date('d', strtotime($date));
+                                        $bulan_hari = $month[((int)date('m', strtotime($date))) - 1];
+                                        $tahun_hari = (int)date('Y', strtotime($date));
+                                    ?>
+                                    <div class="form-group xs-title">
+                                    <div class="title"><a href="detail_ticket.php?id=<?=$row['ID_Pelaporan']?>&jenis=1" style="text-decoration:none;"><?=$fetch_unit['nama_unit']?> - <?=$row['Ticket']?></a> &nbsp;	
+                                        </div>
+                                        <div class="desc">
+                                        <?=$row['Keterangan']?>
+                                        </div>
+                                        <div class="detail">  
+                                            <span><?=$tanggal_hari.' '.$bulan_hari.' '.$tahun_hari?></span> |  
+                                            <span><?=$fetch_penduduk['Nama']?></span>
+                                        </div>
                                     </div>
-                                </div>
-                                                <div class="form-group xs-title">
-                                    <div class="title"><a href="https://pengaduan.pu.go.id/home/saran_pengaduan_show/uO5Ua1-P1qxOisvn2Nv6eRHkvH9NZDMAsZR9W4NBLVk" style="text-decoration:none;">Jalan rusak berlarut2 tidak ada perbaikan </a> &nbsp;
-                                        <i class="fa fa-star fa-1x icon-grey "data-toggle="tooltip" title = Belum&nbsp;Mendapatkan&nbsp;Rating></i><i class="fa fa-star fa-1x icon-grey "data-toggle="tooltip" title = Belum&nbsp;Mendapatkan&nbsp;Rating></i><i class="fa fa-star fa-1x icon-grey "data-toggle="tooltip" title = Belum&nbsp;Mendapatkan&nbsp;Rating></i><i class="fa fa-star fa-1x icon-grey "data-toggle="tooltip" title = Belum&nbsp;Mendapatkan&nbsp;Rating></i><i class="fa fa-star fa-1x icon-grey "data-toggle="tooltip" title = Belum&nbsp;Mendapatkan&nbsp;Rating></i>	
-                                        
-                                    </div>
-                                    <div class="desc">
-                                        Aslm wr wb&nbsp;
-
-            Terima kasih sudah di beri kesempatan untuk melapor jalan yg dekat rumah saya berlokasi di Citeureup jl Industri pasar Citeureup&nbsp;dan lanjut kearah kanto kepala desa tarikolot 							</div>
-                                    <div class="detail"> 
-                                        <span>1 Tindakan</span> | 
-                                        <span>02-Jan-2022</span> | 
-                                        <span>20:24</span> WIB | 
-                                        <span>Himawan  Supiharnowo</span>
-                                    </div>
-                                </div>
-                                                <div class="form-group xs-title">
-                                    <div class="title"><a href="https://pengaduan.pu.go.id/home/saran_pengaduan_show/l1jFuwzQz12ok-DfEoGdO08Xk7R9a3MPuTqh8pJgjRU" style="text-decoration:none;">Uang DP perumahan saya belom balik sepenuhnya</a> &nbsp;
-                                        <i class="fa fa-star fa-1x icon-grey "data-toggle="tooltip" title = Belum&nbsp;Mendapatkan&nbsp;Rating></i><i class="fa fa-star fa-1x icon-grey "data-toggle="tooltip" title = Belum&nbsp;Mendapatkan&nbsp;Rating></i><i class="fa fa-star fa-1x icon-grey "data-toggle="tooltip" title = Belum&nbsp;Mendapatkan&nbsp;Rating></i><i class="fa fa-star fa-1x icon-grey "data-toggle="tooltip" title = Belum&nbsp;Mendapatkan&nbsp;Rating></i><i class="fa fa-star fa-1x icon-grey "data-toggle="tooltip" title = Belum&nbsp;Mendapatkan&nbsp;Rating></i>	
-                                        
-                                    </div>
-                                    <div class="desc">
-                                        Aslm wr wb&nbsp;
-
-            Sebelumnya saya berterima kasih&nbsp;
-
-            Tolong bantuannya untuk Tim PUPR di tahun 2019 saya pengajuan rumah subsidi ke Perumahan Bumi Tajur Raya yang bertempatan di Citeureup Taju							</div>
-                                    <div class="detail"> 
-                                        <span>2 Tindakan</span> | 
-                                        <span>02-Jan-2022</span> | 
-                                        <span>20:12</span> WIB | 
-                                        <span>Himawan  Supiharnowo</span>
-                                    </div>
-                                </div>
-                                                <div class="form-group xs-title">
-                                    <div class="title"><a href="https://pengaduan.pu.go.id/home/saran_pengaduan_show/OK9fBpHBtRko5qygjFttNt9wYSZwSQBpDSrrWIXHuww" style="text-decoration:none;">MCK SUDAH TIDAK BISA DIPAKAI MINTA DI RENOVASI</a> &nbsp;
-                                        <i class="fa fa-star fa-1x icon-grey "data-toggle="tooltip" title = Belum&nbsp;Mendapatkan&nbsp;Rating></i><i class="fa fa-star fa-1x icon-grey "data-toggle="tooltip" title = Belum&nbsp;Mendapatkan&nbsp;Rating></i><i class="fa fa-star fa-1x icon-grey "data-toggle="tooltip" title = Belum&nbsp;Mendapatkan&nbsp;Rating></i><i class="fa fa-star fa-1x icon-grey "data-toggle="tooltip" title = Belum&nbsp;Mendapatkan&nbsp;Rating></i><i class="fa fa-star fa-1x icon-grey "data-toggle="tooltip" title = Belum&nbsp;Mendapatkan&nbsp;Rating></i>	
-                                        
-                                    </div>
-                                    <div class="desc">
-                                        Mohon bantuannya untuk renovasi mck yang ada di lingkungan rumah kami,sudah sangat tidak layak dipakai dan sudah sangat hancur ,sedanngkan mck yang pakai sampai 2 RT,yaitu RT.005 dan RT.006,mohon diti							</div>
-                                    <div class="detail"> 
-                                        <span>1 Tindakan</span> | 
-                                        <span>01-Jan-2022</span> | 
-                                        <span>23:20</span> WIB | 
-                                        <span>Iqbal Priyatna</span>
-                                    </div>
-                                </div>
-                                                <div class="form-group xs-title">
-                                    <div class="title"><a href="https://pengaduan.pu.go.id/home/saran_pengaduan_show/9E8z1wm4DHpRwts-1aLn_YTJhdJbTTLvUaZtMMyJSGQ" style="text-decoration:none;">jalan rusak</a> &nbsp;
-                                        <i class="fa fa-star fa-1x icon-grey "data-toggle="tooltip" title = Belum&nbsp;Mendapatkan&nbsp;Rating></i><i class="fa fa-star fa-1x icon-grey "data-toggle="tooltip" title = Belum&nbsp;Mendapatkan&nbsp;Rating></i><i class="fa fa-star fa-1x icon-grey "data-toggle="tooltip" title = Belum&nbsp;Mendapatkan&nbsp;Rating></i><i class="fa fa-star fa-1x icon-grey "data-toggle="tooltip" title = Belum&nbsp;Mendapatkan&nbsp;Rating></i><i class="fa fa-star fa-1x icon-grey "data-toggle="tooltip" title = Belum&nbsp;Mendapatkan&nbsp;Rating></i>	
-                                        
-                                    </div>
-                                    <div class="desc">
-                                        didepan rumah saya terdapat jalanan yang bolong yang harus ditambal dimana alamatnya adalah jalan menteng granit rt 005 rw 009 no 2 kelurahan pasar manggis kecamtan menteng atas jakarta selatan&nbsp;
-                                    </div>
-                                    <div class="detail"> 
-                                        <span>2 Tindakan</span> | 
-                                        <span>29-Des-2021</span> | 
-                                        <span>14:30</span> WIB | 
-                                        <span>Anonim</span>
-                                    </div>
-                                </div>
-                                                <div class="password text-center xs-title">
-                                <a href="https://pengaduan.pu.go.id//home/saran_pengaduan_all" class="btn btn-flatYellow" style="font-size: 17px;color: #6241b5; font-weight: 600;">Lihat Laporan Lain</a>
-                            </div>	
+                                <?php } ?>
+                                <div class="password text-center xs-title">
+                                    <a href="https://pengaduan.pu.go.id//home/saran_pengaduan_all" class="btn btn-flatYellow" style="font-size: 17px;color: #6241b5; font-weight: 600;">Lihat Laporan Lain</a>
+                                </div>	
+                            </div>
                         </div>
                     </div>
                             </div>
