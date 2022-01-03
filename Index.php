@@ -148,7 +148,7 @@ session_regenerate_id(true);
                                 </div>
                                 <div class="col-sm-12">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" name="email" placeholder="Email *" required="required" value="">
+                                        <input type="text" class="form-control" name="Email" placeholder="Email *" required="required" value="">
                                     </div>
                                 </div>
                                 <div class="col-sm-12">
