@@ -169,7 +169,7 @@ session_regenerate_id(true);
                                 
                                 <div class="col-sm-12 text-center">
                                     <div class="form-group">
-                                        <button class="btn btn-sm" value="submit" type="button" style="color: #6241b5;	width: 200px; padding: 5px 10px; min-width: 95%;font-size: 17px; font-weight: 600; color: #ffff; background-color: #c02f2f;">DAFTAR</button>
+                                        <button class="btn btn-sm" value="submit" type="submit" style="color: #6241b5;	width: 200px; padding: 5px 10px; min-width: 95%;font-size: 17px; font-weight: 600; color: #ffff; background-color: #c02f2f;">DAFTAR</button>
                                     </div>
                                 </div>
                             </div>

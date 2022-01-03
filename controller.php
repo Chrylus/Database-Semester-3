@@ -259,9 +259,9 @@
             $sql= "INSERT INTO `penduduk`(`Nama`, `NIK`, `No_telepon`, `Email`, `password`) VALUES ('$esc_nama','$esc_nik','$esc_telepon','$esc_email','$hash_pw')";
             $hasil=mysqli_query($koneksi,$sql);
             if($hasil){
-                header("location: daftar.php?peringatan=Sukses");
+                header("location: index.php?peringatan=Sukses");
             }else{
-                header("location: daftar.php?peringatan=Gagal");
+                header("location: index.php?peringatan=Gagal");
             }
             break;
         case 'logout':
