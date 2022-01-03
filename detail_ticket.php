@@ -129,10 +129,12 @@ $id = $_GET['id'];
 							<h1><?= $fetch_unit['nama_unit']?> - <?= $fetch['Ticket']?></h1>
 						</div>
 					</div>
-                    <?php if(isset($_GET['jenis']) == 0){ ?>
-					    <h2>Pengaduan</h2>
-                    <?php } else if(isset($_GET['jenis']) == 0){ ?>
-                        <h2>Aspirasi</h2>
+                    <?php 
+                        $jenis = $_GET['jenis'];
+                        if($jenis == 0){ ?>
+                            <h2>Pengaduan</h2>
+                        <?php } else if($jenis == 1){ ?>
+                            <h2>Aspirasi</h2>
                     <?php } ?>
 					<div class="row">
 						<div class="col-sm-9 col-xs-12">
@@ -211,25 +213,81 @@ $id = $_GET['id'];
 					<h4>Status Tanggapan</h4>
 					<div class="demo-topleft"></div>
 				</div>
-				
-								<div class="keterangan-tindaklanjut">
-					<div class="form-group">
-						<div class="title">
-							<div class="col-sm-12">
-								<img src="https://pengaduan.pu.go.id/assets/common/images/chat.png" alt="" width="30">
-								Admin Pengaduan							</div>
-							
-						</div>
-						<div class="desc col-md-12">
-							<p>Yth, Sdr</p>	
-						</div>
-						<div class="detail"  style="margin-left: 13px;"> 
-							<span>03 January 2022</span> | 
-							<span>09:56</span> WIB 
-						</div>
-					</div>
-				</div>
-							</div>
+				<?php 
+                
+                    $komentar = "SELECT * FROM diskusi";
+                    $exec_komentar = mysqli_query($koneksi, $komentar);
+                
+                ?>
+                <?php while ($row = mysqli_fetch_array($exec_komentar)) { ?>
+                    <div class="keterangan-tindaklanjut">
+                        <div class="form-group">
+                            <?php
+                                $nik = $row['NIK']; 
+                                $admin = "SELECT name FROM msadmin WHERE NIK = '$nik'";
+                                $penduduk = "SELECT Nama FROM penduduk WHERE NIK = '$nik'";
+                                $exec_admin = mysqli_query($koneksi, $admin);
+                                $exec_penduduk = mysqli_query($koneksi, $penduduk);
+                                $row_admin = mysqli_num_rows($exec_admin);
+                                $row_penduduk = mysqli_num_rows($exec_penduduk);
+                                if($row_admin > 0 && $row_penduduk == 0){
+                                    $fetch_admin = mysqli_fetch_assoc($exec_admin);
+                                }else if($row_admin == 0 && $row_penduduk > 0){
+                                    $fetch_penduduk = mysqli_fetch_array($exec_penduduk);
+                                }else if($row_admin > 0 && $row_penduduk > 0){
+                                    $fetch_penduduk = mysqli_fetch_array($exec_penduduk);
+                                }else if($row_admin == 0 && $row_penduduk == 0){
+                                    echo "Error";
+                                }
+                            ?>
+                            <div class="title">
+                                <?php if($row_admin > 0 && $row_penduduk == 0) {?>
+                                    <div class="col-sm-12">
+                                        <img src="https://pengaduan.pu.go.id/assets/common/images/chat.png" alt="" width="30">
+                                        Admin - <?= $fetch_admin['name']?>						
+                                    </div>
+                                <?php } else if($row_admin == 0 && $row_penduduk > 0) { ?>
+                                    <div class="col-sm-12">
+                                        <img src="https://pengaduan.pu.go.id/assets/common/images/chat.png" alt="" width="30">
+                                        <?= $fetch_penduduk['Nama']?>							
+                                    </div>
+                                <?php } else if($row_admin == 0 && $row_penduduk == 0) { ?>
+                                    <div class="col-sm-12">
+                                        <img src="https://pengaduan.pu.go.id/assets/common/images/chat.png" alt="" width="30">
+                                        ERROR							
+                                    </div>
+                                <?php } ?>
+                            </div>
+                            <div class="desc col-md-12">
+                                <p><?= $row['isi']?></p>	
+                            </div>
+                            <?php 
+                                $date = $row['tanggal'];
+                                $month = array('Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember');
+                                $tanggal_hari = (int)date('d', strtotime($date));
+                                $bulan_hari = $month[((int)date('m', strtotime($date))) - 1];
+                                $tahun_hari = (int)date('Y', strtotime($date));
+                            ?>
+                            <div class="detail"  style="margin-left: 13px;"> 
+                                <span><?=$tanggal_hari.' '.$bulan_hari.' '.$tahun_hari?></span> | 
+                            </div>
+                        </div>
+                    </div>
+                <?php } ?>
+                <br>
+                <form method="post" action="controller.php?aksi=komentar">
+                    <div class="form-group">
+                        <textarea name="isi" id="isi" rows="6" class="form-control" placeholder="Komentar"></textarea>
+                    </div>
+                    <div class="text-center">
+                        <input type="hidden" name="jenis" id="jenis" value="<?= $jenis?>"></input>
+                        <input type="hidden" name="Ticket" id="Ticket" value="<?=$fetch['Ticket']?>"></input>
+                        <input type="hidden" name="id" id="id" value="<?= $id?>"></input>
+                        <input type="hidden" name="nik" id="nik" value="<?= $_SESSION['nik']?>"></input>
+                        <button class="btn btn-flatYellow" type="submit" value="submit" name ="submit" style="font-size: 17px;color: #6241b5; font-weight: 600;">KIRIM</button>
+                    </div>
+                </form>
+			</div>
 		</div>
 	</section>
 
@@ -253,4 +311,3 @@ $id = $_GET['id'];
 	<script src="assets/app.js"></script>
 </body>
 </html>
-<div style="border:1px solid #990000;padding-left:20px;margin:0 0 10px 0;">

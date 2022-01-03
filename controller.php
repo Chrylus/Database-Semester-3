@@ -174,6 +174,24 @@
                 header("location: index.php?Ticket2=$x&id=2");
             }
             break;
+        case 'komentar':
+            $tanggal = date("Y-m-d");
+            $jenis = $data['jenis'];
+            $id = $data['id'];
+            $ticket = $data['Ticket'];
+            $esc_ticket = mysqli_real_escape_string($koneksi, $ticket);
+            $nik = $data['nik'];
+            $esc_nik = mysqli_real_escape_string($koneksi, $nik);
+            $isi = $data['isi'];
+            $esc_isi = mysqli_real_escape_string($koneksi, $isi);
+            $query = "INSERT INTO diskusi(tanggal, Ticket, NIK, isi) VALUES ('$tanggal', '$esc_ticket', '$esc_nik', '$esc_isi')";
+            $exec = mysqli_query($koneksi, $query);
+            if($exec){
+                header("location:detail_ticket.php?pesan=Sukses&id=$id&jenis=$jenis");
+            }else{
+                header("location:detail_ticket.php?pesan=Gagal&jenis=$jenis");
+            }
+            break;
         case 'login':
             if(isset($data['submit'])){
                 $username = $_POST['username']; //menampung data yang dikirim dari input username
