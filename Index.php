@@ -1,8 +1,7 @@
-
 <?php
-include 'koneksi.php';
-session_start();
-session_regenerate_id(true);
+    include 'koneksi.php';
+    session_start();
+    session_regenerate_id(true);
 ?>
 
 <!DOCTYPE html>
@@ -25,8 +24,12 @@ session_regenerate_id(true);
 	<link rel="stylesheet" href="assets/media-queries.css">
 
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </head>
+
 <body>
+
+    <!-- SweetAlert2 Ticket -->
     <?php
         if(isset($_GET['Ticket0'])){
             $Pesan=$_GET['Ticket0'];
@@ -46,7 +49,7 @@ session_regenerate_id(true);
                             }
                         })
                     </script>";
-        }else if(isset($_GET['Ticket1'])){
+        } else if(isset($_GET['Ticket1'])){
             $Pesan=$_GET['Ticket1'];
                 
             echo    "<script type = 'text/javascript'>
@@ -64,87 +67,105 @@ session_regenerate_id(true);
                             }
                         })
                     </script>";
+        } else if(isset($_GET['Ticket2'])){
+            $Pesan=$_GET['Ticket2'];
+    
+            echo    "<script type = 'text/javascript'>
+                        Swal.fire(
+                            'Status Ticket Anda Adalah',
+                            '<b>$Pesan</b>',
+                            'success'
+                        ).then(function() {
+                            window.location.href = 'index.php?id=2';
+                        })
+                    </script>";
         }
     ?>
+
     <!-- Navbar belum login -->
     <?php if(!isset($_SESSION['nik'])){?>
 	    <nav id="top-nav" class="navbar navbar-default">
-        <div class="container">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="index.php" ><img src="images/logo-wadul.png" class="xs-image-navbar" alt="" height="35" ></a>
-        </div>
-
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse xs-form-login" id="bs-example-navbar-collapse-1" >
-            <form action="controller.php?aksi=login_masyarakat" class="navbar-form navbar-left frm-login-inline xs-form-login" method = "POST">
-                <div class="form-group " >
-                    <input type="email" name="email" id="password" class="form-control" placeholder="EMAIL">
-                </div>
-                <div class="form-group">
-                    <input type="password" name="password" id="password" class="form-control" placeholder="PASSWORD">
+            <div class="container">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="index.php" ><img src="images/logo-wadul.png" class="xs-image-navbar" alt="" height="35" ></a>
                 </div>
 
-               <!--  <a href="javascript:void(0)" onclick="lupapass()" title="Lupa Password" data-toggle="tooltip" data-placement="bottom" style="text-decoration: none;"> <i class=" glyphicon glyphicon-question-sign"></i> </a> -->
-                <div class="form-group xs-form-login">    
-                     <input class="btn btn-default" id="submit" type="submit" value="Login" name="submit" data-target="#data_submit">
-                </div>
-                
-            </form>
-            <ul class="nav navbar-nav navbar-right xs-align-center">
-                <li ><a href="mekanisme.php">Mekanisme</a></li>
-            </ul>
-        </div><!-- /.navbar-collapse -->
-        </div><!-- /.container-fluid -->
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse xs-form-login" id="bs-example-navbar-collapse-1" >
+                    <form action="controller.php?aksi=login_masyarakat" class="navbar-form navbar-left frm-login-inline xs-form-login" method = "POST">
+                        <div class="form-group " >
+                            <input type="email" name="email" id="password" class="form-control" placeholder="EMAIL">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" name="password" id="password" class="form-control" placeholder="PASSWORD">
+                        </div>
+
+                    <!--  <a href="javascript:void(0)" onclick="lupapass()" title="Lupa Password" data-toggle="tooltip" data-placement="bottom" style="text-decoration: none;"> <i class=" glyphicon glyphicon-question-sign"></i> </a> -->
+                        <div class="form-group xs-form-login">    
+                            <input class="btn btn-default" id="submit" type="submit" value="Login" name="submit" data-target="#data_submit">
+                        </div>
+                        
+                    </form>
+                    <ul class="nav navbar-nav navbar-right xs-align-center">
+                        <li ><a href="mekanisme.php">Mekanisme</a></li>
+                    </ul>
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
         </nav>
+
     <!-- Navbar sudah login -->
     <?php } else if(isset($_SESSION['nik'])) { ?>
         <nav id="top-nav" class="navbar navbar-default">
-        <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="index.php?id=0"><img src="images/logo-wadul.png" alt=""  height="50" ></a>
-            </div>
-                    <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right  xs-align-center" style="padding-top: 8px;">
-                    <li>
-                        <a href="index.php?id=0">Pengaduan</a>
-                    </li>
-                    <li>
-                        <a href="index.php?id=1">Aspirasi</a>
-                    </li>
-                    <li >
-                        <a href="mekanisme.php">Mekanisme</a>
-                    </li>
-                    <li class="user-section">
-                        <div class="dropdown">
-                            <a class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"> 
-                                                                <img  src="images/avatar.png" alt="" width="50">
-                                                        </a>
-                            <ul class="dropdown-menu xs-align-center" aria-labelledby="dropdownMenu1">
-                                <li><a href="#">Laporan Saya</a></li>
-                                <li><a href="controller.php?aksi=logout_user">Keluar</a></li>
-                            </ul>
-                        </div>
-                    </li>
-                </ul>
-            </div><!-- /.navbar-collapse -->
-        </div><!-- /.container-fluid -->
+            <div class="container">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="index.php?id=0"><img src="images/logo-wadul.png" alt=""  height="50" ></a>
+                </div>
+                        <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav navbar-right  xs-align-center" style="padding-top: 8px;">
+                        <li>
+                            <a href="index.php?id=0">Pengaduan</a>
+                        </li>
+                        <li>
+                            <a href="index.php?id=1">Aspirasi</a>
+                        </li>
+                        <li>
+                            <a href="index.php?id=2">Cek Tiket</a>
+                        </li>
+                        <li >
+                            <a href="mekanisme.php">Mekanisme</a>
+                        </li>
+                        <li class="user-section">
+                            <div class="dropdown">
+                                <a class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"> 
+                                                                    <img  src="images/avatar.png" alt="" width="50">
+                                                            </a>
+                                <ul class="dropdown-menu xs-align-center" aria-labelledby="dropdownMenu1">
+                                    <li><a href="#">Laporan Saya</a></li>
+                                    <li><a href="controller.php?aksi=logout_user">Keluar</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
         </nav>
     <?php } ?>
+
     <!-- Body belum login -->
     <?php if(!isset($_SESSION['nik'])) { ?>
         <section class="bg-tosca">
@@ -196,7 +217,7 @@ session_regenerate_id(true);
                                             <span class="input-group-addon" style="border: none;">
                                                 <input type="checkbox" name="show" id="show"> Tampilkan
                                             </span>
-                                        </div><!-- /input-group -->
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-sm-8" >
@@ -211,7 +232,6 @@ session_regenerate_id(true);
                                     </div>
                                 </div>
                             </div>
-                            
                         </form>
                     </div>
                 </div>
@@ -223,85 +243,87 @@ session_regenerate_id(true);
         <?php 
             $id = $_GET['id'];    
         ?>
+
         <!-- Pengaduan -->
         <?php if($id == 0){?>
             <section class="page-saranPengaduanAdd bg-halfTosca">
-            <div class="container bg-tosca2">
-                <div class="row">
-                    <div class="col-sm-8 col-sm-offset-2">
-                        <form action="controller.php?aksi=tambah_pengaduan" role="form" enctype="multipart/form-data" method="POST" id="form" >
-                            <h1>SAMPAIKAN PENGADUAN ANDA</h1>
-                            <div class="form-group">
-                                <select name="unit" id="unit" class="form-control" placeholder="Pilih Unit Layanan" name="category_id" onchange="getId(this.value);" required>
-                                    <option value="">Unit Layanan *</option>
-                                    <?php
-                                        $query = "SELECT * FROM unit_layanan";
-                                        $results=mysqli_query($koneksi, $query);
-                                        //loop
-                                        foreach ($results as $unit){
-                                    ?>
-                                    <option value="<?php echo $unit["id"];?>"><?php echo $unit["nama_unit"];?></option>
-                                    <?php
-                                        }
-                                    ?>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <select name="keperluan" id="keperluan" class="form-control" placeholder="Pilih Kategori Laporan Anda" name="category_id" required>
-                                    <option value ="">Keperluan *</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <select name="kota" id="kota" class="form-control" placeholder="Pilih Kabupaten / Kota" name="category_id" onchange="getId2(this.value);">
-                                    <option>Kabupaten / Kota *</option>
-                                    <?php
-                                        $query = "SELECT * FROM kabkota";
-                                        $results=mysqli_query($koneksi, $query);
-                                        //loop
-                                        foreach ($results as $unit){
-                                    ?>
-                                    <option value="<?php echo $unit["id_kabkota"];?>"><?php echo $unit["nama_kabkota"];?></option>
-                                    <?php
-                                        }
-                                    ?>
-                                </select>
-                            </div>
-                            <!-- Kecamatan -->
-                            <div class="form-group">
-                                <select name="kecamatan" id="kecamatan" class="form-control" placeholder="Pilih Kecamatan" name="category_id" onchange="getId4(this.value);">
-                                    <option>Kecamatan *</option>
-                                </select>
-                            </div>
-                            <!-- Kelurahan/Desa -->
-                            <div class="form-group">
-                                <select name="keldesa" id="keldesa" class="form-control" placeholder="Pilih Desa/Kelurahan" name="category_id">
-                                    <option>Kelurahan/Desa *</option>
-                                </select>
-                            </div>
-                            <label>Tanggal Kejadian</label>
-                            <div class="form-group">
-                                <input type="date" name="TanggalKejadian" id="TanggalKejadian" class="form-control" placeholder="Tanggal Kejadian *" required></textarea>
-                            </div>
-                            <div class="form-group">
-                                <textarea name="Keterangan" rows="6" class="form-control" placeholder="Keterangan *"></textarea>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-6 col-xs-12" style="padding-left: 0px;">
-                                    <div class="col-md-12 col-xs-12">
-                                        <input type="file" name="files[]" id="files[]" class="form-control" accept="image"></textarea>
-                                    </div>		
+                <div class="container bg-tosca2">
+                    <div class="row">
+                        <div class="col-sm-8 col-sm-offset-2">
+                            <form action="controller.php?aksi=tambah_pengaduan" role="form" enctype="multipart/form-data" method="POST" id="form" >
+                                <h1>SAMPAIKAN PENGADUAN ANDA</h1>
+                                <div class="form-group">
+                                    <select name="unit" id="unit" class="form-control" placeholder="Pilih Unit Layanan" name="category_id" onchange="getId(this.value);" required>
+                                        <option value="">Unit Layanan *</option>
+                                        <?php
+                                            $query = "SELECT * FROM unit_layanan";
+                                            $results=mysqli_query($koneksi, $query);
+                                            //loop
+                                            foreach ($results as $unit){
+                                        ?>
+                                        <option value="<?php echo $unit["id"];?>"><?php echo $unit["nama_unit"];?></option>
+                                        <?php
+                                            }
+                                        ?>
+                                    </select>
                                 </div>
-                            </div>
-                            <input type="hidden" name="NIK" id="NIK" class="form-control" value="<?php echo $_SESSION['nik']; ?>"></input>
-                            <br>
-                            <div class="text-center">
-                                <button class="btn btn-flatYellow" type="submit" value="submit" name ="submit" style="font-size: 17px;color: #6241b5; font-weight: 600;">SUBMIT</button>
-                            </div>
-                        </form>
-                    </div>
-                                <div class="col-sm-10 col-sm-offset-1">
-                        <div class="list-saranPengaduan">
-                            <h3>DAFTAR PENGADUAN</h3>
+                                <div class="form-group">
+                                    <select name="keperluan" id="keperluan" class="form-control" placeholder="Pilih Kategori Laporan Anda" name="category_id" required>
+                                        <option value ="">Keperluan *</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <select name="kota" id="kota" class="form-control" placeholder="Pilih Kabupaten / Kota" name="category_id" onchange="getId2(this.value);">
+                                        <option>Kabupaten / Kota *</option>
+                                        <?php
+                                            $query = "SELECT * FROM kabkota";
+                                            $results=mysqli_query($koneksi, $query);
+                                            //loop
+                                            foreach ($results as $unit){
+                                        ?>
+                                        <option value="<?php echo $unit["id_kabkota"];?>"><?php echo $unit["nama_kabkota"];?></option>
+                                        <?php
+                                            }
+                                        ?>
+                                    </select>
+                                </div>
+                                <!-- Kecamatan -->
+                                <div class="form-group">
+                                    <select name="kecamatan" id="kecamatan" class="form-control" placeholder="Pilih Kecamatan" name="category_id" onchange="getId4(this.value);">
+                                        <option>Kecamatan *</option>
+                                    </select>
+                                </div>
+                                <!-- Kelurahan/Desa -->
+                                <div class="form-group">
+                                    <select name="keldesa" id="keldesa" class="form-control" placeholder="Pilih Desa/Kelurahan" name="category_id">
+                                        <option>Kelurahan/Desa *</option>
+                                    </select>
+                                </div>
+                                <label>Tanggal Kejadian</label>
+                                <div class="form-group">
+                                    <input type="date" name="TanggalKejadian" id="TanggalKejadian" class="form-control" placeholder="Tanggal Kejadian *" required></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <textarea name="Keterangan" rows="6" class="form-control" placeholder="Keterangan *"></textarea>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6 col-xs-12" style="padding-left: 0px;">
+                                        <div class="col-md-12 col-xs-12">
+                                            <input type="file" name="files[]" id="files[]" class="form-control" accept="image"></textarea>
+                                        </div>		
+                                    </div>
+                                </div>
+                                <input type="hidden" name="NIK" id="NIK" class="form-control" value="<?php echo $_SESSION['nik']; ?>"></input>
+                                <br>
+                                <div class="text-center">
+                                    <button class="btn btn-flatYellow" type="submit" value="submit" name ="submit" style="font-size: 17px;color: #6241b5; font-weight: 600;">SUBMIT</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-sm-10 col-sm-offset-1">
+                            <div class="list-saranPengaduan">
+                                <h3>DAFTAR PENGADUAN</h3>
+
                                 <?php 
                                     $list_p = "SELECT * FROM pelaporan WHERE ID_Pelaporan LIKE 'PGD%' LIMIT 4";
                                     $exec_list = mysqli_query($koneksi, $list_p);
@@ -336,89 +358,92 @@ session_regenerate_id(true);
                                         </div>
                                     </div>
                                 <?php } ?>
+
                                 <div class="password text-center xs-title">
-                                    <a href="https://pengaduan.pu.go.id//home/saran_pengaduan_all" class="btn btn-flatYellow" style="font-size: 17px;color: #6241b5; font-weight: 600;">Lihat Laporan Lain</a>
+                                    <a href="#" class="btn btn-flatYellow" style="font-size: 17px;color: #6241b5; font-weight: 600;">Lihat Laporan Lain</a>
                                 </div>	
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
+
         <!-- Aspirasi -->
         <?php } else if($id == 1){?>
             <section class="page-saranPengaduanAdd bg-halfTosca">
-            <div class="container bg-tosca2">
-                <div class="row">
-                    <div class="col-sm-8 col-sm-offset-2">
-                        <form action="controller.php?aksi=tambah_aspirasi" role="form" enctype="multipart/form-data" method="POST" id="form" >
-                            <h1>SAMPAIKAN ASPIRASI ANDA</h1>
-                            <div class="form-group">
-                                <select name="unit" id="unit" class="form-control" placeholder="Pilih Unit Layanan" name="category_id" onchange="getId(this.value);" required>
-                                    <option value="">Unit Layanan *</option>
-                                    <?php
-                                        $query = "SELECT * FROM unit_layanan";
-                                        $results=mysqli_query($koneksi, $query);
-                                        //loop
-                                        foreach ($results as $unit){
-                                    ?>
-                                    <option value="<?php echo $unit["id"];?>"><?php echo $unit["nama_unit"];?></option>
-                                    <?php
-                                        }
-                                    ?>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <select name="keperluan" id="keperluan" class="form-control" placeholder="Pilih Kategori Laporan Anda" name="category_id" required>
-                                    <option value ="">Keperluan *</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <select name="kota" id="kota" class="form-control" placeholder="Pilih Kabupaten / Kota" name="category_id" onchange="getId2(this.value);">
-                                    <option>Kabupaten / Kota *</option>
-                                    <?php
-                                        $query = "SELECT * FROM kabkota";
-                                        $results=mysqli_query($koneksi, $query);
-                                        //loop
-                                        foreach ($results as $unit){
-                                    ?>
-                                    <option value="<?php echo $unit["id_kabkota"];?>"><?php echo $unit["nama_kabkota"];?></option>
-                                    <?php
-                                        }
-                                    ?>
-                                </select>
-                            </div>
-                            <!-- Kecamatan -->
-                            <div class="form-group">
-                                <select name="kecamatan" id="kecamatan" class="form-control" placeholder="Pilih Kecamatan" name="category_id" onchange="getId4(this.value);">
-                                    <option>Kecamatan *</option>
-                                </select>
-                            </div>
-                            <!-- Kelurahan/Desa -->
-                            <div class="form-group">
-                                <select name="keldesa" id="keldesa" class="form-control" placeholder="Pilih Desa/Kelurahan" name="category_id">
-                                    <option>Kelurahan/Desa *</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <textarea name="Keterangan" rows="6" class="form-control" placeholder="Keterangan *"></textarea>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-6 col-xs-12" style="padding-left: 0px;">
-                                    <div class="col-md-12 col-xs-12">
-                                        <input type="file" name="files[]" id="files[]" class="form-control" accept="image"></textarea>
-                                    </div>		
+                <div class="container bg-tosca2">
+                    <div class="row">
+                        <div class="col-sm-8 col-sm-offset-2">
+                            <form action="controller.php?aksi=tambah_aspirasi" role="form" enctype="multipart/form-data" method="POST" id="form" >
+                                <h1>SAMPAIKAN ASPIRASI ANDA</h1>
+                                <div class="form-group">
+                                    <select name="unit" id="unit" class="form-control" placeholder="Pilih Unit Layanan" name="category_id" onchange="getId(this.value);" required>
+                                        <option value="">Unit Layanan *</option>
+                                        <?php
+                                            $query = "SELECT * FROM unit_layanan";
+                                            $results=mysqli_query($koneksi, $query);
+                                            //loop
+                                            foreach ($results as $unit){
+                                        ?>
+                                        <option value="<?php echo $unit["id"];?>"><?php echo $unit["nama_unit"];?></option>
+                                        <?php
+                                            }
+                                        ?>
+                                    </select>
                                 </div>
-                            </div>
-                            <input type="hidden" name="NIK" id="NIK" class="form-control" value="<?php echo $_SESSION['nik']; ?>"></input>
-                            <br>
-                            <div class="text-center">
-                                <button class="btn btn-flatYellow" type="submit" value="submit" name = "submit" style="font-size: 17px;color: #6241b5; font-weight: 600;">SUBMIT</butt>
-                            </div>
-                        </form>
-                    </div>
-                                <div class="col-sm-10 col-sm-offset-1">
-                                <div class="list-saranPengaduan">
-                            <h3>DAFTAR ASPIRASI</h3>
+                                <div class="form-group">
+                                    <select name="keperluan" id="keperluan" class="form-control" placeholder="Pilih Kategori Laporan Anda" name="category_id" required>
+                                        <option value ="">Keperluan *</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <select name="kota" id="kota" class="form-control" placeholder="Pilih Kabupaten / Kota" name="category_id" onchange="getId2(this.value);">
+                                        <option>Kabupaten / Kota *</option>
+                                        <?php
+                                            $query = "SELECT * FROM kabkota";
+                                            $results=mysqli_query($koneksi, $query);
+                                            //loop
+                                            foreach ($results as $unit){
+                                        ?>
+                                        <option value="<?php echo $unit["id_kabkota"];?>"><?php echo $unit["nama_kabkota"];?></option>
+                                        <?php
+                                            }
+                                        ?>
+                                    </select>
+                                </div>
+                                <!-- Kecamatan -->
+                                <div class="form-group">
+                                    <select name="kecamatan" id="kecamatan" class="form-control" placeholder="Pilih Kecamatan" name="category_id" onchange="getId4(this.value);">
+                                        <option>Kecamatan *</option>
+                                    </select>
+                                </div>
+                                <!-- Kelurahan/Desa -->
+                                <div class="form-group">
+                                    <select name="keldesa" id="keldesa" class="form-control" placeholder="Pilih Desa/Kelurahan" name="category_id">
+                                        <option>Kelurahan/Desa *</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <textarea name="Keterangan" rows="6" class="form-control" placeholder="Keterangan *"></textarea>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6 col-xs-12" style="padding-left: 0px;">
+                                        <div class="col-md-12 col-xs-12">
+                                            <input type="file" name="files[]" id="files[]" class="form-control" accept="image"></textarea>
+                                        </div>		
+                                    </div>
+                                </div>
+                                <input type="hidden" name="NIK" id="NIK" class="form-control" value="<?php echo $_SESSION['nik']; ?>"></input>
+                                <br>
+                                <div class="text-center">
+                                    <button class="btn btn-flatYellow" type="submit" value="submit" name = "submit" style="font-size: 17px;color: #6241b5; font-weight: 600;">SUBMIT</butt>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-sm-10 col-sm-offset-1">
+                            <div class="list-saranPengaduan">
+                                <h3>DAFTAR ASPIRASI</h3>
+
                                 <?php 
                                     $list_p = "SELECT * FROM pelaporan WHERE ID_Pelaporan LIKE 'ASP%' LIMIT 4";
                                     $exec_list = mysqli_query($koneksi, $list_p);
@@ -453,24 +478,46 @@ session_regenerate_id(true);
                                         </div>
                                     </div>
                                 <?php } ?>
+
                                 <div class="password text-center xs-title">
                                     <a href="https://pengaduan.pu.go.id//home/saran_pengaduan_all" class="btn btn-flatYellow" style="font-size: 17px;color: #6241b5; font-weight: 600;">Lihat Laporan Lain</a>
                                 </div>	
                             </div>
                         </div>
                     </div>
-                            </div>
-            </div>
+                </div>
+            </section>
+
+        <?php } else if($id == 2){?>
+            <section class="page-saranPengaduanAdd bg-halfTosca">
+                <div class="container bg-tosca2">
+                    <div class="row">
+                        <div class="col-sm-8 col-sm-offset-2">
+                            <form action="controller.php?aksi=cek_tiket" role="form" enctype="multipart/form-data" method="POST" id="form" >
+                                <h1>CEK TIKET PENGADUAN ANDA</h1>
+                                <div class="form-group">
+                                    <input type="text" name="query" class="form-control" placeholder="Masukkan Tiket Anda Disini *" required/> <br>     
+                                </div>
+                                <br>
+                                <div class="text-center">
+                                    <button class="btn btn-flatYellow" type="submit" value="Search" name ="submit" style="font-size: 17px;color: #6241b5; font-weight: 600;">SUBMIT</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </section>
         <?php } ?>
+
     <?php } ?>
+
     <footer>
-	<div class="row">
-		<div class="col-xs-12 col-sm-4 xs-align-center">Universitas Bina Nusantara Malang<br/>Araya Mansion No. 8 - 22, Genitri, Tirtomoyo, Kec. Pakis, Kabupaten Malang, Jawa Timur 65154<br/></div>
-		<div class="col-xs-12 col-sm-5 text-center xs-align-center">
-			Hak Cipta @ <script>document.write(new Date().getFullYear())</script> <a href="https://www.wadul.my.id/" style="text-decoration:none;">Wadul</a><br/>Hak cipta dilindungi Undang - Undang
-		</div>
-	</div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-4 xs-align-center">Universitas Bina Nusantara Malang<br/>Araya Mansion No. 8 - 22, Genitri, Tirtomoyo, Kec. Pakis, Kabupaten Malang, Jawa Timur 65154<br/></div>
+            <div class="col-xs-12 col-sm-5 text-center xs-align-center">
+                Hak Cipta @ <script>document.write(new Date().getFullYear())</script> <a href="https://www.wadul.my.id/" style="text-decoration:none;">Wadul</a><br/>Hak cipta dilindungi Undang - Undang
+            </div>
+        </div>
     </footer>
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
@@ -479,10 +526,13 @@ session_regenerate_id(true);
 	<script src='https://www.google.com/recaptcha/api.js'></script>
 	<script src="assets/jquery.flexslider.js"></script>
 	<script src="assets/bootstrap-datepicker.js"></script>
-	<!-- <script src="https://pengaduan.pu.go.id/assets/common/js/tinymce/tinymce.min.js"></script> -->
 	<script type="text/javascript" src="assets/ckeditor.js"></script>
 	<script src="assets/cropbox.js"></script>
 	<script src="assets/app.js"></script>
+
+    <!-- <script src="https://pengaduan.pu.go.id/assets/common/js/tinymce/tinymce.min.js"></script> -->
+
+    <!-- Keperluan Sub Class Unit Layanan -->
     <script>
         function getId(val){
             //We create ajax function
@@ -496,6 +546,7 @@ session_regenerate_id(true);
             });
         }
     </script>
+
     <!-- Kecamatan -->
     <script>
         function getId2(val){
@@ -510,6 +561,7 @@ session_regenerate_id(true);
             });
         }
     </script>
+
     <!-- Desa -->
     <script>
         function getId4(val){
@@ -524,5 +576,6 @@ session_regenerate_id(true);
             });
         }
     </script>
+    
 </body>
 </html>

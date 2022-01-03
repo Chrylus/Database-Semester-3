@@ -84,6 +84,9 @@ session_regenerate_id(true);
                     <li>
                         <a href="index.php?id=1">Aspirasi</a>
                     </li>
+                    <li>
+                        <a href="index.php?id=2">Cek Tiket</a>
+                    </li>
                     <li >
                         <a href="mekanisme.php">Mekanisme</a>
                     </li>

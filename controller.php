@@ -171,7 +171,7 @@
                     echo "Minimum length is ".$min_length;
                     $x = $query;
                 }
-                header("location:Check_Ticket.php?Ticket=$x");
+                header("location: index.php?Ticket2=$x&id=2");
             }
             break;
         case 'login':
