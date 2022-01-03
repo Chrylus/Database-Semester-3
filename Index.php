@@ -154,7 +154,7 @@ session_regenerate_id(true);
                                 <div class="col-sm-12">
                                     <div class="form-group" >
                                         <div class="input-group " id = "form-pass">
-                                            <input type="password"  name="password" id="input-password" class="form-control" placeholder="New Password"  title="Password Min 8 karakter" value="">
+                                            <input type="password"  name="password" id="input-password" class="form-control" placeholder="Password"  title="Password Min 8 karakter" value="">
                                             <span class="input-group-addon" style="border: none;">
                                                 <input type="checkbox" name="show" id="show"> Tampilkan
                                             </span>
