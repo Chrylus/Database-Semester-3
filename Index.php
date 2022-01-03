@@ -245,7 +245,7 @@ session_regenerate_id(true);
                                 <input type="date" name="TanggalKejadian" id="TanggalKejadian" class="form-control" placeholder="Tanggal Kejadian *" required></textarea>
                             </div>
                             <div class="form-group">
-                                <textarea name="isi" rows="6" class="form-control" placeholder="Keterangan *"></textarea>
+                                <textarea name="Keterangan" rows="6" class="form-control" placeholder="Keterangan *"></textarea>
                             </div>
                             <div class="row">
                                 <div class="col-sm-6 col-xs-12" style="padding-left: 0px;">
@@ -257,7 +257,7 @@ session_regenerate_id(true);
                             
                             <br>
                             <div class="text-center">
-                                <button class="btn btn-flatYellow" type="submit" value="submit" style="font-size: 17px;color: #6241b5; font-weight: 600;">SUBMIT</button>
+                                <button class="btn btn-flatYellow" type="submit" value="submit" name ="submit" style="font-size: 17px;color: #6241b5; font-weight: 600;">SUBMIT</button>
                             </div>
                         </form>
                     </div>
@@ -408,7 +408,7 @@ session_regenerate_id(true);
                                 </select>
                             </div>
                             <div class="form-group">
-                                <textarea name="isi" rows="6" class="form-control" placeholder="Keterangan *"></textarea>
+                                <textarea name="Keterangan" rows="6" class="form-control" placeholder="Keterangan *"></textarea>
                             </div>
                             <div class="row">
                                 <div class="col-sm-6 col-xs-12" style="padding-left: 0px;">
@@ -420,7 +420,7 @@ session_regenerate_id(true);
                             
                             <br>
                             <div class="text-center">
-                                <button class="btn btn-flatYellow" type="submit" value="submit" style="font-size: 17px;color: #6241b5; font-weight: 600;">SUBMIT</butt>
+                                <button class="btn btn-flatYellow" type="submit" value="submit" name = "submit" style="font-size: 17px;color: #6241b5; font-weight: 600;">SUBMIT</butt>
                             </div>
                         </form>
                     </div>
