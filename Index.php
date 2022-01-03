@@ -24,8 +24,30 @@ session_regenerate_id(true);
 	<link rel="stylesheet" href="assets/style.css">
 	<link rel="stylesheet" href="assets/media-queries.css">
 
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
+    <?php
+        if(isset($_GET['Ticket'])){
+            $Pesan=$_GET['Ticket'];
+                
+            echo    "<script type = 'text/javascript'>
+                        Swal.fire({
+                            title: 'Mohon Catat Nomor Tiket Anda',
+                            text: '$Pesan',
+                            showCancelButton: true,
+                            confirmButtonText: 'Cetak Bukti',
+                            cancelButtonText: `Ok`,
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.href = 'create_ticket.php?id=$Pesan';
+                            } else {
+                                window.location.href = 'index.php';
+                            }
+                        })
+                    </script>";
+        }
+    ?>
     <!-- Navbar belum login -->
     <?php if(!isset($_SESSION['nik'])){?>
 	    <nav id="top-nav" class="navbar navbar-default">
