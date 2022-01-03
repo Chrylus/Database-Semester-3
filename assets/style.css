@@ -29,7 +29,7 @@ body {
 	
 }
 .frm-login-inline .form-control {
-	max-width: 150px;
+	max-width: 300px;
 	border-radius: 20px;
 	border: none !important;
 	font-size: 13px;

@@ -44,7 +44,6 @@ session_regenerate_id(true);
             <form action="controller.php?aksi=login_masyarakat" class="navbar-form navbar-left frm-login-inline xs-form-login" method = "POST">
                 <div class="form-group " >
                     <input type="email" name="email" id="password" class="form-control" placeholder="EMAIL">
-                    <div class="forget"> &nbsp;</div>
                 </div>
                 <div class="form-group">
                     <input type="password" name="password" id="password" class="form-control" placeholder="PASSWORD">
@@ -53,7 +52,6 @@ session_regenerate_id(true);
                <!--  <a href="javascript:void(0)" onclick="lupapass()" title="Lupa Password" data-toggle="tooltip" data-placement="bottom" style="text-decoration: none;"> <i class=" glyphicon glyphicon-question-sign"></i> </a> -->
                 <div class="form-group xs-form-login">    
                      <input class="btn btn-default" id="submit" type="submit" value="Login" name="submit" data-target="#data_submit">
-                    <div class="forget">&nbsp;</div>
                 </div>
                 
             </form>
