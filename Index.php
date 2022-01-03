@@ -1,3 +1,4 @@
+
 <?php
 include 'koneksi.php';
 session_start();
@@ -5,232 +6,195 @@ session_regenerate_id(true);
 ?>
 
 <!DOCTYPE html>
-<html lang = "en">
+<html>
 <head>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-35959721-1"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'UA-35959721-1');
-    </script>
+<title>Wadul - Wadah Aspirasi Daerah Unit Layanan</title>
 
-    <meta charset="utf-8">
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="icon" href="images/logo-wadul-white-ico.png">
+	<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+	<link href="https://getbootstrap.com/docs/3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+	<link href="assets/datepicker3.css" rel="stylesheet">
+	<link href="assets/font-awesome.min.css" rel="stylesheet">
+	<link href="assets/ionicons.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="assets/owl.carousel.min.css">
+	
+	<link rel="stylesheet" href="assets/style.css">
+	<link rel="stylesheet" href="assets/media-queries.css">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-
-    <!-- Place this data between the <head> tags of your website -->
-    <title>Wadul - Wadah Aspirasi Daerah Unit Layanan - Beranda</title>
-
-    <!-- Favicons -->
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
-    <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
-    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#d7381b">
-    <meta name="apple-mobile-web-app-title" content="LAPOR!">
-    <meta name="application-name" content="LAPOR!">
-    <meta name="theme-color" content="#ffffff">
-
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
-
-    <!-- App Styles -->
-    <link href= 'index.css' rel="stylesheet">
-
-    <script src="resources/sweetalert2.min.js"></script>
-    <link rel="stylesheet" href="https://www.lapor.go.id/combine/66cb3800f16b20b046b93a4571b46c42-1617850351">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://www.lapor.go.id/combine/15d6ac0173665e1a9057c30ca8e08f8f-1617850351"></script>
-    <script src="resources/zingchart.min.js"></script>
-    <link rel="icon" href="images/logo-wadul-white-ico.png">
-    <link rel ="stylesheet" href = "//cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
-    <script src="//cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
-
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-
-    <nav id="leftMenu" class="navmenu navmenu-default navmenu-inverse navmenu-fixed-left offcanvas" role="navigation">
-        <ul class="nav navmenu-nav">
-            <li role="presentation" class="  active">
-                <a href="#" >
-                    Layanan Pengaduan
-                </a>
-            </li>
-            <li role="presentation" class="  ">
-                <a href="admin/index.php" >
-                    Admin
-                </a>
-            </li>
-            <li role="presentation" class="  ">
-                <?php
-                if(isset($_SESSION["nik"])){
-                    echo'<a href="controller.php?aksi=logout_user">
-                        Logout
-                    </a>';
-                }
-                ?>
-            </li>
-        </ul>
-    </nav>
 </head>
-
-<body class="page-home pd-t-0 ">
-    <div class="loader-custom hidden"></div>
-    <div id="search-bar"> </div>
-    
-    <header class="navbar-fixed-top navbar-inverse ">
+<body>
+    <!-- Navbar belum login -->
+    <?php if(!isset($_SESSION['nik'])){?>
+	    <nav id="top-nav" class="navbar navbar-default">
         <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="index.php" ><img src="images/logo-wadul.png" class="xs-image-navbar" alt="" height="35" ></a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse xs-form-login" id="bs-example-navbar-collapse-1" >
+            <form action="controller.php?aksi=login_masyarakat" class="navbar-form navbar-left frm-login-inline xs-form-login" method = "POST">
+                <div class="form-group " >
+                    <input type="email" name="email" id="password" class="form-control" placeholder="EMAIL">
+                    <div class="forget"> &nbsp;</div>
+                </div>
+                <div class="form-group">
+                    <input type="password" name="password" id="password" class="form-control" placeholder="PASSWORD">
+                </div>
+
+               <!--  <a href="javascript:void(0)" onclick="lupapass()" title="Lupa Password" data-toggle="tooltip" data-placement="bottom" style="text-decoration: none;"> <i class=" glyphicon glyphicon-question-sign"></i> </a> -->
+                <div class="form-group xs-form-login">    
+                     <input class="btn btn-default" id="submit" type="submit" value="Login" name="submit" data-target="#data_submit">
+                    <div class="forget">&nbsp;</div>
+                </div>
+                
+            </form>
+            <ul class="nav navbar-nav navbar-right xs-align-center">
+                <li ><a href="mekanisme.php">Mekanisme</a></li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+        </nav>
+    <!-- Navbar sudah login -->
+    <?php } else if(isset($_SESSION['nik'])) { ?>
+        <nav id="top-nav" class="navbar navbar-default">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle navbar-toggle-left" data-toggle="offcanvas" data-target="#leftMenu" data-canvas="body">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">
-                    <img src="images/logo-wadul.png" alt="" class="img-responsive hidden-navbar-inverse">
-                    <img src="images/logo-wadul.png" alt="" class="img-responsive hidden-navbar-default">
-                </a>
+                <a class="navbar-brand" href="index.php"><img src="images/logo-wadul.png" alt=""  height="50" ></a>
             </div>
-
-            <div class="collapse navbar-collapse">
-                <ul class="nav navbar-nav navbar-left navbar-primary">
-                    <li role="presentation" class="  ">
-                        <a href="#" >
-                            Layanan Pengaduan
-                        </a>
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right  xs-align-center" style="padding-top: 8px;">
+                    <li>
+                        <a href="index.php?id=0">Pengaduan</a>
                     </li>
-                    <li role="presentation" class="  ">
-                        <a href="admin/index.php" >
-                            Admin
-                        </a>
+                    <li>
+                        <a href="index.php?id=1">Aspirasi</a>
+                    </li>
+                    <li >
+                        <a href="mekanisme.php">Mekanisme</a>
+                    </li>
+                    <li class="user-section">
+                        <div class="dropdown">
+                            <a class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"> 
+                                                                <img  src="images/avatar.png" alt="" width="50">
+                                                        </a>
+                            <ul class="dropdown-menu xs-align-center" aria-labelledby="dropdownMenu1">
+                                <li><a href="#">Laporan Saya</a></li>
+                                <li><a href="controller.php?aksi=logout_user">Keluar</a></li>
+                            </ul>
+                        </div>
                     </li>
                 </ul>
-                <div class="nav navbar-nav navbar-right mg-l-10">
-                    <?php
-                        if(isset($_SESSION["nik"])){
-                            echo' <a href="controller.php?aksi=logout_user" class="btn navbar-btn pull-right btn-outline-white">
-                                Logout
-                            </a>';
-                        }
-                    ?>
-                </div>    
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+        </nav>
+    <?php } ?>
+    <!-- Body belum login -->
+    <?php if(!isset($_SESSION['nik'])) { ?>
+        <section class="bg-tosca">
+            <div class="container">
+                <div class="owl-carousel owl-theme register-slide">
+                    <div class="item"><img src="assets/regist-slide1.png" alt=""></div>
+                    <div class="item"><img src="assets/regist-slide2.png" alt=""></div>
+                    <div class="item"><img src="assets/regist-slide3.png" alt=""></div>
+                    <div class="item"><img src="assets/regist-slide4.png" alt=""></div>
+                    <div class="item"><img src="assets/regist-slide5.png" alt=""></div>
+                </div>
             </div>
-        </div>
-    </header>
+        </section>
 
-    <section id="hero">
-        <div class="container">
-            <div class="block block-aspiration">
-                <div class="h2">Wadah Aspirasi Daerah Unit Layanan</div>
-                <p>Sampaikan aspirasi Anda langsung kepada unit kerja yang berwenang</p>
-                <hr>
-            </div>
-        </div>
-        <svg width="100%" height="160px" viewBox="0 0 1300 160" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-            <g>
-                <path d="M1300,160 L-5.68434189e-14,160 L-5.68434189e-14,119 C423.103102,41.8480501 1096.33049,180.773108 1300,98 L1300,160 Z" fill="#FEF5ED" fill-rule="nonzero"></path>
-                <path d="M129.77395,40.2373685 C292.925845,31.2149964 314.345174,146.772453 615.144273,151.135393 C915.94337,155.498333 1017.27057,40.8373289 1240.93447,40.8373289 C1262.89392,40.8373289 1282.20864,41.9705564 1299.18628,44.0144896 L1300,160 L-1.0658141e-14,160 L-1.0658141e-14,105 C31.4276111,70.4780448 73.5616946,43.3459311 129.77395,40.2373685 Z" fill="#FEF5ED" fill-rule="nonzero" opacity="0.3"></path>
-                <path d="M69.77395,60.2373685 C232.925845,51.2149964 314.345174,146.772453 615.144273,151.135393 C915.94337,155.498333 1017.27057,0.837328936 1240.93447,0.837328936 C1263.91283,0.837328936 1283.59768,0.606916225 1300,1 L1300,160 L-1.70530257e-13,160 L-9.9475983e-14,74 C-9.9475983e-14,74 36.9912359,62.0502671 69.77395,60.2373685 Z" fill="#FEF5ED" fill-rule="nonzero" opacity="0.3"></path>
-                <path d="M2.27373675e-13,68 C23.2194389,95.7701288 69.7555676,123.009338 207,125 C507.7991,129.36294 698.336099,22 922,22 C1047.38026,22 1198.02057,63.2171658 1300,101 L1300,160 L0,160 L2.27373675e-13,68 Z" fill="#FEF5ED" fill-rule="nonzero" opacity="0.3" transform="translate(650, 91) scale(-1, 1) translate(-650, -91) "></path>
-            </g>
-        </svg>
-    </section>
-
-    <?php
-        if(isset($_GET['Ticket'])){
-            $Pesan=$_GET['Ticket'];
-                
-            echo    "<script type = 'text/javascript'>
-                        Swal.fire({
-                            title: 'Mohon Catat Nomor Tiket Anda',
-                            text: '$Pesan',
-                            showCancelButton: true,
-                            confirmButtonText: 'Cetak Bukti',
-                            cancelButtonText: `Ok`,
-                        }).then((result) => {
-                            if (result.isConfirmed) {
-                                window.location.href = 'create_ticket.php?id=$Pesan';
-                            } else {
-                                window.location.href = 'index.php';
-                            }
-                        })
-                    </script>";
-        }
-    ?>
-
-    <section id="complaint-box">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-8 col-md-offset-2 mg-b-40">
-                    <?php if(!isset($_SESSION['nik'])){?>
-                        <form action="controller.php?aksi=login_masyarakat" method="POST" class="complaint-form" enctype="multipart/form-data">
-                            <div class="complaint-form-box">
-                                <br>
-                                <div class="select-complaint">Sampaikan Laporan Anda</div>
-                                <!-- <center><p><b>Pilih Klasifikasi Permintaan Anda</b></p></center> -->
-                                <center>
-                                    <a href="#" class="button1 active">Login</a>
-                                    <a href="daftar.php" class="button1">Daftar</a>
-                                </center>
-                                <div class="complaint-help">
-                                    Silahkan login terlebih dahulu 
-                                    <span id="classfication_name">
-                                        atau registrasi
-                                    </span> bila Anda belum memiliki akun 
-                                    
+        <section class="frm-register ">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-8 col-sm-offset-2">
+                        <form action="controller.php?aksi=daftar_masyarakat" method="POST" id="registrasi" name="myForm">
+                            <div class="form-label form-group text-center">
+                                <b>Wadah Aspirasi Daerah Unit Layanan</b>
+                                <div class="thin">Sampaikan aspirasi Anda langsung kepada unit kerja yang berwenang</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="Nama *" name="Nama" required>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="NIK *" name="NIK" required>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="Nomor Telepon *" name="No_telepon" required>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" name="email" placeholder="Email *" required="required" value="">
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="form-group" >
+                                        <div class="input-group " id = "form-pass">
+                                            <input type="password"  name="password" id="input-password" class="form-control" placeholder="New Password"  title="Password Min 8 karakter" value="">
+                                            <span class="input-group-addon" style="border: none;">
+                                                <input type="checkbox" name="show" id="show"> Tampilkan
+                                            </span>
+                                        </div><!-- /input-group -->
+                                    </div>
+                                </div>
+                                <div class="col-sm-8" >
+                                    <div class="form-group">
+                                    <span id='message2'></span>
+                                </div>
+                                </div>
+                                
+                                <div class="col-sm-12 text-center">
+                                    <div class="form-group">
+                                        <button class="btn btn-sm" value="submit" type="button" style="color: #6241b5;	width: 200px; padding: 5px 10px; min-width: 95%;font-size: 17px; font-weight: 600; color: #ffff; background-color: #c02f2f;">DAFTAR</button>
+                                    </div>
                                 </div>
                             </div>
                             
-                            <div class="complaint-form-category">
-                                <input type="email" name="email" class="form-control" placeholder="Email *" required></textarea>
-                            </div>
-                            <div class="complaint-form-category">
-                                <input type="password" name="password" class="form-control" placeholder="Password *" required></textarea>
-                            </div>
-
-                            <div class="complaint-form-footer">
-                                <div class="row-flex flex-align-between">
-                                    <input class="btn btn-primary" id="submit-complaint" type="submit" value="submit" name="submit" data-target="#data_submit">
-                                </div>
-                            </div>
                         </form>
-                    <?php } else if(isset($_SESSION['nik'])) {?>
-                        <form action="controller.php?aksi=tambah_pengaduan" method="POST" class="complaint-form" enctype="multipart/form-data">
-                            <div class="complaint-form-box">
-                                <br>
-                                <div class="select-complaint">Sampaikan Laporan Anda</div>
-                                <!-- <center><p><b>Pilih Klasifikasi Permintaan Anda</b></p></center> -->
-                                <center>
-                                    <a href="#" class="button1 active">Pengaduan</a>
-                                    <a href="aspirasi.php" class="button1">Aspirasi</a>
-                                    <a href="Check_Ticket.php" class="button1">Cek Tiket</a>
-                                </center>
-                                <div class="complaint-help">
-                                    Perhatikan Cara Menyampaikan 
-                                    <span id="classfication_name">
-                                        Pengaduan
-                                    </span> Yang Baik dan Benar 
-                                    <a href="#modalPengaduan" data-toggle="modal" class="modalTrigger" id="modalToggler" data-modal-name="modalPengaduan" data-target="#bannerformmodal">
-                                        <img alt="info-complaint" class="info-complaint" src="icon/info.svg" >
-                                    </a>
-                                </div>
-                            </div>
-                            
-                            <div class="complaint-form-category">
-                                <input type="text" name="Nama" class="form-control" value="<?php echo $_SESSION['nama_masyarakat']; ?>" placeholder="Nama *" readonly></textarea>
-                            </div>
-                            <div class="complaint-form-category">
-                                <input type="text" name="NIK" class="form-control" value="<?php echo $_SESSION['nik']; ?>" placeholder="NIK *" readonly></textarea>
-                            </div>
-                            <div class="complaint-form-category">
-                                <input type="text" name="No_telepon" class="form-control" value="<?php echo $_SESSION['telepon']; ?>" placeholder="No Telepon *" readonly></textarea>
-                            </div>
-                            <div class="complaint-form-category">
-                                <input type="email" name="Email" class="form-control" value="<?php echo $_SESSION['email']; ?>" placeholder="Email *" readonly></textarea>
-                            </div>
-                            <div class="complaint-form-category">
-                                <select name="unit" id="unit" class="select-tree-view" placeholder="Pilih Unit Layanan" name="category_id" onchange="getId(this.value);" required>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+    <!--Body sudah login  -->
+    <?php } else if(isset($_SESSION['nik'])) { ?>
+        <?php 
+            $id = $_GET['id'];    
+        ?>
+        <!-- Pengaduan -->
+        <?php if($id == 0){?>
+            <section class="page-saranPengaduanAdd bg-halfTosca">
+            <div class="container bg-tosca2">
+                <div class="row">
+                    <div class="col-sm-8 col-sm-offset-2">
+                        <form action="controller.php?aksi=tambah_pengaduan" role="form" enctype="multipart/form-data" method="POST" id="form" >
+                            <h1>SAMPAIKAN PENGADUAN ANDA</h1>
+                            <div class="form-group">
+                                <select name="unit" id="unit" class="form-control" placeholder="Pilih Unit Layanan" name="category_id" onchange="getId(this.value);" required>
                                     <option value="">Unit Layanan *</option>
                                     <?php
                                         $query = "SELECT * FROM unit_layanan";
@@ -244,14 +208,13 @@ session_regenerate_id(true);
                                     ?>
                                 </select>
                             </div>
-                            <div class="complaint-form-category">
-                                <select name="keperluan" id="keperluan" class="select-tree-view" placeholder="Pilih Kategori Laporan Anda" name="category_id" required>
+                            <div class="form-group">
+                                <select name="keperluan" id="keperluan" class="form-control" placeholder="Pilih Kategori Laporan Anda" name="category_id" required>
                                     <option value ="">Keperluan *</option>
                                 </select>
                             </div>
-                            <!-- Kota -->
-                            <div class="complaint-form-category">
-                                <select name="kota" id="kota" class="select-tree-view" placeholder="Pilih Kabupaten / Kota" name="category_id" onchange="getId2(this.value);">
+                            <div class="form-group">
+                                <select name="kota" id="kota" class="form-control" placeholder="Pilih Kabupaten / Kota" name="category_id" onchange="getId2(this.value);">
                                     <option>Kabupaten / Kota *</option>
                                     <?php
                                         $query = "SELECT * FROM kabkota";
@@ -266,170 +229,313 @@ session_regenerate_id(true);
                                 </select>
                             </div>
                             <!-- Kecamatan -->
-                            <div class="complaint-form-category">
-                                <select name="kecamatan" id="kecamatan" class="select-tree-view" placeholder="Pilih Kecamatan" name="category_id" onchange="getId4(this.value);">
+                            <div class="form-group">
+                                <select name="kecamatan" id="kecamatan" class="form-control" placeholder="Pilih Kecamatan" name="category_id" onchange="getId4(this.value);">
                                     <option>Kecamatan *</option>
                                 </select>
                             </div>
                             <!-- Kelurahan/Desa -->
-                            <div class="complaint-form-category">
-                                <select name="keldesa" id="keldesa" class="select-tree-view" placeholder="Pilih Desa/Kelurahan" name="category_id">
+                            <div class="form-group">
+                                <select name="keldesa" id="keldesa" class="form-control" placeholder="Pilih Desa/Kelurahan" name="category_id">
                                     <option>Kelurahan/Desa *</option>
                                 </select>
                             </div>
-                            <label for="classification_complaint" class="choose-classification">Tanggal Kejadian</label>
-                            <div class="complaint-form-category">
+                            <label>Tanggal Kejadian</label>
+                            <div class="form-group">
                                 <input type="date" name="TanggalKejadian" id="TanggalKejadian" class="form-control" placeholder="Tanggal Kejadian *" required></textarea>
                             </div>
-                            <div class="complaint-form-category">
-                                <textarea name="Keterangan" id="" rows="6" class="form-control textarea-flex autosize" placeholder="Keterangan *" required></textarea>
+                            <div class="form-group">
+                                <textarea name="isi" rows="6" class="form-control" placeholder="Keterangan *"></textarea>
                             </div>
-                            <label for="classification_complaint" class="choose-classification">Lampiran Masalah</label>
-                            <div class="complaint-form-category">
-                                <input type="file" name="files[]" id="files[]" class="form-control" accept="image"></textarea>
-                            </div>
-
-                            <div class="complaint-form-footer">
-                                <div class="row-flex flex-align-between">
-                                    <input class="btn btn-primary" id="submit-complaint" type="submit" value="submit" name="submit" data-target="#data_submit">
+                            <div class="row">
+                                <div class="col-sm-6 col-xs-12" style="padding-left: 0px;">
+                                    <div class="col-md-12 col-xs-12">
+                                        <input type="file" name="files[]" id="files[]" class="form-control" accept="image"></textarea>
+                                    </div>		
                                 </div>
+                            </div>
+                            
+                            <br>
+                            <div class="text-center">
+                                <button class="btn btn-flatYellow" type="submit" value="submit" style="font-size: 17px;color: #6241b5; font-weight: 600;">SUBMIT</button>
                             </div>
                         </form>
-                    <?php } ?>
-                    
-                    <div class="modal fade how-to" id="modalPengaduan" tabindex="-1" role="dialog" aria-labelledby="modalPengaduan" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered">
-                            <div class="modal-content">
-                                <div class="modal-header" style="padding: 15px;">
-                                    <button type="button" class="close" style="top: 11px;" data-dismiss="modal" aria-hidden="true">
-                                        ×
-                                    </button>
-                                    <h4 class="modal-title">PANDUAN PENGISIAN PENGADUAN</h4>
+                    </div>
+                                <div class="col-sm-10 col-sm-offset-1">
+                        <div class="list-saranPengaduan">
+                            <h3>DAFTAR PENGADUAN</h3>
+
+                                                <div class="form-group xs-title">
+                                    <div class="title"><a href="https://pengaduan.pu.go.id/home/saran_pengaduan_show/rmxuyLXaiJNEa6eeX_UDQCAiu1ZXiBBr6sGZP2_bxEo" style="text-decoration:none;">P3TGAI</a> &nbsp;
+                                        <i class="fa fa-star fa-1x icon-grey "data-toggle="tooltip" title = Belum&nbsp;Mendapatkan&nbsp;Rating></i><i class="fa fa-star fa-1x icon-grey "data-toggle="tooltip" title = Belum&nbsp;Mendapatkan&nbsp;Rating></i><i class="fa fa-star fa-1x icon-grey "data-toggle="tooltip" title = Belum&nbsp;Mendapatkan&nbsp;Rating></i><i class="fa fa-star fa-1x icon-grey "data-toggle="tooltip" title = Belum&nbsp;Mendapatkan&nbsp;Rating></i><i class="fa fa-star fa-1x icon-grey "data-toggle="tooltip" title = Belum&nbsp;Mendapatkan&nbsp;Rating></i>	
+                                        
+                                    </div>
+                                    <div class="desc">
+                                        Kepada yth kementrian pupr.
+
+            Mohon dengan hormat untuk mendapatkan bantuan program P3TGAI di Daerah irigasi Kuton desa Bligo kecamatan Ngluwar kab Magelang Jawa tengah. Saluran saat ini masih salura							</div>
+                                    <div class="detail"> 
+                                        <span>1 Tindakan</span> | 
+                                        <span>02-Jan-2022</span> | 
+                                        <span>21:17</span> WIB | 
+                                        <span>Hartoto Toto</span>
+                                    </div>
                                 </div>
-                            <img src="images/posterv20.png" width="100%">
+                                                <div class="form-group xs-title">
+                                    <div class="title"><a href="https://pengaduan.pu.go.id/home/saran_pengaduan_show/uO5Ua1-P1qxOisvn2Nv6eRHkvH9NZDMAsZR9W4NBLVk" style="text-decoration:none;">Jalan rusak berlarut2 tidak ada perbaikan </a> &nbsp;
+                                        <i class="fa fa-star fa-1x icon-grey "data-toggle="tooltip" title = Belum&nbsp;Mendapatkan&nbsp;Rating></i><i class="fa fa-star fa-1x icon-grey "data-toggle="tooltip" title = Belum&nbsp;Mendapatkan&nbsp;Rating></i><i class="fa fa-star fa-1x icon-grey "data-toggle="tooltip" title = Belum&nbsp;Mendapatkan&nbsp;Rating></i><i class="fa fa-star fa-1x icon-grey "data-toggle="tooltip" title = Belum&nbsp;Mendapatkan&nbsp;Rating></i><i class="fa fa-star fa-1x icon-grey "data-toggle="tooltip" title = Belum&nbsp;Mendapatkan&nbsp;Rating></i>	
+                                        
+                                    </div>
+                                    <div class="desc">
+                                        Aslm wr wb&nbsp;
+
+            Terima kasih sudah di beri kesempatan untuk melapor jalan yg dekat rumah saya berlokasi di Citeureup jl Industri pasar Citeureup&nbsp;dan lanjut kearah kanto kepala desa tarikolot 							</div>
+                                    <div class="detail"> 
+                                        <span>1 Tindakan</span> | 
+                                        <span>02-Jan-2022</span> | 
+                                        <span>20:24</span> WIB | 
+                                        <span>Himawan  Supiharnowo</span>
+                                    </div>
+                                </div>
+                                                <div class="form-group xs-title">
+                                    <div class="title"><a href="https://pengaduan.pu.go.id/home/saran_pengaduan_show/l1jFuwzQz12ok-DfEoGdO08Xk7R9a3MPuTqh8pJgjRU" style="text-decoration:none;">Uang DP perumahan saya belom balik sepenuhnya</a> &nbsp;
+                                        <i class="fa fa-star fa-1x icon-grey "data-toggle="tooltip" title = Belum&nbsp;Mendapatkan&nbsp;Rating></i><i class="fa fa-star fa-1x icon-grey "data-toggle="tooltip" title = Belum&nbsp;Mendapatkan&nbsp;Rating></i><i class="fa fa-star fa-1x icon-grey "data-toggle="tooltip" title = Belum&nbsp;Mendapatkan&nbsp;Rating></i><i class="fa fa-star fa-1x icon-grey "data-toggle="tooltip" title = Belum&nbsp;Mendapatkan&nbsp;Rating></i><i class="fa fa-star fa-1x icon-grey "data-toggle="tooltip" title = Belum&nbsp;Mendapatkan&nbsp;Rating></i>	
+                                        
+                                    </div>
+                                    <div class="desc">
+                                        Aslm wr wb&nbsp;
+
+            Sebelumnya saya berterima kasih&nbsp;
+
+            Tolong bantuannya untuk Tim PUPR di tahun 2019 saya pengajuan rumah subsidi ke Perumahan Bumi Tajur Raya yang bertempatan di Citeureup Taju							</div>
+                                    <div class="detail"> 
+                                        <span>2 Tindakan</span> | 
+                                        <span>02-Jan-2022</span> | 
+                                        <span>20:12</span> WIB | 
+                                        <span>Himawan  Supiharnowo</span>
+                                    </div>
+                                </div>
+                                                <div class="form-group xs-title">
+                                    <div class="title"><a href="https://pengaduan.pu.go.id/home/saran_pengaduan_show/OK9fBpHBtRko5qygjFttNt9wYSZwSQBpDSrrWIXHuww" style="text-decoration:none;">MCK SUDAH TIDAK BISA DIPAKAI MINTA DI RENOVASI</a> &nbsp;
+                                        <i class="fa fa-star fa-1x icon-grey "data-toggle="tooltip" title = Belum&nbsp;Mendapatkan&nbsp;Rating></i><i class="fa fa-star fa-1x icon-grey "data-toggle="tooltip" title = Belum&nbsp;Mendapatkan&nbsp;Rating></i><i class="fa fa-star fa-1x icon-grey "data-toggle="tooltip" title = Belum&nbsp;Mendapatkan&nbsp;Rating></i><i class="fa fa-star fa-1x icon-grey "data-toggle="tooltip" title = Belum&nbsp;Mendapatkan&nbsp;Rating></i><i class="fa fa-star fa-1x icon-grey "data-toggle="tooltip" title = Belum&nbsp;Mendapatkan&nbsp;Rating></i>	
+                                        
+                                    </div>
+                                    <div class="desc">
+                                        Mohon bantuannya untuk renovasi mck yang ada di lingkungan rumah kami,sudah sangat tidak layak dipakai dan sudah sangat hancur ,sedanngkan mck yang pakai sampai 2 RT,yaitu RT.005 dan RT.006,mohon diti							</div>
+                                    <div class="detail"> 
+                                        <span>1 Tindakan</span> | 
+                                        <span>01-Jan-2022</span> | 
+                                        <span>23:20</span> WIB | 
+                                        <span>Iqbal Priyatna</span>
+                                    </div>
+                                </div>
+                                                <div class="form-group xs-title">
+                                    <div class="title"><a href="https://pengaduan.pu.go.id/home/saran_pengaduan_show/9E8z1wm4DHpRwts-1aLn_YTJhdJbTTLvUaZtMMyJSGQ" style="text-decoration:none;">jalan rusak</a> &nbsp;
+                                        <i class="fa fa-star fa-1x icon-grey "data-toggle="tooltip" title = Belum&nbsp;Mendapatkan&nbsp;Rating></i><i class="fa fa-star fa-1x icon-grey "data-toggle="tooltip" title = Belum&nbsp;Mendapatkan&nbsp;Rating></i><i class="fa fa-star fa-1x icon-grey "data-toggle="tooltip" title = Belum&nbsp;Mendapatkan&nbsp;Rating></i><i class="fa fa-star fa-1x icon-grey "data-toggle="tooltip" title = Belum&nbsp;Mendapatkan&nbsp;Rating></i><i class="fa fa-star fa-1x icon-grey "data-toggle="tooltip" title = Belum&nbsp;Mendapatkan&nbsp;Rating></i>	
+                                        
+                                    </div>
+                                    <div class="desc">
+                                        didepan rumah saya terdapat jalanan yang bolong yang harus ditambal dimana alamatnya adalah jalan menteng granit rt 005 rw 009 no 2 kelurahan pasar manggis kecamtan menteng atas jakarta selatan&nbsp;
+                                    </div>
+                                    <div class="detail"> 
+                                        <span>2 Tindakan</span> | 
+                                        <span>29-Des-2021</span> | 
+                                        <span>14:30</span> WIB | 
+                                        <span>Anonim</span>
+                                    </div>
+                                </div>
+                                                <div class="password text-center xs-title">
+                                <a href="https://pengaduan.pu.go.id//home/saran_pengaduan_all" class="btn btn-flatYellow" style="font-size: 17px;color: #6241b5; font-weight: 600;">Lihat Laporan Lain</a>
+                            </div>	
                         </div>
                     </div>
-                </div>
-                <div class="modal fade how-to" id="modalAspirasi" tabindex="-1" role="dialog" aria-labelledby="modalAspirasi" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content">
-                            <div class="modal-header" style="padding: 15px;">
-                                <button type="button" class="close" style="top: 11px;" data-dismiss="modal" aria-hidden="true">×</button>
-                                <h4 class="modal-title">PANDUAN PENGISIAN ASPIRASI</h4>
                             </div>
-                            <img src="images/posterv20.png" width="100%">
-                        </div>
-                    </div>
-                </div>
-
-                <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-                <script src="resources/select2totree.css"></script>
-                <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css">
-                <link rel="stylesheet" type="text/css" href="resources/select2totree.css">  
             </div>
-            <div class="col-sm-12">
-                <div class="text-center text-muted h3 mg-0 mg-b-30">PROSES LAPORAN</div>
-                <div class="row bs-wizard" style="border-bottom:0;">
-                    <div class="col-xs-2 col-xs-offset-1 bs-wizard-step">
-                        <div class="progress"><div class="progress-bar"></div></div>
-                        <span class="bs-wizard-dot">
-                            <!-- <i class="fa fa-pencil-square-o"></i> -->
-                            <img src="icon/Laporan1.png" style="width: 100%;">
-                        </span>
-                        <div class="text-center bs-wizard-stepnum">Laporan</div>
-                        <div class="bs-wizard-info text-center">
-                            Tulis laporan atau aspirasi anda
-                        </div>
+            </section>
+        <!-- Aspirasi -->
+        <?php } else if($id == 1){?>
+            <section class="page-saranPengaduanAdd bg-halfTosca">
+            <div class="container bg-tosca2">
+                <div class="row">
+                    <div class="col-sm-8 col-sm-offset-2">
+                        <form action="controller.php?aksi=tambah_aspirasi" role="form" enctype="multipart/form-data" method="POST" id="form" >
+                            <h1>SAMPAIKAN ASPIRASI ANDA</h1>
+                            <div class="form-group">
+                                <select name="unit" id="unit" class="form-control" placeholder="Pilih Unit Layanan" name="category_id" onchange="getId(this.value);" required>
+                                    <option value="">Unit Layanan *</option>
+                                    <?php
+                                        $query = "SELECT * FROM unit_layanan";
+                                        $results=mysqli_query($koneksi, $query);
+                                        //loop
+                                        foreach ($results as $unit){
+                                    ?>
+                                    <option value="<?php echo $unit["id"];?>"><?php echo $unit["nama_unit"];?></option>
+                                    <?php
+                                        }
+                                    ?>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <select name="keperluan" id="keperluan" class="form-control" placeholder="Pilih Kategori Laporan Anda" name="category_id" required>
+                                    <option value ="">Keperluan *</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <select name="kota" id="kota" class="form-control" placeholder="Pilih Kabupaten / Kota" name="category_id" onchange="getId2(this.value);">
+                                    <option>Kabupaten / Kota *</option>
+                                    <?php
+                                        $query = "SELECT * FROM kabkota";
+                                        $results=mysqli_query($koneksi, $query);
+                                        //loop
+                                        foreach ($results as $unit){
+                                    ?>
+                                    <option value="<?php echo $unit["id_kabkota"];?>"><?php echo $unit["nama_kabkota"];?></option>
+                                    <?php
+                                        }
+                                    ?>
+                                </select>
+                            </div>
+                            <!-- Kecamatan -->
+                            <div class="form-group">
+                                <select name="kecamatan" id="kecamatan" class="form-control" placeholder="Pilih Kecamatan" name="category_id" onchange="getId4(this.value);">
+                                    <option>Kecamatan *</option>
+                                </select>
+                            </div>
+                            <!-- Kelurahan/Desa -->
+                            <div class="form-group">
+                                <select name="keldesa" id="keldesa" class="form-control" placeholder="Pilih Desa/Kelurahan" name="category_id">
+                                    <option>Kelurahan/Desa *</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <textarea name="isi" rows="6" class="form-control" placeholder="Keterangan *"></textarea>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6 col-xs-12" style="padding-left: 0px;">
+                                    <div class="col-md-12 col-xs-12">
+                                        <input type="file" name="files[]" id="files[]" class="form-control" accept="image"></textarea>
+                                    </div>		
+                                </div>
+                            </div>
+                            
+                            <br>
+                            <div class="text-center">
+                                <button class="btn btn-flatYellow" type="submit" value="submit" style="font-size: 17px;color: #6241b5; font-weight: 600;">SUBMIT</butt>
+                            </div>
+                        </form>
                     </div>
+                                <div class="col-sm-10 col-sm-offset-1">
+                        <div class="list-saranPengaduan">
+                            <h3>DAFTAR ASPIRASI</h3>
 
-                    <div class="col-xs-2 bs-wizard-step">
-                        <div class="progress"><div class="progress-bar"></div></div>
-                        <span class="bs-wizard-dot">
-                            <!-- <i class="fa fa-mail-forward"></i> -->
-                            <img src="icon/Verifikasi1.png" style="width: 100%;">
-                        </span>
-                        <div class="text-center bs-wizard-stepnum">Verifikasi</div>
-                        <div class="bs-wizard-info text-center">
-                            Proses verifikasi akan berjalan selama 3 hari, setelah itu akan diteruskan ke pihak yang bersangkutan
-                        </div>
-                    </div>
+                                                <div class="form-group xs-title">
+                                    <div class="title"><a href="https://pengaduan.pu.go.id/home/saran_pengaduan_show/rmxuyLXaiJNEa6eeX_UDQCAiu1ZXiBBr6sGZP2_bxEo" style="text-decoration:none;">P3TGAI</a> &nbsp;
+                                        <i class="fa fa-star fa-1x icon-grey "data-toggle="tooltip" title = Belum&nbsp;Mendapatkan&nbsp;Rating></i><i class="fa fa-star fa-1x icon-grey "data-toggle="tooltip" title = Belum&nbsp;Mendapatkan&nbsp;Rating></i><i class="fa fa-star fa-1x icon-grey "data-toggle="tooltip" title = Belum&nbsp;Mendapatkan&nbsp;Rating></i><i class="fa fa-star fa-1x icon-grey "data-toggle="tooltip" title = Belum&nbsp;Mendapatkan&nbsp;Rating></i><i class="fa fa-star fa-1x icon-grey "data-toggle="tooltip" title = Belum&nbsp;Mendapatkan&nbsp;Rating></i>	
+                                        
+                                    </div>
+                                    <div class="desc">
+                                        Kepada yth kementrian pupr.
 
-                    <div class="col-xs-2 bs-wizard-step">
-                        <div class="progress"><div class="progress-bar"></div></div>
-                        <span class="bs-wizard-dot">
-                            <!-- <i class="fa fa-comments"></i> -->
-                            <img src="icon/Tindak Lanjut1.png" style="width: 100%;">
-                        </span>
-                        <div class="text-center bs-wizard-stepnum">Tindak Lanjut</div>
-                        <div class="bs-wizard-info text-center">
-                            Pihak yang bersangkutan akan menindaklanjuti laporan yang telah anda sampaikan
-                        </div>
-                    </div>
+            Mohon dengan hormat untuk mendapatkan bantuan program P3TGAI di Daerah irigasi Kuton desa Bligo kecamatan Ngluwar kab Magelang Jawa tengah. Saluran saat ini masih salura							</div>
+                                    <div class="detail"> 
+                                        <span>1 Tindakan</span> | 
+                                        <span>02-Jan-2022</span> | 
+                                        <span>21:17</span> WIB | 
+                                        <span>Hartoto Toto</span>
+                                    </div>
+                                </div>
+                                                <div class="form-group xs-title">
+                                    <div class="title"><a href="https://pengaduan.pu.go.id/home/saran_pengaduan_show/uO5Ua1-P1qxOisvn2Nv6eRHkvH9NZDMAsZR9W4NBLVk" style="text-decoration:none;">Jalan rusak berlarut2 tidak ada perbaikan </a> &nbsp;
+                                        <i class="fa fa-star fa-1x icon-grey "data-toggle="tooltip" title = Belum&nbsp;Mendapatkan&nbsp;Rating></i><i class="fa fa-star fa-1x icon-grey "data-toggle="tooltip" title = Belum&nbsp;Mendapatkan&nbsp;Rating></i><i class="fa fa-star fa-1x icon-grey "data-toggle="tooltip" title = Belum&nbsp;Mendapatkan&nbsp;Rating></i><i class="fa fa-star fa-1x icon-grey "data-toggle="tooltip" title = Belum&nbsp;Mendapatkan&nbsp;Rating></i><i class="fa fa-star fa-1x icon-grey "data-toggle="tooltip" title = Belum&nbsp;Mendapatkan&nbsp;Rating></i>	
+                                        
+                                    </div>
+                                    <div class="desc">
+                                        Aslm wr wb&nbsp;
 
-                    <div class="col-xs-2 bs-wizard-step">
-                        <div class="progress"><div class="progress-bar"></div></div>
-                        <span class="bs-wizard-dot">
-                            <!-- <i class="fa fa-commenting-o"></i> -->
-                            <img src="icon/Tanggapan1.png" style="width: 100%;">
-                        </span>
-                        <div class="text-center bs-wizard-stepnum">Tanggapan</div>
-                        <div class="bs-wizard-info text-center">
-                            Anda akan diberikan waktu 5 hari untuk menanggapi balasan yang telah diberikan oleh pihak yang bersangkutan
-                        </div>
-                    </div>
+            Terima kasih sudah di beri kesempatan untuk melapor jalan yg dekat rumah saya berlokasi di Citeureup jl Industri pasar Citeureup&nbsp;dan lanjut kearah kanto kepala desa tarikolot 							</div>
+                                    <div class="detail"> 
+                                        <span>1 Tindakan</span> | 
+                                        <span>02-Jan-2022</span> | 
+                                        <span>20:24</span> WIB | 
+                                        <span>Himawan  Supiharnowo</span>
+                                    </div>
+                                </div>
+                                                <div class="form-group xs-title">
+                                    <div class="title"><a href="https://pengaduan.pu.go.id/home/saran_pengaduan_show/l1jFuwzQz12ok-DfEoGdO08Xk7R9a3MPuTqh8pJgjRU" style="text-decoration:none;">Uang DP perumahan saya belom balik sepenuhnya</a> &nbsp;
+                                        <i class="fa fa-star fa-1x icon-grey "data-toggle="tooltip" title = Belum&nbsp;Mendapatkan&nbsp;Rating></i><i class="fa fa-star fa-1x icon-grey "data-toggle="tooltip" title = Belum&nbsp;Mendapatkan&nbsp;Rating></i><i class="fa fa-star fa-1x icon-grey "data-toggle="tooltip" title = Belum&nbsp;Mendapatkan&nbsp;Rating></i><i class="fa fa-star fa-1x icon-grey "data-toggle="tooltip" title = Belum&nbsp;Mendapatkan&nbsp;Rating></i><i class="fa fa-star fa-1x icon-grey "data-toggle="tooltip" title = Belum&nbsp;Mendapatkan&nbsp;Rating></i>	
+                                        
+                                    </div>
+                                    <div class="desc">
+                                        Aslm wr wb&nbsp;
 
-                    <div class="col-xs-2 bs-wizard-step">
-                        <div class="progress"><div class="progress-bar"></div></div>
-                        <span class="bs-wizard-dot">
-                            <!-- <i class="fa fa-check"></i> -->
-                            <img src="icon/Selesai1.png" style="width: 100%;">
-                        </span>
-                        <div class="text-center bs-wizard-stepnum">Selesai</div>
-                        <div class="bs-wizard-info text-center">
-                                Laporan anda akan ditindaklanjuti hingga selesai
+            Sebelumnya saya berterima kasih&nbsp;
+
+            Tolong bantuannya untuk Tim PUPR di tahun 2019 saya pengajuan rumah subsidi ke Perumahan Bumi Tajur Raya yang bertempatan di Citeureup Taju							</div>
+                                    <div class="detail"> 
+                                        <span>2 Tindakan</span> | 
+                                        <span>02-Jan-2022</span> | 
+                                        <span>20:12</span> WIB | 
+                                        <span>Himawan  Supiharnowo</span>
+                                    </div>
+                                </div>
+                                                <div class="form-group xs-title">
+                                    <div class="title"><a href="https://pengaduan.pu.go.id/home/saran_pengaduan_show/OK9fBpHBtRko5qygjFttNt9wYSZwSQBpDSrrWIXHuww" style="text-decoration:none;">MCK SUDAH TIDAK BISA DIPAKAI MINTA DI RENOVASI</a> &nbsp;
+                                        <i class="fa fa-star fa-1x icon-grey "data-toggle="tooltip" title = Belum&nbsp;Mendapatkan&nbsp;Rating></i><i class="fa fa-star fa-1x icon-grey "data-toggle="tooltip" title = Belum&nbsp;Mendapatkan&nbsp;Rating></i><i class="fa fa-star fa-1x icon-grey "data-toggle="tooltip" title = Belum&nbsp;Mendapatkan&nbsp;Rating></i><i class="fa fa-star fa-1x icon-grey "data-toggle="tooltip" title = Belum&nbsp;Mendapatkan&nbsp;Rating></i><i class="fa fa-star fa-1x icon-grey "data-toggle="tooltip" title = Belum&nbsp;Mendapatkan&nbsp;Rating></i>	
+                                        
+                                    </div>
+                                    <div class="desc">
+                                        Mohon bantuannya untuk renovasi mck yang ada di lingkungan rumah kami,sudah sangat tidak layak dipakai dan sudah sangat hancur ,sedanngkan mck yang pakai sampai 2 RT,yaitu RT.005 dan RT.006,mohon diti							</div>
+                                    <div class="detail"> 
+                                        <span>1 Tindakan</span> | 
+                                        <span>01-Jan-2022</span> | 
+                                        <span>23:20</span> WIB | 
+                                        <span>Iqbal Priyatna</span>
+                                    </div>
+                                </div>
+                                                <div class="form-group xs-title">
+                                    <div class="title"><a href="https://pengaduan.pu.go.id/home/saran_pengaduan_show/9E8z1wm4DHpRwts-1aLn_YTJhdJbTTLvUaZtMMyJSGQ" style="text-decoration:none;">jalan rusak</a> &nbsp;
+                                        <i class="fa fa-star fa-1x icon-grey "data-toggle="tooltip" title = Belum&nbsp;Mendapatkan&nbsp;Rating></i><i class="fa fa-star fa-1x icon-grey "data-toggle="tooltip" title = Belum&nbsp;Mendapatkan&nbsp;Rating></i><i class="fa fa-star fa-1x icon-grey "data-toggle="tooltip" title = Belum&nbsp;Mendapatkan&nbsp;Rating></i><i class="fa fa-star fa-1x icon-grey "data-toggle="tooltip" title = Belum&nbsp;Mendapatkan&nbsp;Rating></i><i class="fa fa-star fa-1x icon-grey "data-toggle="tooltip" title = Belum&nbsp;Mendapatkan&nbsp;Rating></i>	
+                                        
+                                    </div>
+                                    <div class="desc">
+                                        didepan rumah saya terdapat jalanan yang bolong yang harus ditambal dimana alamatnya adalah jalan menteng granit rt 005 rw 009 no 2 kelurahan pasar manggis kecamtan menteng atas jakarta selatan&nbsp;
+                                    </div>
+                                    <div class="detail"> 
+                                        <span>2 Tindakan</span> | 
+                                        <span>29-Des-2021</span> | 
+                                        <span>14:30</span> WIB | 
+                                        <span>Anonim</span>
+                                    </div>
+                                </div>
+                                                <div class="password text-center xs-title">
+                                <a href="https://pengaduan.pu.go.id//home/saran_pengaduan_all" class="btn btn-flatYellow" style="font-size: 17px;color: #6241b5; font-weight: 600;">Lihat Laporan Lain</a>
+                            </div>	
                         </div>
                     </div>
-                </div>
+                            </div>
             </div>
-        </div>
-    </section>
-        <section class="block block-counter" id="hero" style="color:white; padding: 40px 0 40px;">
-            <div class="container">
-                <div class="text-center text-muted h3 mg-0 mg-b-30" style="color: white">JUMLAH LAPORAN DAN ASPIRASI SEKARANG</div>
-                <?php 
-                    $query = "SELECT COUNT(ID_Pelaporan) AS JumlahLaporan FROM pelaporan;";
-                    $exec = mysqli_query($koneksi, $query);
-                    $fetch_q = mysqli_fetch_array($exec);
-                ?>
-                <div class="row-flex flex-tablet text-center">
-                    <div class="post post-counter" style="margin-left: auto;margin-right: auto;">
-                        <div class="counter-count"> 
-                            <span class="numscroller" data-min='0' data-max=<?= $fetch_q['JumlahLaporan'] ?> data-delay='2' data-increment='1000'></span></div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <div class="clearfix"></div>
+            </section>
+        <?php } ?>
+    <?php } ?>
+    <footer>
+	<div class="row">
+		<div class="col-xs-12 col-sm-4 xs-align-center">Universitas Bina Nusantara Malang<br/>Araya Mansion No. 8 - 22, Genitri, Tirtomoyo, Kec. Pakis, Kabupaten Malang, Jawa Timur 65154<br/></div>
+		<div class="col-xs-12 col-sm-5 text-center xs-align-center">
+			Hak Cipta @ <script>document.write(new Date().getFullYear())</script> <a href="https://www.wadul.my.id/" style="text-decoration:none;">Wadul</a><br/>Hak cipta dilindungi Undang - Undang
+		</div>
+	</div>
+    </footer>
 
-        <footer>
-                <div class="post-footer">
-                    <div class="footer-Hak Cipta">
-                        Database-Semester 3
-                    </div>
-                </div>
-            </div>
-        </footer>
-
-    <div class="loadedcontentmodal"></div>
-
-    <script src="https://www.lapor.go.id/combine/412ecc180b60d48eb196db8827c68391-1634533910"></script>
-    <script src="resources/dropzone.js"></script>
-    <script src="https://www.lapor.go.id/combine/e0149bf6f4f799c71effe2f3272859ac-1617850352"></script>
-    <script src="https://www.lapor.go.id/combine/6853ff71a407ef7906205e10eefc483e-1617850351"></script>
-
-    <script src="resources/leaflet.js"></script>
-    <script src="resources/leaflet-providers.js"></script>
-    <script src="resources/leaflet.ajax.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="assets/owl.carousel.js"></script>
+	<script src="https://getbootstrap.com/docs/3.3/dist/js/bootstrap.min.js"></script>
+	<script src='https://www.google.com/recaptcha/api.js'></script>
+	<script src="assets/jquery.flexslider.js"></script>
+	<script src="assets/bootstrap-datepicker.js"></script>
+	<!-- <script src="https://pengaduan.pu.go.id/assets/common/js/tinymce/tinymce.min.js"></script> -->
+	<script type="text/javascript" src="assets/ckeditor.js"></script>
+	<script src="assets/cropbox.js"></script>
+	<script src="assets/app.js"></script>
     <script>
         function getId(val){
             //We create ajax function

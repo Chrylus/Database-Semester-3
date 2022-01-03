@@ -229,7 +229,7 @@
                             $_SESSION['telepon'] = $row['No_telepon'];
                             $_SESSION['email'] = $row['Email'];
                             $_SESSION['keadaan'] = "login";
-                            header("location:index.php?=sukses");
+                            header("location:index.php?pesan=sukses&id=0");
                         }else{
                             header("location:index.php?pesan=password salah");
                         }
