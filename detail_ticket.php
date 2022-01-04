@@ -87,6 +87,9 @@ $id = $_GET['id'];
                     <li>
                         <a href="index.php?id=1">Aspirasi</a>
                     </li>
+                    <li>
+                        <a href="index.php?id=2">Cek Tiket</a>
+                    </li>
                     <li >
                         <a href="mekanisme.php">Mekanisme</a>
                     </li>
@@ -96,7 +99,7 @@ $id = $_GET['id'];
                                                                 <img  src="images/avatar.png" alt="" width="50">
                                                         </a>
                             <ul class="dropdown-menu xs-align-center" aria-labelledby="dropdownMenu1">
-                                <li><a href="#">Laporan Saya</a></li>
+                                <li><a href="index.php?id=3">Laporan Saya</a></li>
                                 <li><a href="controller.php?aksi=logout_user">Keluar</a></li>
                             </ul>
                         </div>
@@ -180,9 +183,15 @@ $id = $_GET['id'];
                             $id_kabkota = $fetch_header['KabKota'];
                             $id_kecamatan = $fetch_header['Kecamatan'];
                             $id_keldesa =  $fetch_header['KelDesa'];
-                            $kabkota = "SELECT nama_kabkota FROM kabkota WHERE id_kabkota = '$id_kabkota'";
-                            $kecamatan = "SELECT nama_kecamatan FROM kecamatan WHERE id_kecamatan = '$id_kecamatan'";
-                            $keldesa = "SELECT nama_keldesa FROM keldesa WHERE id_keldesa = '$id_keldesa'";
+                            $kabkota    = "SELECT nama_kabkota FROM kabkota WHERE id_kabkota = '$id_kabkota'";
+                            $kecamatan  = "SELECT nama_kecamatan FROM kecamatan
+                                            INNER JOIN header_pelaporan ON header_pelaporan.KabKota = kecamatan.id_kabkota
+                                            INNER JOIN pelaporan ON header_pelaporan.ID_Pelaporan = pelaporan.ID_Pelaporan
+                                                WHERE header_pelaporan.Kecamatan = kecamatan.id_kecamatan AND pelaporan.ID_Pelaporan='$id'";
+                            $keldesa    = "SELECT nama_keldesa FROM keldesa
+                                            INNER JOIN header_pelaporan ON header_pelaporan.KabKota = keldesa.id_kabkota
+                                            INNER JOIN pelaporan ON header_pelaporan.ID_Pelaporan = pelaporan.ID_Pelaporan
+                                                WHERE header_pelaporan.Kecamatan = keldesa.id_kecamatan AND header_pelaporan.KelDesa = keldesa.id_keldesa AND pelaporan.ID_Pelaporan='$id'";
                             // Execute
                             $exec_kabkota = mysqli_query($koneksi, $kabkota);
                             $exec_kecamatan = mysqli_query($koneksi, $kecamatan);
