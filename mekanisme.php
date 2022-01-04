@@ -56,7 +56,8 @@ session_regenerate_id(true);
                 
             </form>
             <ul class="nav navbar-nav navbar-right xs-align-center">
-                <li ><a href="mekanisme.php">Mekanisme</a></li>
+            <li><a href="../Database-Semester-3/admin/login.php">Admin</a></li>
+             <li ><a href="mekanisme.php">Mekanisme</a></li>
             </ul>
         </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
