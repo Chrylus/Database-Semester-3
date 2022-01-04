@@ -155,7 +155,7 @@
                                                                     <img  src="images/avatar.png" alt="" width="50">
                                                             </a>
                                 <ul class="dropdown-menu xs-align-center" aria-labelledby="dropdownMenu1">
-                                    <li><a href="#">Laporan Saya</a></li>
+                                    <li><a href="index.php?id=3">Laporan Saya</a></li>
                                     <li><a href="controller.php?aksi=logout_user">Keluar</a></li>
                                 </ul>
                             </div>
@@ -487,7 +487,8 @@
                     </div>
                 </div>
             </section>
-
+        
+        <!-- Cek Tiket -->
         <?php } else if($id == 2){?>
             <section class="page-saranPengaduanAdd bg-halfTosca">
                 <div class="container bg-tosca2">
@@ -503,6 +504,61 @@
                                     <button class="btn btn-flatYellow" type="submit" value="Search" name ="submit" style="font-size: 17px;color: #6241b5; font-weight: 600;">SUBMIT</button>
                                 </div>
                             </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        
+        <!-- Cek Laporan Saya -->
+        <?php } else if($id == 3){?>
+            <?php
+                $nik = ($_SESSION['nik']);
+            ?>
+            <section class="page-saranPengaduanAdd bg-halfTosca">
+                <div class="container bg-tosca2">
+                    <div class="col-sm-10 col-sm-offset-1">
+                        <div class="list-saranPengaduan">
+                            <h3>LAPORAN SAYA</h3>
+
+                            <?php 
+                                $list_p = "SELECT * FROM pelaporan WHERE NIK LIKE '$nik' LIMIT 4";
+                                $exec_list = mysqli_query($koneksi, $list_p);
+                            ?>
+                            <?php while ($row = mysqli_fetch_array($exec_list)){ ?>
+                                <?php
+                                    $unit = $row['Tujuan']; 
+                                    $data_unit = "SELECT * FROM unit_layanan WHERE id = '$unit'";
+                                    $exec_unit = mysqli_query($koneksi, $data_unit);
+                                    $fetch_unit = mysqli_fetch_array($exec_unit);
+                                   
+                                    $nik_pnd = $row['NIK'];
+                                    $nama_pend = "SELECT Nama FROM penduduk WHERE NIK = '$nik_pnd'";
+                                    $exec_pnd = mysqli_query($koneksi, $nama_pend);
+                                    $fetch_penduduk = mysqli_fetch_array($exec_pnd);
+
+                                    $date = $row['TanggalLaporan'];
+                                    $month = array('Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember');
+                                    $tanggal_hari = (int)date('d', strtotime($date));
+                                    $bulan_hari = $month[((int)date('m', strtotime($date))) - 1];
+                                    $tahun_hari = (int)date('Y', strtotime($date));
+                                ?>
+                                <div class="form-group xs-title">
+                                    <div class="title"><a href="detail_ticket.php?id=<?=$row['ID_Pelaporan']?>&jenis=1" style="text-decoration:none;"><?=$fetch_unit['nama_unit']?> - <?=$row['Ticket']?></a> &nbsp;	
+                                    </div>
+                                    <div class="desc">
+                                        <?=$row['Keterangan']?>
+                                    </div>
+                                    <div class="detail">  
+                                        <span><?=$tanggal_hari.' '.$bulan_hari.' '.$tahun_hari?></span> |  
+                                        <span><?=$fetch_penduduk['Nama']?></span>
+                                    </div>
+                                </div>
+
+                            <?php } ?>
+
+                            <div class="password text-center xs-title">
+                                <a href="https://pengaduan.pu.go.id//home/saran_pengaduan_all" class="btn btn-flatYellow" style="font-size: 17px;color: #6241b5; font-weight: 600;">Lihat Laporan Lain</a>
+                            </div>	
                         </div>
                     </div>
                 </div>

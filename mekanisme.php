@@ -96,7 +96,7 @@ session_regenerate_id(true);
                                                                 <img  src="images/avatar.png" alt="" width="50">
                                                         </a>
                             <ul class="dropdown-menu xs-align-center" aria-labelledby="dropdownMenu1">
-                                <li><a href="#">Laporan Saya</a></li>
+                                <li><a href="index.php?id=3">Laporan Saya</a></li>
                                 <li><a href="controller.php?aksi=logout_user">Keluar</a></li>
                             </ul>
                         </div>

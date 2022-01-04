@@ -50,8 +50,8 @@ $data6   = mysqli_fetch_assoc($result6);
 $tujuan = $data6['Tujuan'];
 
 $sql7    = "select keperluan.keperluan as Keperluan from keperluan
-                INNER JOIN pelaporan ON pelaporan.Tujuan = keperluan.topik_id
-                INNER JOIN penduduk ON pelaporan.NIK = penduduk.NIK 
+                INNER JOIN unit_layanan ON unit_layanan.id = keperluan.id
+                INNER JOIN pelaporan ON keperluan.topik_id = pelaporan.Keperluan
                     WHERE Ticket = '$id'";
 $result7 = mysqli_query($koneksi, $sql7);
 $data7   = mysqli_fetch_assoc($result7);
@@ -80,23 +80,18 @@ $result10 = mysqli_query($koneksi, $sql10);
 $data10   = mysqli_fetch_assoc($result10);
 $kabkota = $data10['KabKota'];
 
-$sql10    = "select nama_kecamatan as Kecamatan from kecamatan
-                INNER JOIN kabkota ON kecamatan.id_kabkota = kabkota.id_kabkota
-                INNER JOIN header_pelaporan ON header_pelaporan.KabKota = kabkota.id_kabkota
+$sql10    = "select nama_kecamatan AS 'Kecamatan' from kecamatan
+                INNER JOIN header_pelaporan ON header_pelaporan.KabKota = kecamatan.id_kabkota
                 INNER JOIN pelaporan ON header_pelaporan.ID_Pelaporan = pelaporan.ID_Pelaporan
-                INNER JOIN penduduk ON pelaporan.NIK = penduduk.NIK 
-                    WHERE Ticket = '$id'";
+                    WHERE header_pelaporan.Kecamatan = kecamatan.id_kecamatan AND Ticket = '$id'";
 $result10 = mysqli_query($koneksi, $sql10);
 $data10   = mysqli_fetch_assoc($result10);
 $kecamatan = $data10['Kecamatan'];
 
-$sql11    = "select nama_keldesa as KelDesa from keldesa
-                INNER JOIN kecamatan ON keldesa.id_kecamatan = kecamatan.id_kecamatan
-                INNER JOIN kabkota ON kecamatan.id_kabkota = kabkota.id_kabkota
-                INNER JOIN header_pelaporan ON header_pelaporan.KabKota = kabkota.id_kabkota
+$sql11    = "select nama_keldesa AS 'KelDesa' from keldesa
+                INNER JOIN header_pelaporan ON header_pelaporan.KabKota = keldesa.id_kabkota
                 INNER JOIN pelaporan ON header_pelaporan.ID_Pelaporan = pelaporan.ID_Pelaporan
-                INNER JOIN penduduk ON pelaporan.NIK = penduduk.NIK 
-                    WHERE Ticket = '$id'";
+                    WHERE header_pelaporan.Kecamatan = keldesa.id_kecamatan AND header_pelaporan.KelDesa = keldesa.id_keldesa AND Ticket = '$id'";
 $result11 = mysqli_query($koneksi, $sql11);
 $data11   = mysqli_fetch_assoc($result11);
 $keldesa = $data11['KelDesa'];
