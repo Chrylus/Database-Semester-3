@@ -194,11 +194,11 @@
             break;
         case 'login':
             if(isset($data['submit'])){
-                $username = $_POST['username']; //menampung data yang dikirim dari input username
+                $email = $_POST['email']; //menampung data yang dikirim dari input username
                 $password = $_POST['password']; //menampung data yang dikirim dari input password
-                $esc_username = mysqli_real_escape_string($koneksi, $username);
+                $esc_email = mysqli_real_escape_string($koneksi, $email);
                 $esc_password = mysqli_real_escape_string($koneksi, $password);
-                $data=$koneksi->query("SELECT * FROM msadmin WHERE username='$esc_username'");
+                $data=$koneksi->query("SELECT * FROM penduduk WHERE Email='$esc_email'");
                 
                 $cek_login = mysqli_num_rows($data);
                 //menghitung jumlah data yang didapat
@@ -208,10 +208,17 @@
                     $password = $row['password'];
                     $verify = password_verify($esc_password, $password);
                     if($verify){
-                        $_SESSION['username'] = $row['username'];
-                        $_SESSION['nama'] = $row['name'];
-                        $_SESSION['status'] = "login_admin";
-                        $_SESSION['id']= $row['id'];
+                        $nik = $row['NIK'];
+                        $cek_admin = $koneksi->query("SELECT * FROM msadmin WHERE NIK = '$nik'");
+                        $rows_admin = mysqli_num_rows($cek_admin);
+                        if($rows_admin > 0){
+                            $_SESSION['username'] = $row['Nama'];
+                            $_SESSION['nama'] = $row['Nama'];
+                            $_SESSION['id']= $row['NIK'];
+                            $_SESSION['No_telepon'] = $row['No_telepon'];
+                            $_SESSION['email']= $row['Email'];
+                            $_SESSION['status'] = "login_admin";
+                        }
                         header("location:admin/index.php"); //berpindah ke halaman beranda
                     }else{
                         header("location:admin/login.php?pesan=password salah");
@@ -297,18 +304,11 @@
             header("location:index.php");
             break;
         case 'tambah_admin':
-            $nama = $_POST['name'];
             $nik = $_POST['nik'];
-            $username = $_POST['username'];
-            $password = $_POST['password'];
             // Escape
-            $esc_nama = mysqli_real_escape_string($koneksi, $nama);
             $esc_nik = mysqli_real_escape_string($koneksi, $nik);
-            $esc_username = mysqli_real_escape_string($koneksi, $username);
-            $esc_password = mysqli_real_escape_string($koneksi, $password);
             // Hash PW
-            $hash_pw = password_hash($esc_password, PASSWORD_DEFAULT);
-            $query = "INSERT INTO msadmin (name, NIK, username, password) VALUES ('$esc_nama', '$esc_nik', '$esc_username', '$hash_pw')";
+            $query = "INSERT INTO msadmin (NIK) VALUES ('$esc_nik')";
             $exec = mysqli_query($koneksi, $query);
             if($exec){
                 header("location: admin/super/admin.php?alert=sukses");
@@ -318,20 +318,22 @@
             break;
         case 'edit_admin':
             $id = $_GET['id'];
-            $nama = $_POST['name'];
+            $nama = $_POST['nama'];
             $nik = $_POST['nik'];
-            $username = $_POST['username'];
+            $nomor_telepon = $_POST['telepon'];
+            $email = $_POST['email'];
             $password = $_POST['password'];
             // Escape
             $esc_id = mysqli_real_escape_string($koneksi, $id);
             $esc_nama = mysqli_real_escape_string($koneksi, $nama);
             $esc_nik = mysqli_real_escape_string($koneksi, $nik);
-            $esc_username = mysqli_real_escape_string($koneksi, $username);
+            $esc_telepon = mysqli_real_escape_string($koneksi, $nomor_telepon);
+            $esc_email = mysqli_real_escape_string($koneksi, $email);
             $esc_password = mysqli_real_escape_string($koneksi, $password);
             // Hash PW
             $hash_pw = password_hash($esc_password, PASSWORD_DEFAULT);
             //$query = "UPDATE msadmin SET (name, username, password) VALUES ('$esc_nama', '$esc_username', '$hash_pw') WHERE id = '$_GET[id]'";
-            $query = "UPDATE msadmin SET name = '$esc_nama', NIK = '$esc_nik', username = '$esc_username', password = '$hash_pw' WHERE id = '$esc_id'";
+            $query = "UPDATE penduduk SET Nama = '$esc_nama', NIK = '$esc_nik', No_telepon = '$esc_telepon', Email = '$esc_email', password = '$hash_pw' WHERE NIK = '$esc_id'";
 
             $exec = mysqli_query($koneksi, $query);
             if($exec){
@@ -343,7 +345,7 @@
         case 'hapus_admin':
             $id = $_GET['id'];
             $esc_id = mysqli_real_escape_string($koneksi, $id);
-            $query = "DELETE FROM msadmin WHERE id = '$esc_id'";
+            $query = "DELETE FROM msadmin WHERE NIK = '$esc_id'";
             $exec = mysqli_query($koneksi, $query);
             if($exec){
                 header("location: admin/super/admin.php?alert=sukses");

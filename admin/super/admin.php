@@ -29,7 +29,10 @@
     <link rel="icon" href="../user/images/Binus Logo.png">
     <!-- Table sort -->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
+    <link href="select2/dist/css/select2.min.css" rel="stylesheet" type="text/css">
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
+    <script src="../vendor/jquery/jquery.min.js"></script>
+
 </head>
 
 <body id="page-top">
@@ -157,43 +160,47 @@
                     <div class="card-body">
                     <?php if(isset($_GET['hal']) == "edit"){?>
                         <?php 
-                            $id = $_GET['id'];
-                            $query = "SELECT * FROM msadmin WHERE id = '$_GET[id]'";
+                            $query = "SELECT * FROM penduduk WHERE NIK = '$_GET[id]'";
                             $exec = mysqli_query($koneksi, $query);
                             $fetch = mysqli_fetch_array($exec);    
                         ?>
                         <form method="post" action="../../controller.php?aksi=edit_admin&id=<?=$fetch['id']?>">
                         <div class="complaint-form-category">
-                            <input type="text" name="name" class="form-control" placeholder="Nama *" value="<?=$fetch['name']?>" required></textarea>
+                            <input type="text" name="nama" class="form-control" placeholder="Nama *" value="<?=$fetch['Nama']?>" required></textarea>
                         </div>
                         <div class="complaint-form-category">
                             <input type="text" name="nik" class="form-control" placeholder="NIK *" value="<?=$fetch['NIK']?>" required></textarea>
                         </div>
                         <div class="complaint-form-category">
-                            <input type="text" name="username" class="form-control" placeholder="Username *" value="<?=$fetch['username']?>" required></textarea>
+                            <input type="text" name="telepon" class="form-control" placeholder="Nomor Telepon *" value="<?=$fetch['No_telepon']?>" required></textarea>
                         </div>
                         <div class="complaint-form-category">
-                            <input type="password" name="password" class="form-control" placeholder="Password   *" required></textarea>
+                            <input type="text" name="email" class="form-control" placeholder="Email *" value="<?=$fetch['Email']?>" required></textarea>
+                        </div>
+                        <div class="complaint-form-category">
+                            <input type="password" name="password" class="form-control" placeholder="Password *" required></textarea>
                         </div>
                         <br>
                         <button type="submit" class="btn btn-primary">Simpan</button>
                     </form>
                     <?php } else if(isset($_GET['hal']) != "edit"){?>
                         <form method="post" action="../../controller.php?aksi=tambah_admin">
-                        <div class="complaint-form-category">
-                            <input type="text" name="name" class="form-control" placeholder="Nama *" required></textarea>
-                        </div>
-                        <div class="complaint-form-category">
-                            <input type="text" name="nik" class="form-control" placeholder="NIK *" required></textarea>
-                        </div>
-                        <div class="complaint-form-category">
-                            <input type="text" name="username" class="form-control" placeholder="Username *" required></textarea>
-                        </div>
-                        <div class="complaint-form-category">
-                            <input type="password" name="password" class="form-control" placeholder="Password   *" required></textarea>
+                        <div class="form-group">
+                            <select class="select2-single form-control" name="nik" id="nik">
+                            <option disabled selected>Pilih NIK</option>
+                            <?php 
+                                $calon_admin = "SELECT Nama, NIK FROM penduduk 
+                                WHERE NOT EXISTS 
+                                (SELECT * FROM msadmin WHERE penduduk.NIK = msadmin.NIK);";
+                                $exec = mysqli_query($koneksi, $calon_admin);   
+                            ?>
+                            <?php while($dataAdmin = mysqli_fetch_array($exec)):?>
+                                <option value="<?= $dataAdmin['NIK'] ?>"><?= $dataAdmin['NIK'] ?> - <?= $dataAdmin['Nama'] ?></option>
+                            <?php endwhile; ?>
+                            </select>
                         </div>
                         <br>
-                        <button type="submit" class="btn btn-primary">Simpan</button>
+                        <button type="submit" class="btn btn-primary">Tambah</button>
                     </form>
                     <?php } ?>
                     <br><br>
@@ -214,32 +221,28 @@
                                                 <tr>
                                                     <th>No</th>
                                                     <th>Nama</th>
-                                                    <th>Username</th>
                                                     <th>Command</th>
                                                 </tr>
                                             </thead>
-                                            <!-- <tfoot>
+                                            <tfoot>
                                                 <tr>
                                                     <th>No</th>
                                                     <th>Nama</th>
-                                                    <th>Email</th>
-                                                    <th>Status</th>
                                                     <th>Command</th>
                                                 </tr>
-                                            </tfoot> -->
+                                            </tfoot>
                                             <tbody>
                                             <?php
                                                 $no = 1;
-                                                $tampil = mysqli_query($koneksi, "SELECT * from msadmin order by id desc");
+                                                $tampil = mysqli_query($koneksi, "SELECT Nama, penduduk.NIK FROM penduduk INNER JOIN msadmin ON penduduk.NIK = msadmin.NIK order by penduduk.NIK desc");
                                                 while($data = mysqli_fetch_array($tampil)) :
                                             ?>
                                             <tr>
                                                 <td><?=$no++;?></td>
-                                                <td><?=$data['name']?></td>
-                                                <td><?=$data['username']?></td>
+                                                <td><?=$data['Nama']?></td>
                                                 <td>
-                                                    <a href="admin.php?hal=edit&id=<?=$data['id']?>" class="btn btn-primary"> Edit </a>
-                                                    <a href="../../controller.php?aksi=hapus_admin&id=<?=$data['id']?>" class="btn btn-danger"> Hapus </a>
+                                                    <a href="admin.php?hal=edit&id=<?=$data['NIK']?>" class="btn btn-primary"> Edit </a>
+                                                    <a href="../../controller.php?aksi=hapus_admin&id=<?=$data['NIK']?>" class="btn btn-danger"> Hapus </a>
                                                 </td>
                                             </tr>
                                             <?php endwhile; //penutup perulangan while ?>           
@@ -302,7 +305,7 @@
     </div>
 
     <!-- Bootstrap core JavaScript-->
-    <script src="../vendor/jquery/jquery.min.js"></script>
+    
     <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
@@ -317,7 +320,21 @@
     <!-- Page level custom scripts -->
     <script src="../js/demo/chart-area-demo.js"></script>
     <script src="../js/demo/chart-pie-demo.js"></script>
+    <script src="select2/dist/js/select2.min.js"></script>
+    <script>
+    $(document).ready(function () {
 
+
+      $('.select2-single').select2();
+
+      // Select2 Single  with Placeholder
+      $('.NIK').select2({
+        placeholder: "Pilih NIK",
+        allowClear: true
+      });
+
+    });
+  </script>
 </body>
 
 </html>

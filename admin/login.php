@@ -60,9 +60,9 @@
                                     </div>
                                     <form class="user" method="POST" action="../controller.php?aksi=login" enctype="multipart/form-data">
                                         <div class="form-group">
-                                            <input type="username" class="form-control form-control-user"
-                                                id="username" name="username" aria-describedby="emailHelp"
-                                                placeholder="Enter Username..."></input>
+                                            <input type="email" class="form-control form-control-user"
+                                                id="email" name="email" aria-describedby="emailHelp"
+                                                placeholder="Masukkan Email..."></input>
                                         </div>
                                         <div class="form-group">
                                             <input type="password" class="form-control form-control-user"
