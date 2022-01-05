@@ -311,9 +311,9 @@
             $query = "INSERT INTO msadmin (NIK) VALUES ('$esc_nik')";
             $exec = mysqli_query($koneksi, $query);
             if($exec){
-                header("location: admin/super/admin.php?alert=sukses");
+                header("location: admin/super/admin.php?tambah&alert=sukses");
             }else{
-                header("location: admin/super/admin.php?alert=gagal");
+                header("location: admin/super/admin.php?tambah&alert=gagal");
             }
             break;
         case 'edit_admin':
@@ -337,9 +337,9 @@
 
             $exec = mysqli_query($koneksi, $query);
             if($exec){
-                header("location: admin/super/admin.php?alert=sukses");
+                header("location: admin/super/admin.php?edit&alert=sukses");
             }else{
-                header("location: admin/super/admin.php?alert=gagal");
+                header("location: admin/super/admin.php?edit&alert=gagal");
             }
             break;
         case 'hapus_admin':
@@ -348,9 +348,9 @@
             $query = "DELETE FROM msadmin WHERE NIK = '$esc_id'";
             $exec = mysqli_query($koneksi, $query);
             if($exec){
-                header("location: admin/super/admin.php?alert=sukses");
+                header("location: admin/super/admin.php?hapus&alert=sukses");
             }else{
-                header("location: admin/super/admin.php?alert=gagal");
+                header("location: admin/super/admin.php?hapus&alert=gagal");
             }
             break;
         case 'edit_aspirasi':

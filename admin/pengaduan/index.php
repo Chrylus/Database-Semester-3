@@ -32,9 +32,27 @@ include '../../koneksi.php';
     <!-- Custom styles for this page -->
     <link href="../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body id="page-top">
+    <?php
+        if(isset($_GET['alert'])){             
+            echo    "<script type = 'text/javascript'>
+                        Swal.fire(
+                            'Sukses!',
+                            'Edit Data Berhasil!',
+                            'success'
+                        ).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.href = 'index.php';
+                            } else {
+                                window.location.href = 'index.php';
+                            }
+                        })
+                    </script>";
+        }
+    ?>
 
     <!-- Page Wrapper -->
     <div id="wrapper">

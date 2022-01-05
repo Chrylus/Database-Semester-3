@@ -37,6 +37,52 @@
 
 <body id="page-top">
 
+    <?php
+        if(isset($_GET['tambah'])){             
+            echo    "<script type = 'text/javascript'>
+                        Swal.fire(
+                            'Sukses!',
+                            'Tambah Data Berhasil!',
+                            'success'
+                        ).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.href = 'admin.php';
+                            } else {
+                                window.location.href = 'admin.php';
+                            }
+                        })
+                    </script>";
+        } else if (isset($_GET['edit'])){             
+            echo    "<script type = 'text/javascript'>
+                        Swal.fire(
+                            'Sukses!',
+                            'Edit Data Berhasil!',
+                            'success'
+                        ).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.href = 'admin.php';
+                            } else {
+                                window.location.href = 'admin.php';
+                            }
+                        })
+                    </script>";
+        } else if (isset($_GET['hapus'])){             
+            echo    "<script type = 'text/javascript'>
+                        Swal.fire(
+                            'Sukses!',
+                            'Hapus Data Berhasil!',
+                            'success'
+                        ).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.href = 'admin.php';
+                            } else {
+                                window.location.href = 'admin.php';
+                            }
+                        })
+                    </script>";
+        }
+    ?>
+
     <!-- Page Wrapper -->
     <div id="wrapper">
 
@@ -164,7 +210,7 @@
                             $exec = mysqli_query($koneksi, $query);
                             $fetch = mysqli_fetch_array($exec);    
                         ?>
-                        <form method="post" action="../../controller.php?aksi=edit_admin&id=<?=$fetch['id']?>">
+                        <form method="post" action="../../controller.php?aksi=edit_admin&id=<?=$fetch['NIK']?>">
                         <div class="complaint-form-category">
                             <input type="text" name="nama" class="form-control" placeholder="Nama *" value="<?=$fetch['Nama']?>" required></textarea>
                         </div>
