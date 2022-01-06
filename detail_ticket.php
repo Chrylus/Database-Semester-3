@@ -233,32 +233,31 @@ $id = $_GET['id'];
                         <div class="form-group">
                             <?php
                                 $nik = $row['NIK']; 
-                                $admin = "SELECT name FROM msadmin WHERE NIK = '$nik'";
-                                $penduduk = "SELECT Nama FROM penduduk WHERE NIK = '$nik'";
-                                $exec_admin = mysqli_query($koneksi, $admin);
-                                $exec_penduduk = mysqli_query($koneksi, $penduduk);
-                                $row_admin = mysqli_num_rows($exec_admin);
-                                $row_penduduk = mysqli_num_rows($exec_penduduk);
-                                if($row_admin > 0 && $row_penduduk == 0){
-                                    $fetch_admin = mysqli_fetch_assoc($exec_admin);
-                                }else if($row_admin == 0 && $row_penduduk > 0){
-                                    $fetch_penduduk = mysqli_fetch_array($exec_penduduk);
-                                }else if($row_admin > 0 && $row_penduduk > 0){
-                                    $fetch_penduduk = mysqli_fetch_array($exec_penduduk);
-                                }else if($row_admin == 0 && $row_penduduk == 0){
-                                    echo "Error";
+                                $penduduk = $koneksi->query("SELECT * FROM penduduk WHERE NIK = '$nik'");
+                                $row_penduduk = mysqli_num_rows($penduduk);
+                                if($row_penduduk > 0){
+                                    $assoc = mysqli_fetch_assoc($penduduk);
+                                    $nik = $assoc['NIK'];
+                                    $cek_admin = $koneksi->query("SELECT * FROM msadmin WHERE NIK = '$nik'");
+                                    $rows_admin = mysqli_num_rows($cek_admin);
+                                    if($rows_admin > 0){
+                                        $name = 'Admin '.$assoc['Nama'];
+                                    }else{
+                                        $name = $assoc['Nama'];
+                                    }
                                 }
+                                
                             ?>
                             <div class="title">
-                                <?php if($row_admin > 0 && $row_penduduk == 0) {?>
+                                <?php if($row_admin > 0 && $row_penduduk > 0) {?>
                                     <div class="col-sm-12">
                                         <img src="https://pengaduan.pu.go.id/assets/common/images/chat.png" alt="" width="30">
-                                        Admin - <?= $fetch_admin['name']?>						
+                                        <?= $name?>						
                                     </div>
                                 <?php } else if($row_admin == 0 && $row_penduduk > 0) { ?>
                                     <div class="col-sm-12">
                                         <img src="https://pengaduan.pu.go.id/assets/common/images/chat.png" alt="" width="30">
-                                        <?= $fetch_penduduk['Nama']?>							
+                                        <?= $name?>							
                                     </div>
                                 <?php } else if($row_admin == 0 && $row_penduduk == 0) { ?>
                                     <div class="col-sm-12">
