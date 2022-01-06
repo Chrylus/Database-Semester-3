@@ -83,7 +83,7 @@ include '../../koneksi.php';
 
             <!-- Heading -->
             <div class="sidebar-heading">
-                Interface
+                Menu
             </div>
             <li class="nav-item ">
                 <a class="nav-link" href="../super/admin.php">
@@ -136,7 +136,7 @@ include '../../koneksi.php';
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item dropdown no-arrow mx-1">
-                            <a href="../../index.php" class="nav-link" style="color: #007BFF">Ke Halaman Depan</a>
+                            <a href="../../index.php?id=0" class="nav-link" style="color: #007BFF">Ke Halaman Depan</a>
                         </li>
                         <!-- Nav Item - Search Dropdown (Visible Only XS) -->
                         <li class="nav-item dropdown no-arrow d-sm-none">
@@ -398,7 +398,7 @@ include '../../koneksi.php';
                     </div>
                     <div class="form-group input-group">
                         <span class="input-group-addon" style="width:150px;">Keterangan</span>
-                        <input type="text" style="width:350px;" class="form-control" id="m_keterangan">
+                        <input type="text" style="width:350px; height:auto;" class="form-control" id="m_keterangan">
                     </div>
                     <div class="form-group input-group">
                         <span class="input-group-addon" style="width:150px;">Lampiran</span>

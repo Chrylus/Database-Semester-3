@@ -80,6 +80,9 @@ session_regenerate_id(true);
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right  xs-align-center" style="padding-top: 8px;">
                     <li>
+                        <a href="admin/login.php">Admin</a>
+                    </li>
+                    <li>
                         <a href="index.php?id=0">Pengaduan</a>
                     </li>
                     <li>

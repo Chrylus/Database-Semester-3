@@ -101,15 +101,15 @@
                 <div class="collapse navbar-collapse xs-form-login" id="bs-example-navbar-collapse-1" >
                     <form action="controller.php?aksi=login_masyarakat" class="navbar-form navbar-left frm-login-inline xs-form-login" method = "POST">
                         <div class="form-group " >
-                            <input type="email" name="email" id="password" class="form-control" placeholder="EMAIL">
+                            <input type="email" name="email" id="email" class="form-control" placeholder="EMAIL" required>
                         </div>
                         <div class="form-group">
-                            <input type="password" name="password" id="password" class="form-control" placeholder="PASSWORD">
+                            <input type="password" name="password" id="password" class="form-control" placeholder="PASSWORD" required>
                         </div>
 
                     <!--  <a href="javascript:void(0)" onclick="lupapass()" title="Lupa Password" data-toggle="tooltip" data-placement="bottom" style="text-decoration: none;"> <i class=" glyphicon glyphicon-question-sign"></i> </a> -->
                         <div class="form-group xs-form-login">    
-                            <input class="btn btn-default" id="submit" type="submit" value="Login" name="submit" data-target="#data_submit">
+                            <input class="btn btn-default" id="submit" type="submit" value="Login" name="submit">
                         </div>
                         
                     </form>
@@ -138,6 +138,9 @@
                         <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right  xs-align-center" style="padding-top: 8px;">
+                        <li>
+                            <a href="admin/login.php">Admin</a>
+                        </li>
                         <li>
                             <a href="index.php?id=0">Pengaduan</a>
                         </li>
@@ -193,28 +196,28 @@
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="Nama *" name="Nama" required>
+                                        <input type="text" class="form-control" placeholder="Nama *" name="Nama" id="Nama" required>
                                     </div>
                                 </div>
                                 <div class="col-sm-12">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="NIK *" name="NIK" required>
+                                        <input type="text" class="form-control" placeholder="NIK *" name="NIK" id="NIK" required>
                                     </div>
                                 </div>
                                 <div class="col-sm-12">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="Nomor Telepon *" name="No_telepon" required>
+                                        <input type="text" class="form-control" placeholder="Nomor Telepon *" name="No_telepon" id="No_telepon" required>
                                     </div>
                                 </div>
                                 <div class="col-sm-12">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" name="Email" placeholder="Email *" required="required" value="">
+                                        <input type="email" class="form-control" name="Email" placeholder="Email *" id="Email" required="required">
                                     </div>
                                 </div>
                                 <div class="col-sm-12">
                                     <div class="form-group" >
                                         <div class="input-group " id = "form-pass">
-                                            <input type="password"  name="password" id="input-password" class="form-control" placeholder="Password"  title="Password Min 8 karakter" value="">
+                                            <input type="password"  name="Password" id="Password" class="form-control" placeholder="Password"  title="Password Min 8 karakter" required>
                                             <span class="input-group-addon" style="border: none;">
                                                 <input type="checkbox" name="show" id="show"> Tampilkan
                                             </span>

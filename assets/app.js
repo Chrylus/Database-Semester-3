@@ -64,8 +64,8 @@ $('#confirm_pass').on('keyup', function () {
 	}
 });
 
-$('#input-password').on('keyup', function () {
-	if ($.trim($('#input-password').val()).length > 0 && $.trim($('#input-password').val()).length < 8) {
+$('#Password').on('keyup', function () {
+	if ($.trim($('#Password').val()).length > 0 && $.trim($('#Password').val()).length < 8) {
 		$('#message2').html('<small>Password Minimal 8 Karakter </small>').css('color', 'red');
 	}else{
 		$('#message2').html('');
@@ -118,10 +118,10 @@ $('#pekerjaan').on('click', function(){
 });
 
 $("#show").click(function () {
-	if ($("#input-password").attr("type")=="password") {
-		$("#input-password").attr("type", "text");
+	if ($("#Password").attr("type")=="password") {
+		$("#Password").attr("type", "text");
 	}else{
-		$("#input-password").attr("type", "password");
+		$("#Password").attr("type", "password");
 	}
 });
 

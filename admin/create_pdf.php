@@ -42,7 +42,7 @@ $result7 = mysqli_query($koneksi, $sql7);
 $data7   = mysqli_fetch_assoc($result7);
 $total_keldesa = $data7['Total_KelDesa'];
 
-$sql8    = "select count(id) as Total_Admin from msadmin";
+$sql8    = "select count(NIK) as Total_Admin from msadmin";
 $result8 = mysqli_query($koneksi, $sql8);
 $data8   = mysqli_fetch_assoc($result8);
 $total_admin = $data8['Total_Admin'];

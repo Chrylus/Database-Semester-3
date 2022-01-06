@@ -209,7 +209,7 @@
 
             <!-- Heading -->
             <div class="sidebar-heading">
-                Interface
+                Menu
             </div>
             <li class="nav-item">
                 <a class="nav-link" href="super/admin.php">
@@ -261,7 +261,7 @@
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item dropdown no-arrow mx-1">
-                            <a href="../index.php" class="nav-link" style="color: #007BFF">Ke Halaman Depan</a>
+                            <a href="../index.php?id=0" class="nav-link" style="color: #007BFF">Ke Halaman Depan</a>
                         </li>
                         <div class="topbar-divider d-none d-sm-block"></div>
 
@@ -317,7 +317,7 @@
                                     <div class="card-body">
                                         <div class="row no-gutters align-items-center">
                                             <div class="col mr-2">
-                                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1"> Pending Pelaporan Ticket </div>
+                                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1"> Pending Pengaduan Ticket </div>
                                                 <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $data1['Pending_Pelaporan'];?></div>
                                             </div>
                                             <div class="col-auto">
@@ -350,7 +350,6 @@
 
                         <!-- Total Ticket -->
                         <div class="col-xl-3 col-md-6 mb-4">
-                            <a href = "#">
                                 <div class="card border-left-info shadow h-100 py-2">
                                     <div class="card-body">
                                         <div class="row no-gutters align-items-center">
@@ -368,11 +367,10 @@
                                         </div>
                                     </div>
                                 </div>
-                            </a>
                         </div>
 
                         <div class="col-xl-3 col-md-6 mb-4">
-                            <a href = "#">
+                            
                                 <div class="card border-left-warning shadow h-100 py-2">
                                     <div class="card-body">
                                         <div class="row no-gutters align-items-center">
@@ -386,11 +384,11 @@
                                         </div>
                                     </div>
                                 </div>
-                            </a>
+                            
                         </div>
 
                         <div class="col-xl-3 col-md-6 mb-4">
-                            <a href = "#">
+                            
                                 <div class="card border-left-danger shadow h-100 py-2">
                                     <div class="card-body">
                                         <div class="row no-gutters align-items-center">
@@ -404,11 +402,11 @@
                                         </div>
                                     </div>
                                 </div>
-                            </a>
+                            
                         </div>
 
                         <div class="col-xl-3 col-md-6 mb-4">
-                            <a href = "#">
+                            
                                 <div class="card border-left-secondary shadow h-100 py-2">
                                     <div class="card-body">
                                         <div class="row no-gutters align-items-center">
@@ -422,11 +420,11 @@
                                         </div>
                                     </div>
                                 </div>
-                            </a>
+                            
                         </div>
 
                         <div class="col-xl-3 col-md-6 mb-4">
-                            <a href = "#">
+                            
                                 <div class="card border-left-dark shadow h-100 py-2">
                                     <div class="card-body">
                                         <div class="row no-gutters align-items-center">
@@ -440,11 +438,11 @@
                                         </div>
                                     </div>
                                 </div>
-                            </a>
+                            
                         </div>
 
                         <div class="col-xl-3 col-md-6 mb-4">
-                            <a href = "#">
+                            <a href = "super/admin.php">
                                 <div class="card border-left-dark shadow h-100 py-2">
                                     <div class="card-body">
                                         <div class="row no-gutters align-items-center">
@@ -471,7 +469,7 @@
                             <div class="card shadow mb-4">
                                 <!-- Card Header - Dropdown -->
                                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">Pending Tiket</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">Grafik Ticket</h6>
                                     <!-- <div class="dropdown no-arrow">
                                         <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
                                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -501,7 +499,7 @@
                             <div class="card shadow mb-4">
                                 <!-- Card Header - Dropdown -->
                                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">Total Tiket</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">Total Ticket</h6>
                                     <!-- <div class="dropdown no-arrow">
                                         <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
                                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

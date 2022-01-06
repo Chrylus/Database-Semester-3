@@ -1,4 +1,11 @@
 
+<?php 
+    session_start();
+    session_regenerate_id(true);
+    if(isset($_SESSION['status']) == "login_admin"){
+        header('Location:index.php');
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -73,7 +80,7 @@
                                         </button>
                                         <hr>
                                     </form>
-                                    <a href="../index.php">
+                                    <a href="../index.php?id=0">
                                         <button class="btn btn-primary btn-user btn-block">
                                             Kembali ke Beranda
                                         </button>

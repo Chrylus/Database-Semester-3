@@ -83,7 +83,7 @@ include '../../koneksi.php';
 
             <!-- Heading -->
             <div class="sidebar-heading">
-                Interface
+                Menu
             </div>
             <li class="nav-item ">
                 <a class="nav-link" href="../super/admin.php">
@@ -136,7 +136,7 @@ include '../../koneksi.php';
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item dropdown no-arrow mx-1">
-                            <a href="../../index.php" class="nav-link" style="color: #007BFF">Ke Halaman Depan</a>
+                            <a href="../../index.php?id=0" class="nav-link" style="color: #007BFF">Ke Halaman Depan</a>
                         </li>
                         <!-- Nav Item - Search Dropdown (Visible Only XS) -->
                         <li class="nav-item dropdown no-arrow d-sm-none">
@@ -191,6 +191,7 @@ include '../../koneksi.php';
                         </li>
 
                     </ul>
+                    
 
                 </nav>
                 <!-- End of Topbar -->
@@ -210,9 +211,9 @@ include '../../koneksi.php';
                             $exec = mysqli_query($koneksi, $query);
                             $fetch = mysqli_fetch_array($exec);    
                         ?>
-                        <form method="post" action="../../controller.php?aksi=edit_aspirasi&ID=<?=$fetch['ID']?>">
+                        <form method="POST" action="../../controller.php?aksi=edit_aspirasi&id=<?=$fetch['ID']?>">
                         <div class="complaint-form-category">
-                            <input type="text" name="Status" class="form-control" placeholder="Status *" value="<?=$fetch['Status']?>" required></textarea>
+                            <input type="text" id="Status" name="Status" class="form-control" placeholder="Status *" value="<?=$fetch['Status']?>" required></textarea>
                         </div>
                         <br>
                         <button type="submit" class="btn btn-primary">Simpan</button>
@@ -234,11 +235,11 @@ include '../../koneksi.php';
                                 <thead>
                                         <tr>
                                            
-                                            <th>ID_Aspirasi</th>
+                                            <th>ID Aspirasi</th>
                                             <th>NIK</th>
-                                            <th>Unit_Layanan</th>
+                                            <th>Unit Layanan</th>
                                             <th>Keperluan</th>
-                                            <th>Tanggal_Laporan</th>
+                                            <th>Tanggal Laporan</th>
                                             <th>Status</th>
                                             <th>Ticket</th>
                                             <th>Edit</th>
@@ -399,7 +400,7 @@ include '../../koneksi.php';
                     </div>
                     <div class="form-group input-group">
                         <span class="input-group-addon" style="width:150px;">Keterangan</span>
-                        <input type="text" style="width:350px;" class="form-control" id="m_keterangan">
+                        <input type="text" style="width:350px; height:auto;" class="form-control" id="m_keterangan">
                     </div>
                     <div class="form-group input-group">
                         <span class="input-group-addon" style="width:150px;">Lampiran</span>
@@ -409,10 +410,6 @@ include '../../koneksi.php';
                     <div class="form-group input-group">
                         <span class="input-group-addon" style="width:150px;">Tanggal Pelaporan</span>
                         <input type="text" style="width:350px;" class="form-control" id="m_tanggal_pelaporan">
-                    </div>
-                    <div class="form-group input-group">
-                        <span class="input-group-addon" style="width:150px;">Tanggal Kejadian</span>
-                        <input type="text" style="width:350px;" class="form-control" id="m_tanggal_kejadian">
                     </div>
                     <div class="form-group input-group">
                         <span class="input-group-addon" style="width:150px;">Kabupaten / Kota</span>
@@ -469,7 +466,6 @@ include '../../koneksi.php';
             var keterangan=$('#Keterangan'+id).text();
             var lampiran=$('#Lampiran'+id).text();
             var tanggal_pelaporan=$('#TanggalLaporan'+id).text();
-            var tanggal_kejadian=$('#TanggalKejadian'+id).text();
             var kabupaten_kota=$('#KabKota'+id).text();
             var kecamatan=$('#Kecamatan'+id).text();
             var kelurahan_desa=$('#KelDesa'+id).text();
@@ -492,7 +488,6 @@ include '../../koneksi.php';
                 $('#m_lampiran').replaceWith(`<a href='../berkas/${lampiran}' id="m_lampiran">${lampiran}</a>`);
             }
             $('#m_tanggal_pelaporan').val(tanggal_pelaporan);
-            $('#m_tanggal_kejadian').val(tanggal_kejadian);
             $('#m_kabupaten_kota').val(kabupaten_kota);
             $('#m_kecamatan').val(kecamatan);
             $('#m_kelurahan_desa').val(kelurahan_desa);

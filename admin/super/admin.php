@@ -30,8 +30,8 @@
     <!-- Table sort -->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
     <link href="select2/dist/css/select2.min.css" rel="stylesheet" type="text/css">
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
     <script src="../vendor/jquery/jquery.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
 
 </head>
 
@@ -112,7 +112,7 @@
 
             <!-- Heading -->
             <div class="sidebar-heading">
-                Interface
+                Menu
             </div>
             <li class="nav-item active">
                 <a class="nav-link" href="#">
@@ -163,7 +163,7 @@
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item dropdown no-arrow mx-1">
-                            <a href="../../index.php" class="nav-link" style="color: #007BFF">Ke Halaman Depan</a>
+                            <a href="../../index.php?id=0" class="nav-link" style="color: #007BFF">Ke Halaman Depan</a>
                         </li>
                         <div class="topbar-divider d-none d-sm-block"></div>
                         <!-- Nav Item - User Information -->
@@ -228,6 +228,7 @@
                         </div>
                         <br>
                         <button type="submit" class="btn btn-primary">Simpan</button>
+                        <a href="admin.php" class="btn btn-danger">Batal</a>
                     </form>
                     <?php } else if(isset($_GET['hal']) != "edit"){?>
                         <form method="post" action="../../controller.php?aksi=tambah_admin">
@@ -246,7 +247,7 @@
                             </select>
                         </div>
                         <br>
-                        <button type="submit" class="btn btn-primary">Tambah</button>
+                        <button type="submit" class="btn btn-primary">Tambah Admin</button>
                     </form>
                     <?php } ?>
                     <br><br>

@@ -82,6 +82,9 @@ $id = $_GET['id'];
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right  xs-align-center" style="padding-top: 8px;">
                     <li>
+                        <a href="admin/login.php">Admin</a>
+                    </li>
+                    <li>
                         <a href="index.php?id=0">Pengaduan</a>
                     </li>
                     <li>
@@ -109,196 +112,232 @@ $id = $_GET['id'];
         </div><!-- /.container-fluid -->
         </nav>
     <?php } ?>
-    
-    <?php 
-    
-        $query = "SELECT * FROM pelaporan WHERE ID_Pelaporan = '$id'";
-        $exec = mysqli_query($koneksi, $query);
-        $fetch = mysqli_fetch_array($exec);
+    <!-- Belum login -->
+    <?php if(!isset($_SESSION['nik'])){?>
+        <?php 
+            header("location: index.php?alert=Silahkan Login Dulu");   
+        ?>
+    <!-- Sudah login -->
+    <?php } else if(isset($_SESSION['nik'])) { ?>
+        <?php 
+        
+            $query = "SELECT * FROM pelaporan WHERE ID_Pelaporan = '$id'";
+            $exec = mysqli_query($koneksi, $query);
+            $fetch = mysqli_fetch_array($exec);
 
-        $unit = $fetch['Tujuan']; 
-        $data_unit = "SELECT * FROM unit_layanan WHERE id = '$unit'";
-        $exec_unit = mysqli_query($koneksi, $data_unit);
-        $fetch_unit = mysqli_fetch_array($exec_unit);  
-    ?>
-    
-	<section class="page-saranPengaduanShow bg-tosca">
-	<div class="container" style="min-height: 535px;">
-				<div class="row">
-			<div class="col-sm-10 col-sm-offset-1">					
-				<div class="row">
-					<div class="row">
-						<div class="col-sm-9">
-							<h1><?= $fetch_unit['nama_unit']?> - <?= $fetch['Ticket']?></h1>
-						</div>
-					</div>
-                    <?php 
-                        $jenis = $_GET['jenis'];
-                        if($jenis == 0){ ?>
-                            <h2>Pengaduan</h2>
-                        <?php } else if($jenis == 1){ ?>
-                            <h2>Aspirasi</h2>
-                    <?php } ?>
-					<div class="row">
-						<div class="col-sm-9 col-xs-12">
-							<div class="form-group content justify col-sm-12">
-								<p><?= $fetch['Keterangan']?></p>
-							</div>
-							
-							
-							<div class="form-group col-sm-9 col-xs-12">
-								<h2>LAMPIRAN</h2>
-                                <?php 
-                                    $q_lampiran = "SELECT lampiran FROM lampiran WHERE ID_Pelaporan = '$id'";
-                                    $exec_lampiran = mysqli_query($koneksi, $q_lampiran);
-                                    $fetch_lampiran = mysqli_fetch_array($exec_lampiran);
-                                ?>
-                                <?php if(empty($fetch_lampiran['lampiran'])){?>
-								    <p>Tidak ada lampiran</p>
-                                <?php } else {	?>
-                                    <a href="berkas/<?= $fetch_lampiran['lampiran']?>">
-                                        <p><?= $fetch_lampiran['lampiran']?></p>
-                                    </a>
-                                <?php } ?>
+            $unit = $fetch['Tujuan']; 
+            $data_unit = "SELECT * FROM unit_layanan WHERE id = '$unit'";
+            $exec_unit = mysqli_query($koneksi, $data_unit);
+            $fetch_unit = mysqli_fetch_array($exec_unit);  
+        ?>
+        
+        <section class="page-saranPengaduanShow bg-tosca">
+        <div class="container" style="min-height: 535px;">
+                    <div class="row">
+                <div class="col-sm-10 col-sm-offset-1">					
+                    <div class="row">
+                        <div class="row">
+                            <div class="col-sm-9">
+                                <h1><?= $fetch_unit['nama_unit']?> - <?= $fetch['Ticket']?></h1>
                             </div>
-					</div>
-					<div class="col-sm-3 col-xs-12">
-                        <?php 
-                            $date = $fetch['TanggalLaporan'];
-                            $month = array('Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember');
-                            $tanggal_hari = (int)date('d', strtotime($date));
-                            $bulan_hari = $month[((int)date('m', strtotime($date))) - 1];
-                            $tahun_hari = (int)date('Y', strtotime($date));
-                        ?>
-						<div class="form-group">
-							<h3>TANGGAL</h3>
-							<?=$tanggal_hari.' '.$bulan_hari.' '.$tahun_hari?><br/>						
                         </div>
-                        <?php
-                            // Ambil dari header
-                            $header = "SELECT * FROM header_pelaporan WHERE ID_Pelaporan='$id'";
-                            $exec_header = mysqli_query($koneksi, $header);
-                            $fetch_header = mysqli_fetch_array($exec_header);
-                            // Cek dari header
-                            $id_kabkota = $fetch_header['KabKota'];
-                            $id_kecamatan = $fetch_header['Kecamatan'];
-                            $id_keldesa =  $fetch_header['KelDesa'];
-                            $kabkota    = "SELECT nama_kabkota FROM kabkota WHERE id_kabkota = '$id_kabkota'";
-                            $kecamatan  = "SELECT nama_kecamatan FROM kecamatan
-                                            INNER JOIN header_pelaporan ON header_pelaporan.KabKota = kecamatan.id_kabkota
-                                            INNER JOIN pelaporan ON header_pelaporan.ID_Pelaporan = pelaporan.ID_Pelaporan
-                                                WHERE header_pelaporan.Kecamatan = kecamatan.id_kecamatan AND pelaporan.ID_Pelaporan='$id'";
-                            $keldesa    = "SELECT nama_keldesa FROM keldesa
-                                            INNER JOIN header_pelaporan ON header_pelaporan.KabKota = keldesa.id_kabkota
-                                            INNER JOIN pelaporan ON header_pelaporan.ID_Pelaporan = pelaporan.ID_Pelaporan
-                                                WHERE header_pelaporan.Kecamatan = keldesa.id_kecamatan AND header_pelaporan.KelDesa = keldesa.id_keldesa AND pelaporan.ID_Pelaporan='$id'";
-                            // Execute
-                            $exec_kabkota = mysqli_query($koneksi, $kabkota);
-                            $exec_kecamatan = mysqli_query($koneksi, $kecamatan);
-                            $exec_keldesa = mysqli_query($koneksi, $keldesa);
-                            // Fetch
-                            $fetch_kabkota = mysqli_fetch_array($exec_kabkota);
-                            $fetch_kecamatan = mysqli_fetch_array($exec_kecamatan);
-                            $fetch_keldesa = mysqli_fetch_array($exec_keldesa);
-                            // Isi
-                            $area_kabkota = $fetch_kabkota['nama_kabkota'];
-                            $area_kecamatan = $fetch_kecamatan['nama_kecamatan'];
-                            $area_keldesa = $fetch_keldesa['nama_keldesa'];
-                        ?>
-						<div class="form-group">
-							<h3>AREA</h3>
-							<?=$area_kabkota.','.' '.$area_kecamatan.','.' '.$area_keldesa?>							
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	
-	<div class="row">
-		<div class="col-sm-10 col-sm-offset-1">
-			<div class="list-tindaklanjut">
-				<div class="Tindaklanjut ">
-					<h4>Status Tanggapan</h4>
-					<div class="demo-topleft"></div>
-				</div>
-				<?php 
-                
-                    $komentar = "SELECT * FROM diskusi";
-                    $exec_komentar = mysqli_query($koneksi, $komentar);
-                
-                ?>
-                <?php while ($row = mysqli_fetch_array($exec_komentar)) { ?>
-                    <div class="keterangan-tindaklanjut">
-                        <div class="form-group">
-                            <?php
-                                $nik = $row['NIK']; 
-                                $penduduk = $koneksi->query("SELECT * FROM penduduk WHERE NIK = '$nik'");
-                                $row_penduduk = mysqli_num_rows($penduduk);
-                                if($row_penduduk > 0){
-                                    $assoc = mysqli_fetch_assoc($penduduk);
-                                    $nik = $assoc['NIK'];
-                                    $cek_admin = $koneksi->query("SELECT * FROM msadmin WHERE NIK = '$nik'");
-                                    $rows_admin = mysqli_num_rows($cek_admin);
-                                    if($rows_admin > 0){
-                                        $name = 'Admin '.$assoc['Nama'];
-                                    }else{
-                                        $name = $assoc['Nama'];
-                                    }
-                                }
-                                
-                            ?>
-                            <div class="title">
-                                <?php if($row_admin > 0 && $row_penduduk > 0) {?>
-                                    <div class="col-sm-12">
-                                        <img src="https://pengaduan.pu.go.id/assets/common/images/chat.png" alt="" width="30">
-                                        <?= $name?>						
-                                    </div>
-                                <?php } else if($row_admin == 0 && $row_penduduk > 0) { ?>
-                                    <div class="col-sm-12">
-                                        <img src="https://pengaduan.pu.go.id/assets/common/images/chat.png" alt="" width="30">
-                                        <?= $name?>							
-                                    </div>
-                                <?php } else if($row_admin == 0 && $row_penduduk == 0) { ?>
-                                    <div class="col-sm-12">
-                                        <img src="https://pengaduan.pu.go.id/assets/common/images/chat.png" alt="" width="30">
-                                        ERROR							
-                                    </div>
+                        <?php 
+                            $jenis = $_GET['jenis'];
+                            if($jenis == 0){ ?>
+                                <h2>Pengaduan</h2>
+                            <?php } else if($jenis == 1){ ?>
+                                <h2>Aspirasi</h2>
+                            <?php } ?>
+                        <div class="row">
+                            <div class="col-sm-9 col-xs-12">
+                                <div class="form-group content justify col-sm-12">
+                                    <p><?= $fetch['Keterangan']?></p>
+                                </div>
+                                <h2>Keperluan</h2>
+                                <?php
+                                    $nomor_keperluan = $fetch['Keperluan'];
+                                    $query_keperluan = "SELECT keperluan FROM keperluan WHERE topik_id = '$nomor_keperluan'";
+                                    $exec_keperluan = mysqli_query($koneksi, $query_keperluan);
+                                    $fetch_keperluan = mysqli_fetch_array($exec_keperluan);
+                                ?>
+                                <div class="form-group content justify col-sm-12">
+                                    <p><?= $fetch_keperluan['keperluan']?></p>
+                                </div>
+                                <?php 
+                                if($jenis == 0){ ?>
+                                    <?php 
+                                        $date = $fetch['TanggalKejadian'];
+                                        $month = array('Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember');
+                                        $tanggal_hari = (int)date('d', strtotime($date));
+                                        $bulan_hari = $month[((int)date('m', strtotime($date))) - 1];
+                                        $tahun_hari = (int)date('Y', strtotime($date));
+                                    ?>
+                                    <h2>Tanggal Kejadian</h2>
+                                <div class="form-group content justify col-sm-12">
+                                    <p><?=$tanggal_hari.' '.$bulan_hari.' '.$tahun_hari?></p>
+                                </div>
+                                <?php } else if($jenis == 1){ ?>
+                                    
                                 <?php } ?>
-                            </div>
-                            <div class="desc col-md-12">
-                                <p><?= $row['isi']?></p>	
-                            </div>
+                                
+                            
+
+                                <div class="form-group col-sm-9 col-xs-12">
+                                    <h2>LAMPIRAN</h2>
+                                    <?php 
+                                        $q_lampiran = "SELECT lampiran FROM lampiran WHERE ID_Pelaporan = '$id'";
+                                        $exec_lampiran = mysqli_query($koneksi, $q_lampiran);
+                                        $fetch_lampiran = mysqli_fetch_array($exec_lampiran);
+                                    ?>
+                                    <?php if(empty($fetch_lampiran['lampiran'])){?>
+                                        <p>Tidak ada lampiran</p>
+                                    <?php } else {	?>
+                                        <a href="berkas/<?= $fetch_lampiran['lampiran']?>">
+                                            <p><?= $fetch_lampiran['lampiran']?></p>
+                                        </a>
+                                    <?php } ?>
+                                </div>
+                        </div>
+                        <div class="col-sm-3 col-xs-12">
                             <?php 
-                                $date = $row['tanggal'];
+                                $date = $fetch['TanggalLaporan'];
                                 $month = array('Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember');
                                 $tanggal_hari = (int)date('d', strtotime($date));
                                 $bulan_hari = $month[((int)date('m', strtotime($date))) - 1];
                                 $tahun_hari = (int)date('Y', strtotime($date));
                             ?>
-                            <div class="detail"  style="margin-left: 13px;"> 
-                                <span><?=$tanggal_hari.' '.$bulan_hari.' '.$tahun_hari?></span> | 
+                            <div class="form-group">
+                                <h3>TANGGAL LAPORAN</h3>
+                                <?=$tanggal_hari.' '.$bulan_hari.' '.$tahun_hari?><br/>						
+                            </div>
+                            <?php
+                                // Ambil dari header
+                                $header = "SELECT * FROM header_pelaporan WHERE ID_Pelaporan='$id'";
+                                $exec_header = mysqli_query($koneksi, $header);
+                                $fetch_header = mysqli_fetch_array($exec_header);
+                                // Cek dari header
+                                $id_kabkota = $fetch_header['KabKota'];
+                                $id_kecamatan = $fetch_header['Kecamatan'];
+                                $id_keldesa =  $fetch_header['KelDesa'];
+                                $kabkota    = "SELECT nama_kabkota FROM kabkota WHERE id_kabkota = '$id_kabkota'";
+                                $kecamatan  = "SELECT nama_kecamatan FROM kecamatan
+                                                INNER JOIN header_pelaporan ON header_pelaporan.KabKota = kecamatan.id_kabkota
+                                                INNER JOIN pelaporan ON header_pelaporan.ID_Pelaporan = pelaporan.ID_Pelaporan
+                                                    WHERE header_pelaporan.Kecamatan = kecamatan.id_kecamatan AND pelaporan.ID_Pelaporan='$id'";
+                                $keldesa    = "SELECT nama_keldesa FROM keldesa
+                                                INNER JOIN header_pelaporan ON header_pelaporan.KabKota = keldesa.id_kabkota
+                                                INNER JOIN pelaporan ON header_pelaporan.ID_Pelaporan = pelaporan.ID_Pelaporan
+                                                    WHERE header_pelaporan.Kecamatan = keldesa.id_kecamatan AND header_pelaporan.KelDesa = keldesa.id_keldesa AND pelaporan.ID_Pelaporan='$id'";
+                                // Execute
+                                $exec_kabkota = mysqli_query($koneksi, $kabkota);
+                                $exec_kecamatan = mysqli_query($koneksi, $kecamatan);
+                                $exec_keldesa = mysqli_query($koneksi, $keldesa);
+                                // Fetch
+                                $fetch_kabkota = mysqli_fetch_array($exec_kabkota);
+                                $fetch_kecamatan = mysqli_fetch_array($exec_kecamatan);
+                                $fetch_keldesa = mysqli_fetch_array($exec_keldesa);
+                                // Isi
+                                $area_kabkota = $fetch_kabkota['nama_kabkota'];
+                                $area_kecamatan = $fetch_kecamatan['nama_kecamatan'];
+                                $area_keldesa = $fetch_keldesa['nama_keldesa'];
+                            ?>
+                            <div class="form-group">
+                                <h3>AREA</h3>
+                                <?=$area_kabkota.','.' '.$area_kecamatan.','.' '.$area_keldesa?>							
+                            </div>
+                            <div class="form-group">
+                                <h3>Status</h3>
+                                <?=$fetch['Status']?>							
                             </div>
                         </div>
                     </div>
-                <?php } ?>
-                <br>
-                <form method="post" action="controller.php?aksi=komentar">
-                    <div class="form-group">
-                        <textarea name="isi" id="isi" rows="6" class="form-control" placeholder="Komentar"></textarea>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-sm-10 col-sm-offset-1">
+                <div class="list-tindaklanjut">
+                    <div class="Tindaklanjut ">
+                        <h4>Status Tanggapan</h4>
+                        <div class="demo-topleft"></div>
                     </div>
-                    <div class="text-center">
-                        <input type="hidden" name="jenis" id="jenis" value="<?= $jenis?>"></input>
-                        <input type="hidden" name="Ticket" id="Ticket" value="<?=$fetch['Ticket']?>"></input>
-                        <input type="hidden" name="id" id="id" value="<?= $id?>"></input>
-                        <input type="hidden" name="nik" id="nik" value="<?= $_SESSION['nik']?>"></input>
-                        <button class="btn btn-flatYellow" type="submit" value="submit" name ="submit" style="font-size: 17px;color: #6241b5; font-weight: 600;">KIRIM</button>
-                    </div>
-                </form>
-			</div>
-		</div>
-	</section>
-
+                    <?php 
+                        $tiket = $fetch['Ticket'];
+                        $komentar = "SELECT * FROM diskusi WHERE Ticket = '$tiket'";
+                        $exec_komentar = mysqli_query($koneksi, $komentar);
+                    ?>
+                    <?php while ($row = mysqli_fetch_array($exec_komentar)) { ?>
+                        <div class="keterangan-tindaklanjut">
+                            <div class="form-group">
+                                <?php
+                                    $nik = $row['NIK']; 
+                                    $penduduk = $koneksi->query("SELECT * FROM penduduk WHERE NIK = '$nik'");
+                                    $row_penduduk = mysqli_num_rows($penduduk);
+                                    if($row_penduduk > 0){
+                                        $assoc = mysqli_fetch_assoc($penduduk);
+                                        $nik = $assoc['NIK'];
+                                        $cek_admin = $koneksi->query("SELECT * FROM msadmin WHERE NIK = '$nik'");
+                                        $rows_admin = mysqli_num_rows($cek_admin);
+                                        if($rows_admin > 0){
+                                            $name = 'Admin - '.$assoc['Nama'];
+                                        }else{
+                                            $name = $assoc['Nama'];
+                                        }
+                                    }
+                                    
+                                ?>
+                                <div class="title">
+                                    <?php if($rows_admin > 0 && $row_penduduk > 0) {?>
+                                        <div class="col-sm-12">
+                                            <img src="https://pengaduan.pu.go.id/assets/common/images/chat.png" alt="" width="30">
+                                            <?= $name?>						
+                                        </div>
+                                    <?php } else if($rows_admin == 0 && $row_penduduk > 0) { ?>
+                                        <div class="col-sm-12">
+                                            <img src="https://pengaduan.pu.go.id/assets/common/images/chat.png" alt="" width="30">
+                                            <?= $name?>							
+                                        </div>
+                                    <?php } else if($rows_admin == 0 && $row_penduduk == 0) { ?>
+                                        <div class="col-sm-12">
+                                            <img src="https://pengaduan.pu.go.id/assets/common/images/chat.png" alt="" width="30">
+                                            ERROR							
+                                        </div>
+                                    <?php } ?>
+                                </div>
+                                <div class="desc col-md-12">
+                                    <p><?= $row['isi']?></p>	
+                                </div>
+                                <?php 
+                                    $date = $row['tanggal'];
+                                    $month = array('Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember');
+                                    $tanggal_hari = (int)date('d', strtotime($date));
+                                    $bulan_hari = $month[((int)date('m', strtotime($date))) - 1];
+                                    $tahun_hari = (int)date('Y', strtotime($date));
+                                ?>
+                                <div class="detail"  style="margin-left: 13px;"> 
+                                    <span><?=$tanggal_hari.' '.$bulan_hari.' '.$tahun_hari?></span> | 
+                                </div>
+                            </div>
+                        </div>
+                    <?php } ?>
+                    <br>
+                    <form method="post" action="controller.php?aksi=komentar">
+                        <div class="form-group">
+                            <textarea name="isi" id="isi" rows="6" class="form-control" placeholder="Komentar"></textarea>
+                        </div>
+                        <div class="text-center">
+                            <input type="hidden" name="jenis" id="jenis" value="<?= $jenis?>"></input>
+                            <input type="hidden" name="Ticket" id="Ticket" value="<?=$fetch['Ticket']?>"></input>
+                            <input type="hidden" name="id" id="id" value="<?= $id?>"></input>
+                            <input type="hidden" name="nik" id="nik" value="<?= $_SESSION['nik']?>"></input>
+                            <button class="btn btn-flatYellow" type="submit" value="submit" name ="submit" style="font-size: 17px;color: #6241b5; font-weight: 600;">KIRIM</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    <?php } ?>                    
     <footer>
 	<div class="row">
 		<div class="col-xs-12 col-sm-4 xs-align-center">Universitas Bina Nusantara Malang<br/>Araya Mansion No. 8 - 22, Genitri, Tirtomoyo, Kec. Pakis, Kabupaten Malang, Jawa Timur 65154<br/></div>
