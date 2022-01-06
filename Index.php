@@ -14,7 +14,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="icon" href="images/logo-wadul-white-ico.png">
 	<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
-	<link href="https://getbootstrap.com/docs/3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+	<link href="assets/bootstrap.min.css" rel="stylesheet">
 	<link href="assets/datepicker3.css" rel="stylesheet">
 	<link href="assets/font-awesome.min.css" rel="stylesheet">
 	<link href="assets/ionicons.min.css" rel="stylesheet">
@@ -580,9 +580,9 @@
         </div>
     </footer>
 
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="assets/jquery.min.js"></script>
 	<script src="assets/owl.carousel.js"></script>
-	<script src="https://getbootstrap.com/docs/3.3/dist/js/bootstrap.min.js"></script>
+	<script src="assets/bootstrap.min.js"></script>
 	<script src='https://www.google.com/recaptcha/api.js'></script>
 	<script src="assets/jquery.flexslider.js"></script>
 	<script src="assets/bootstrap-datepicker.js"></script>

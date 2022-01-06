@@ -2,7 +2,7 @@
  header("Refresh: 300");
  session_start();
  if(!isset($_SESSION["id"])) {
-     header("location:login.php");
+     header("location:../login.php");
      
  }
 include '../../koneksi.php';
