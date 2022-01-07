@@ -6,7 +6,7 @@ session_regenerate_id(true);
 <!DOCTYPE html>
 <html>
 <head>
-<title>Wadul - Wadah Aspirasi Daerah Unit Layanan - Mekanisme</title>
+<title>Wadul - Wadah Aspirasi Daerah Unit Layanan - Panduan</title>
 
         <meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -57,7 +57,7 @@ session_regenerate_id(true);
             </form>
             <ul class="nav navbar-nav navbar-right xs-align-center">
              <li><a href="admin/login.php">Admin</a></li>
-             <li ><a href="mekanisme.php">Mekanisme</a></li>
+             <li ><a href="mekanisme.php">Panduan</a></li>
             </ul>
         </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
@@ -92,7 +92,7 @@ session_regenerate_id(true);
                         <a href="index.php?id=2">Cek Tiket</a>
                     </li>
                     <li >
-                        <a href="mekanisme.php">Mekanisme</a>
+                        <a href="mekanisme.php">Panduan</a>
                     </li>
                     <li class="user-section">
                         <div class="dropdown">

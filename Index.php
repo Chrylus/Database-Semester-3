@@ -115,7 +115,7 @@
                     </form>
                     <ul class="nav navbar-nav navbar-right xs-align-center">
                         <li><a href="admin/login.php">Admin</a></li>
-                        <li ><a href="mekanisme.php">Mekanisme</a></li>
+                        <li ><a href="mekanisme.php">Panduan</a></li>
                     </ul>
                 </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->
@@ -151,7 +151,7 @@
                             <a href="index.php?id=2">Cek Tiket</a>
                         </li>
                         <li >
-                            <a href="mekanisme.php">Mekanisme</a>
+                            <a href="mekanisme.php">Panduan</a>
                         </li>
                         <li class="user-section">
                             <div class="dropdown">
