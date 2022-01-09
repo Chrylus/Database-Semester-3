@@ -525,8 +525,19 @@
                             <h3>LAPORAN SAYA</h3>
 
                             <?php 
-                                $list_p = "SELECT * FROM pelaporan WHERE NIK LIKE '$nik' LIMIT 4";
+                                $list_p = "SELECT * FROM pelaporan WHERE NIK LIKE '$nik'";
                                 $exec_list = mysqli_query($koneksi, $list_p);
+                                
+                                $jumlahDataHalaman = 5;
+                                $totalData = mysqli_num_rows($exec_list);
+                                $jumlahHalaman = ceil($totalData/$jumlahDataHalaman);
+
+                                $halamanAktif = isset($_GET['halaman']) ? $_GET['halaman'] : 1;
+
+                                $awalData = ($jumlahDataHalaman * $halamanAktif) - $jumlahDataHalaman;
+
+                                $list_p.=" LIMIT $awalData, $jumlahDataHalaman";
+                                $exec_list = mysqli_query($koneksi,$list_p);
                             ?>
                             <?php while ($row = mysqli_fetch_array($exec_list)){ ?>
                                 <?php
@@ -559,9 +570,34 @@
                                 </div>
 
                             <?php } ?>
-
+                            
+                            <div class="center">
+                                <ul class='pagination' >
+                                    <li class='disabled'>
+                                        <?php for($i=1; $i<=$jumlahHalaman; $i++): ?>
+                                            <?php  if($halamanAktif == $i): ?>
+                                                <li class='active'>
+                                                    <a href='#'>
+                                                        <?= $i ?>
+                                                        <span class='sr-only'>
+                                                        </span>
+                                                    </a>
+                                                </li>
+                                            <?php else: ?>
+                                                <li>
+                                                    <a href="?halaman=<?= $i ?>&jenis=1" data-ci-pagination-page="<?= $i ?>">
+                                                        <?= $i ?>
+                                                    </a>
+                                                </li>
+                                            <?php  endif; ?>
+                                        <?php endfor; ?>
+                                    </li>
+                                </ul>
+                            </div>
+                                                
                             <div class="password text-center xs-title">
-                                <a href="https://pengaduan.pu.go.id//home/saran_pengaduan_all" class="btn btn-flatYellow" style="font-size: 17px;color: #6241b5; font-weight: 600;">Lihat Laporan Lain</a>
+                                <a href="laporan.php?jenis=0" class="btn btn-flatYellow" style="font-size: 17px;color: #6241b5; font-weight: 600;">Lihat Pengaduan Lain</a>
+                                <a href="laporan.php?jenis=1" class="btn btn-flatYellow" style="font-size: 17px;color: #6241b5; font-weight: 600;">Lihat Aspirasi Lain</a>
                             </div>	
                         </div>
                     </div>
