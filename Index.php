@@ -364,7 +364,8 @@
                                 <?php } ?>
 
                                 <div class="password text-center xs-title">
-                                    <a href="#" class="btn btn-flatYellow" style="font-size: 17px;color: #6241b5; font-weight: 600;">Lihat Laporan Lain</a>
+                                    <a href="laporan.php?jenis=0" class="btn btn-flatYellow" style="font-size: 17px;color: #6241b5; font-weight: 600;">Lihat Pengaduan Lain</a>
+                                    <a href="laporan.php?jenis=1" class="btn btn-flatYellow" style="font-size: 17px;color: #6241b5; font-weight: 600;">Lihat Aspirasi Lain</a>
                                 </div>	
                             </div>
                         </div>
@@ -484,7 +485,8 @@
                                 <?php } ?>
 
                                 <div class="password text-center xs-title">
-                                    <a href="https://pengaduan.pu.go.id//home/saran_pengaduan_all" class="btn btn-flatYellow" style="font-size: 17px;color: #6241b5; font-weight: 600;">Lihat Laporan Lain</a>
+                                    <a href="laporan.php?jenis=0" class="btn btn-flatYellow" style="font-size: 17px;color: #6241b5; font-weight: 600;">Lihat Pengaduan Lain</a>
+                                    <a href="laporan.php?jenis=1" class="btn btn-flatYellow" style="font-size: 17px;color: #6241b5; font-weight: 600;">Lihat Aspirasi Lain</a>
                                 </div>	
                             </div>
                         </div>
