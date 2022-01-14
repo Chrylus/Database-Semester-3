@@ -212,12 +212,17 @@
                         $cek_admin = $koneksi->query("SELECT * FROM msadmin WHERE NIK = '$nik'");
                         $rows_admin = mysqli_num_rows($cek_admin);
                         if($rows_admin > 0){
+                            $row_head = mysqli_fetch_assoc($cek_admin);
                             $_SESSION['username'] = $row['Nama'];
                             $_SESSION['nama'] = $row['Nama'];
                             $_SESSION['id']= $row['NIK'];
                             $_SESSION['No_telepon'] = $row['No_telepon'];
                             $_SESSION['email']= $row['Email'];
-                            $_SESSION['status'] = "login_admin";
+                            if($row_head['head_admin'] == '0'){
+                                $_SESSION['status'] = "login_admin";
+                            }else if($row_head['head_admin'] == '1'){
+                                $_SESSION['status'] = "login_head_admin";
+                            }
                         }
                         header("location:admin/index.php"); //berpindah ke halaman beranda
                     }else{
@@ -254,15 +259,15 @@
                             $_SESSION['telepon'] = $row['No_telepon'];
                             $_SESSION['email'] = $row['Email'];
                             $_SESSION['keadaan'] = "login";
-                            header("location:index.php?pesan=sukses&id=0");
+                            header("location:index.php?pesan2=sukses&id=0");
                         }else{
-                            header("location:index.php?pesan=password salah");
+                            header("location:index.php?pesan3=salah");
                         }
                          //berpindah ke halaman beranda
                     }
                     else
                     {
-                    header("location:index.php?pesan=gagal");
+                    header("location:index.php?pesan3=gagal");
                     //  alert("Gagal simpan Data");
                     }
                 }   
@@ -284,9 +289,9 @@
             $sql= "INSERT INTO `penduduk`(`Nama`, `NIK`, `No_telepon`, `Email`, `password`) VALUES ('$esc_nama','$esc_nik','$esc_telepon','$esc_email','$hash_pw')";
             $hasil=mysqli_query($koneksi,$sql);
             if($hasil){
-                header("location: index.php?peringatan=Sukses");
+                header("location: index.php?pesan1=sukses_register");
             }else{
-                header("location: index.php?peringatan=Gagal");
+                header("location: index.php?pesan0=gagal_register");
             }
             break;
         case 'logout':
@@ -311,9 +316,9 @@
             $query = "INSERT INTO msadmin (NIK) VALUES ('$esc_nik')";
             $exec = mysqli_query($koneksi, $query);
             if($exec){
-                header("location: admin/super/admin.php?tambah&alert=sukses");
+                header("location: admin/super/admin.php?tambah&tambah_s=sukses");
             }else{
-                header("location: admin/super/admin.php?tambah&alert=gagal");
+                header("location: admin/super/admin.php?tambah&tambah_g=gagal");
             }
             break;
         case 'edit_admin':
@@ -337,20 +342,37 @@
 
             $exec = mysqli_query($koneksi, $query);
             if($exec){
-                header("location: admin/super/admin.php?edit&alert=sukses");
+                header("location: admin/super/admin.php?edit&edit_s=sukses");
             }else{
-                header("location: admin/super/admin.php?edit&alert=gagal");
+                header("location: admin/super/admin.php?edit&edit_g=gagal");
             }
             break;
         case 'hapus_admin':
             $id = $_GET['id'];
             $esc_id = mysqli_real_escape_string($koneksi, $id);
-            $query = "DELETE FROM msadmin WHERE NIK = '$esc_id'";
-            $exec = mysqli_query($koneksi, $query);
-            if($exec){
-                header("location: admin/super/admin.php?hapus&alert=sukses");
+            $session = $_SESSION['id'];
+            if($esc_id == $session){
+                header("location: admin/super/admin.php?hapus&hapus_dr=gagal");
+            }else {
+                $query = "DELETE FROM msadmin WHERE NIK = '$esc_id'";
+                $exec = mysqli_query($koneksi, $query);
+                if($exec){
+                    header("location: admin/super/admin.php?hapus&hapus_s=sukses");
+                }else{
+                    header("location: admin/super/admin.php?hapus&hapus_g=gagal");
+                }
+            }
+            break;
+        case 'reset_password_admin':
+            $id = $_GET['id'];
+            $sunibngalam = 'sunibngalam';
+            $hash_sunib = password_hash($sunibngalam, PASSWORD_DEFAULT);
+            $query = "UPDATE penduduk SET password = '$hash_sunib' WHERE NIK = '$id'";
+            $exec_query = mysqli_query($koneksi, $query);
+            if($exec_query){
+                header("location: admin/super/admin.php?&reset_s=sukses_pw");
             }else{
-                header("location: admin/super/admin.php?hapus&alert=gagal");
+                header("location: admin/super/admin.php?reset_g=gagal_pw");
             }
             break;
         case 'edit_aspirasi':

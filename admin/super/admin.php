@@ -3,8 +3,9 @@
     session_start();
     if(!isset($_SESSION["id"])){
         header("location:login.php");
+    }else if($_SESSION['status'] != "login_head_admin"){
+        header("location: ../index.php?restricted=dilarang");
     }
-
     include '../../koneksi.php';
 ?>
 
@@ -38,7 +39,7 @@
 <body id="page-top">
 
     <?php
-        if(isset($_GET['tambah'])){             
+        if(isset($_GET['tambah_s'])){             
             echo    "<script type = 'text/javascript'>
                         Swal.fire(
                             'Sukses!',
@@ -52,7 +53,21 @@
                             }
                         })
                     </script>";
-        } else if (isset($_GET['edit'])){             
+        } else if (isset($_GET['tambah_g'])){
+            echo    "<script type = 'text/javascript'>
+                        Swal.fire(
+                            'Gagal!',
+                            'Tambah Data Gagal!',
+                            'error'
+                        ).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.href = 'admin.php';
+                            } else {
+                                window.location.href = 'admin.php';
+                            }
+                        })
+                    </script>";
+        } else if (isset($_GET['edit_s'])){             
             echo    "<script type = 'text/javascript'>
                         Swal.fire(
                             'Sukses!',
@@ -66,12 +81,82 @@
                             }
                         })
                     </script>";
-        } else if (isset($_GET['hapus'])){             
+        } else if (isset($_GET['edit_g'])){
+            echo    "<script type = 'text/javascript'>
+                        Swal.fire(
+                            'Gagal!',
+                            'Edit Data Gagal!',
+                            'error'
+                        ).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.href = 'admin.php';
+                            } else {
+                                window.location.href = 'admin.php';
+                            }
+                        })
+                    </script>";
+        } else if (isset($_GET['hapus_s'])){             
             echo    "<script type = 'text/javascript'>
                         Swal.fire(
                             'Sukses!',
                             'Hapus Data Berhasil!',
                             'success'
+                        ).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.href = 'admin.php';
+                            } else {
+                                window.location.href = 'admin.php';
+                            }
+                        })
+                    </script>";
+        } else if (isset($_GET['hapus_g'])){             
+            echo    "<script type = 'text/javascript'>
+                        Swal.fire(
+                            'Gagal!',
+                            'Hapus Data Gagal!',
+                            'error'
+                        ).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.href = 'admin.php';
+                            } else {
+                                window.location.href = 'admin.php';
+                            }
+                        })
+                    </script>";
+        } else if (isset($_GET['hapus_dr'])){             
+            echo    "<script type = 'text/javascript'>
+                        Swal.fire(
+                            'Gagal!',
+                            'Anda tidak bisa menghapus Anda sendiri sebagai Admin!',
+                            'error'
+                        ).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.href = 'admin.php';
+                            } else {
+                                window.location.href = 'admin.php';
+                            }
+                        })
+                    </script>";
+        } else if (isset($_GET['reset_s'])){             
+            echo    "<script type = 'text/javascript'>
+                        Swal.fire(
+                            'Sukses!',
+                            'Reset Password Berhasil!',
+                            'success'
+                        ).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.href = 'admin.php';
+                            } else {
+                                window.location.href = 'admin.php';
+                            }
+                        })
+                    </script>";
+        } else if (isset($_GET['reset_g'])){             
+            echo    "<script type = 'text/javascript'>
+                        Swal.fire(
+                            'Gagal!',
+                            'Reset Data Gagal!',
+                            'error'
                         ).then((result) => {
                             if (result.isConfirmed) {
                                 window.location.href = 'admin.php';
@@ -162,9 +247,6 @@
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
-                        <li class="nav-item dropdown no-arrow mx-1">
-                            <a href="../../index.php?id=0" class="nav-link" style="color: #007BFF">Ke Halaman Depan</a>
-                        </li>
                         <div class="topbar-divider d-none d-sm-block"></div>
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
@@ -223,11 +305,9 @@
                         <div class="complaint-form-category">
                             <input type="text" name="email" class="form-control" placeholder="Email *" value="<?=$fetch['Email']?>" required></textarea>
                         </div>
-                        <div class="complaint-form-category">
-                            <input type="password" name="password" class="form-control" placeholder="Password *" required></textarea>
-                        </div>
                         <br>
                         <button type="submit" class="btn btn-primary">Simpan</button>
+                        <a href="../../controller.php?aksi=reset_password_admin&id=<?= $_GET['id']; ?>" type="submit" class="btn btn-primary">Reset Password</a>
                         <a href="admin.php" class="btn btn-danger">Batal</a>
                     </form>
                     <?php } else if(isset($_GET['hal']) != "edit"){?>

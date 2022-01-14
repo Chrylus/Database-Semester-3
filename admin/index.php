@@ -1,11 +1,10 @@
 <?php
+    include ("../koneksi.php");
     header("Refresh: 300");
     session_start();
     if(!isset($_SESSION["id"])) {
         header("location:login.php");
     }
-
-    include ("../koneksi.php");
 
     //Tampilan Tiket di Dashboard Atas
     $sql1    = "select count(Status) as Pending_Pelaporan from pelaporan WHERE (Status = 'Pending') AND (ID_Pelaporan LIKE '%PGD%')";
@@ -152,6 +151,8 @@
      $sql34    = "select count(Status) as Pending_Aspirasi from pelaporan WHERE (Status = 'Pending') AND (ID_Pelaporan LIKE '%ASP%') AND YEAR (TanggalLaporan) = YEAR (CURDATE())";
      $result34 = mysqli_query($koneksi, $sql34);
      $data34   = mysqli_fetch_assoc($result34);
+
+    $status = $_SESSION['status'];
 ?>
 
 <!DOCTYPE html>
@@ -173,13 +174,29 @@
 
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-3.3.1.js"></script> 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.js"></script> 
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body id="page-top">
-
+    <?php
+            if(isset($_GET['restricted'])){             
+                echo    "<script type = 'text/javascript'>
+                            Swal.fire(
+                                'Dilarang !',
+                                'Privelege halaman tidak terpenuhi !',
+                                'error'
+                            ).then((result) => {
+                                if (result.isConfirmed) {
+                                    window.location.href = 'index.php';
+                                } else {
+                                    window.location.href = 'index.php';
+                                }
+                            })
+                        </script>";
+            }
+    ?>
     <!-- Page Wrapper -->
     <div id="wrapper">
 
@@ -211,11 +228,15 @@
             <div class="sidebar-heading">
                 Menu
             </div>
-            <li class="nav-item">
-                <a class="nav-link" href="super/admin.php">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>Admin</span></a>
-            </li> 
+            <?php if($_SESSION['status'] == "login_head_admin") {?>
+                <li class="nav-item ">
+                    <a class="nav-link" href="super/admin.php">
+                        <i class="fas fa-fw fa-cog"></i>
+                        <span>Admin</span></a>
+                </li>
+            <?php } else {?>
+                
+            <?php } ?>
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
@@ -260,9 +281,6 @@
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
-                        <li class="nav-item dropdown no-arrow mx-1">
-                            <a href="../index.php?id=0" class="nav-link" style="color: #007BFF">Ke Halaman Depan</a>
-                        </li>
                         <div class="topbar-divider d-none d-sm-block"></div>
 
                         <!-- Nav Item - User Information -->

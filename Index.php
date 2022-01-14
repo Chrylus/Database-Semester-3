@@ -79,6 +79,49 @@
                             window.location.href = 'index.php?id=2';
                         })
                     </script>";
+        } else if(isset($_GET['pesan0'])){
+    
+            echo    "<script type = 'text/javascript'>
+                        Swal.fire(
+                            'Registrasi Anda Berhasil !',
+                            'Silahkan login untuk melanjutkan',
+                            'success'
+                        ).then(function() {
+                            window.location.href = 'index.php';
+                        })
+                    </script>";
+        } else if(isset($_GET['pesan1'])){
+    
+            echo    "<script type = 'text/javascript'>
+                        Swal.fire(
+                            'Registrasi Anda Gagal !',
+                            'Silahkan cek kembali data yang Anda masukkan',
+                            'error'
+                        ).then(function() {
+                            window.location.href = 'index.php';
+                        })
+                    </script>";
+        } else if(isset($_GET['pesan2'])){
+    
+            echo    "<script type = 'text/javascript'>
+                        Swal.fire(
+                            'Login Sukses !',
+                            'success'
+                        ).then(function() {
+                            window.location.href = 'index.php?pesan=sukses&id=0';
+                        })
+                    </script>";
+        } else if(isset($_GET['pesan3'])){
+    
+            echo    "<script type = 'text/javascript'>
+                        Swal.fire(
+                            'Login Gagal !',
+                            'Silahkan cek kembali data yang Anda masukkan',
+                            'error'
+                        ).then(function() {
+                            window.location.href = 'index.php';
+                        })
+                    </script>";
         }
     ?>
 

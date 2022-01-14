@@ -85,11 +85,15 @@ include '../../koneksi.php';
             <div class="sidebar-heading">
                 Menu
             </div>
-            <li class="nav-item ">
-                <a class="nav-link" href="../super/admin.php">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>Admin</span></a>
-            </li> 
+            <?php if($_SESSION['status'] == "login_head_admin") {?>
+                <li class="nav-item ">
+                    <a class="nav-link" href="../super/admin.php">
+                        <i class="fas fa-fw fa-cog"></i>
+                        <span>Admin</span></a>
+                </li>
+            <?php } else {?>
+                
+            <?php } ?>
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item active">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
@@ -135,9 +139,6 @@ include '../../koneksi.php';
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
-                        <li class="nav-item dropdown no-arrow mx-1">
-                            <a href="../../index.php?id=0" class="nav-link" style="color: #007BFF">Ke Halaman Depan</a>
-                        </li>
                         <!-- Nav Item - Search Dropdown (Visible Only XS) -->
                         <li class="nav-item dropdown no-arrow d-sm-none">
                             <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
