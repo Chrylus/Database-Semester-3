@@ -118,7 +118,15 @@
         <?php
             if(isset($_GET['cari'])){
                 $cari = $_GET['cari'];
-                $query = "SELECT * FROM pelaporan WHERE Keterangan LIKE '%$cari%' AND ID_Pelaporan LIKE 'PGD%' ORDER BY TanggalLaporan DESC";
+                $query = "SELECT * FROM pelaporan
+                            INNER JOIN unit_layanan ON pelaporan.Tujuan = unit_layanan.id
+                            INNER JOIN penduduk ON pelaporan.NIK = penduduk.NIK
+                                WHERE (Keterangan LIKE '%$cari%' 
+                                    OR unit_layanan.nama_unit LIKE '%$cari%' 
+                                    OR penduduk.Nama LIKE '%$cari%' 
+                                    OR pelaporan.Ticket LIKE '%$cari%')
+                                    AND (ID_Pelaporan LIKE 'PGD%')
+                                        ORDER BY TanggalLaporan DESC";
             }else{
                 $query = "SELECT * FROM pelaporan WHERE ID_Pelaporan LIKE 'PGD%' ORDER BY TanggalLaporan DESC";
             } 
@@ -240,7 +248,15 @@
         <?php
             if(isset($_GET['cari'])){
                 $cari = $_GET['cari'];
-                $query = "SELECT * FROM pelaporan WHERE Keterangan LIKE '%$cari%' AND ID_Pelaporan LIKE 'ASP%' ORDER BY TanggalLaporan DESC";
+                $query = "SELECT * FROM pelaporan
+                            INNER JOIN unit_layanan ON pelaporan.Tujuan = unit_layanan.id
+                            INNER JOIN penduduk ON pelaporan.NIK = penduduk.NIK
+                                WHERE (Keterangan LIKE '%$cari%' 
+                                    OR unit_layanan.nama_unit LIKE '%$cari%' 
+                                    OR penduduk.Nama LIKE '%$cari%' 
+                                    OR pelaporan.Ticket LIKE '%$cari%')
+                                    AND (ID_Pelaporan LIKE 'ASP%')
+                                        ORDER BY TanggalLaporan DESC";
             }else{
                 $query = "SELECT * FROM pelaporan WHERE ID_Pelaporan LIKE 'ASP%' ORDER BY TanggalLaporan DESC";
             } 
